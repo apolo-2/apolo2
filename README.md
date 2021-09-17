@@ -8,5 +8,6 @@ Pruebas de repositorio:
 
 
 Integrantes:  
+Juan David Martinez 
 Hamilton Hernandez Presente PROBANDO ACTUALIZACION  DE ARCHIVOS  
 Escribe aqui tu nombre..  
