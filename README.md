@@ -10,3 +10,4 @@ Integrantes:
 Hamilton Hernandez Presente  
 Hector Alexander Martinez
 Yenni Delgado Balaguera
+Jhojan Smith sanchez
