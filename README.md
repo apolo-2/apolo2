@@ -24,7 +24,7 @@ Lista de funcionalidades:
 - Módulo 3
 
 ### Estado del proyecto
-Project is: _in progress_ <!-- / _complete_ /-->
+El proyecto está : _in progress_ <!-- / _complete_ /-->
 
 ### Equipo de trabajo
 Desarrollado por:
