@@ -8,7 +8,8 @@
 * [Funcionalidades](#funcionalidades)
 * [Media](#media)
 * [Instalación](#setup)
-* [Primer uso](#primer-uso)
+* [Uso](#uso)
+* [Estado del proyecto](#estado-del-proyecto)
 * [Media](#media)
 * [Agradecimientos](#gradecimientos)
 * [Equipo de trabajo](#equipo-de-trabajo)
@@ -44,7 +45,7 @@ Pasos para el primer uso
 `npm start`
 
 
-### Project Status
+### Estado del proyecto
 Project is: _in progress_ <!-- / _complete_ /-->
 
 
