@@ -4,23 +4,17 @@
 
 ## Table of Contents
 * [Información general](#informacion-general)
-* [Tecnologías implementadas](#tecnologias-implementadas)
 * [Funcionalidades](#funcionalidades)
-* [Media](#media)
-* [Instalación](#setup)
-* [Uso](#uso)
 * [Estado del proyecto](#estado-del-proyecto)
-* [Media](#media)
 * [Equipo de trabajo](#equipo-de-trabajo)
+* [Tecnologías implementadas](#tecnologias-implementadas)
+* [Instalación](#instalacion)
+* [Uso](#uso)
 
 
 ### Información general
 - Información del proyecto
-
-
-### Tecnologías implementadas
-- Node.js
-
+![Example screenshot](./apolo_logo.png)
 
 ### Funcionalidades
 Lista de funcionalidades:
@@ -28,24 +22,8 @@ Lista de funcionalidades:
 - Módulo 2
 - Módulo 3
 
-
-### Media
-![Example screenshot](./apolo_logo.png)
-<!-- If you have screenshots you'd like to share, include them here. -->
-
-
-### Instalación
-Requerimientos para la instalación
-
-
-### Uso
-Pasos para el primer uso
-
-`npm start`
-
 ### Estado del proyecto
 Project is: _in progress_ <!-- / _complete_ /-->
-
 
 ### Equipo de trabajo
 Desarrollado por:
@@ -54,3 +32,14 @@ Desarrollado por:
 - HECTOR ALEXANDER MARTINEZ
 - JUAN DAVID MARTINEZ
 - JHOJAN SMITH SANCHEZ
+
+### Tecnologías implementadas
+- Node.js
+
+### Instalación
+Requerimientos para la instalación
+
+### Uso
+Pasos para el primer uso
+
+`npm start`
