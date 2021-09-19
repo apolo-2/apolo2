@@ -14,6 +14,7 @@
 
 ### Información general
 - Información del proyecto
+
 ![Example screenshot](./apolo_logo.png)
 
 ### Funcionalidades
