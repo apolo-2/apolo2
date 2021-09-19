@@ -2,14 +2,14 @@
 > Proyecto desarrollado para dar cumpliento a la propuesta de trabajo del ciclo 3 de MinTic - Universidad de Anquioquia
 > Demo del proyecto:  [Clic aquí](https://www.google.com). <!-- Enlace a proyecto -->
 
-## Table of Contents
-* [Información general](#informacion-general)
-* [Funcionalidades](#funcionalidades)
-* [Estado del proyecto](#estado-del-proyecto)
-* [Equipo de trabajo](#equipo-de-trabajo)
-* [Tecnologías implementadas](#tecnologias-implementadas)
-* [Instalación](#instalacion)
-* [Uso](#uso)
+### Tabla de contenido
+* [Información general](#informacion-general).
+* [Funcionalidades](#funcionalidades).
+* [Estado del proyecto](#estado-del-proyecto).
+* [Equipo de trabajo](#equipo-de-trabajo).
+* [Tecnologías implementadas](#tecnologias-implementadas).
+* [Instalación](#instalacion).
+* [Uso](#uso).
 
 
 ### Información general
