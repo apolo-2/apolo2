@@ -38,7 +38,7 @@ Desarrollado por:
 - Node.js
 
 ### Instalación
-Requerimientos para la instalación
+`git clone`
 
 ### Uso
 Pasos para el primer uso
