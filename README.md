@@ -14,45 +14,45 @@
 * [Equipo de trabajo](#equipo-de-trabajo)
 
 
-## Información general
+### Información general
 - Información del proyecto
 
 
-## Tecnologías implementadas
+### Tecnologías implementadas
 - Node.js
 
 
-## Funcionalidades
+### Funcionalidades
 Lista de funcionalidades:
 - Módulo 1
 - Módulo 2
 - Módulo 3
 
 
-## Media
+### Media
 ![Example screenshot](./apolo_logo.png)
 <!-- If you have screenshots you'd like to share, include them here. -->
 
 
-## Instalación
+### Instalación
 Requerimientos para la instalación
 
 
-## Uso
+### Uso
 Pasos para el primer uso
 
 `npm start`
 
 
-## Project Status
+### Project Status
 Project is: _in progress_ <!-- / _complete_ /-->
 
 
-## Agradecimientos
+### Agradecimientos
 Gracias profesor Daniel..., Universidad de Antioquia y al programa Mintic
 
 
-## Equipo de trabajo
+### Equipo de trabajo
 Desarrollado por:
 - YENNI DELGADO BALAGUERA
 - HAMILTON HERNANDEZ LOAIZA
