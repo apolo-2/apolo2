@@ -11,7 +11,6 @@
 * [Uso](#uso)
 * [Estado del proyecto](#estado-del-proyecto)
 * [Media](#media)
-* [Agradecimientos](#gradecimientos)
 * [Equipo de trabajo](#equipo-de-trabajo)
 
 
@@ -44,13 +43,8 @@ Pasos para el primer uso
 
 `npm start`
 
-
 ### Estado del proyecto
 Project is: _in progress_ <!-- / _complete_ /-->
-
-
-### Agradecimientos
-Gracias profesor Daniel..., Universidad de Antioquia y al programa Mintic
 
 
 ### Equipo de trabajo
