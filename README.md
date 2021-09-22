@@ -36,6 +36,7 @@ Desarrollado por:
 
 ### Tecnologías implementadas
 - Node.js
+- React
 
 ### Instalación
 `git clone`
