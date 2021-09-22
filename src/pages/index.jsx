@@ -10,6 +10,8 @@ function Index() {
     <div>
       <header>
         <span>Este es el header</span>
+        <br />
+        <a href='/listado-ventas'> Ejemplo ver ruta listado-ventas </a>
       </header>
       <main>
         <section>

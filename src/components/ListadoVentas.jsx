@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom';
 
 function ListadoVentas({ imagen }) {
   return (
-    <Link to='/listado-ventas'>
+      <Link to='/listado-ventas'>
         <div className='contenedorImagen'>
-          <img src={imagen} alt='alt title' />
+          <img src={imagen} title="LINK HACIA LISTADO VENTAS PRUEBA"/>
         </div>
       </Link>
   );
