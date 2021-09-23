@@ -9,18 +9,27 @@ function Index() {
   return (
     <div>
       <header>
-        <span>Este es el header</span>
+        <h1>Ejemplo pantalla login</h1>
         <br />
-        <a href='/listado-ventas'> Ejemplo ver ruta listado-ventas </a>
       </header>
       <main>
-        <section>
-          <h1>Login</h1>
-          <ul className='loginContainer'>
-            <ListadoVentas  imagen={logoApolo} />
-          </ul>
-        </section>
-        <section></section>
+        <div class="login-page">
+            <div class="form">
+            <form class="login-form">
+                <input type="text" placeholder="username"/>
+                <input type="password" placeholder="password"/>
+                <button>login</button>
+            </form>
+            </div>
+        </div>
+        <br />
+        <hr />
+        <h3>Link a otra seccion:</h3>
+        <ul>
+            <li>
+                <a href='/listado-ventas'>listado-ventas </a>
+            </li>
+        </ul>
       </main>
       <footer></footer>
     </div>

@@ -1,0 +1,9 @@
+body{
+    margin: 10px;
+}
+table, tr, td{
+    border: 2px;
+    border-color: gray;
+    border-style: double;
+    padding: 5px 40px;
+}
