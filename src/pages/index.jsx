@@ -8,11 +8,12 @@ import LoginForm from 'components/LoginForm';
 function Index() {
   return (
           <section>
-            <h1>Pagina de bienvenida!</h1>
-            <h3>Grupo Apolo2 🚀</h3>
-            <br />
-            <h5>Programa MisionTIC 2022</h5>
-            <p>Otra informacion relacionada con el proyecto: Integrantes, alcance, etc.</p>
+            <div class="bg-light p-5 rounded mt-3">
+              <h1>Ejemplo Pagina de bienvenida!</h1>
+              <p class="lead">Programa MisionTIC 2022 - Otra informacion relacionada con el proyecto: Integrantes, alcance, etc.</p>
+              <a class="btn btn-lg btn-primary" href="/login" role="button">Login</a>
+            </div>
+
             <ul>
               <li>
                 <Link to='/login'>Login</Link>
@@ -21,6 +22,7 @@ function Index() {
                 <Link to='/listado-ventas'>Listado-ventas</Link>
               </li>
             </ul>
+
           </section>
   );
 }

@@ -3,7 +3,7 @@ import logoApolo from 'media/apolo_logo.png';
 
 function ListadoVentasInfoPage() {
     return  <div>
-              <h1>Pantalla listado-ventas</h1>
+              <h2>Pantalla listado-ventas</h2>
               <section>
                 <ul className='loginContainer'>
                   <ListadoVentas  imagen={logoApolo} />
