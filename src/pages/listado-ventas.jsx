@@ -1,5 +1,5 @@
 import ListadoVentas from 'components/ListadoVentas';
- import logoApolo from 'media/apolo_logo.png';
+import logoApolo from 'media/apolo_logo.png';
 
 function ListadoVentasInfoPage() {
     return  <div>

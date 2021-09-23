@@ -1,4 +1,5 @@
 import ListadoVentas from 'components/ListadoVentas';
+import LoginForm from 'components/LoginForm';
 // import logo from 'media/logo.png';
 // import borderCollie from 'media/borderCollie.jpg';
 // import rhodesian from 'media/rhodesian.jpg';
@@ -9,19 +10,11 @@ function Index() {
   return (
     <div>
       <header>
-        <h1>Ejemplo pantalla login</h1>
+        <h1>Ejemplo</h1>
         <br />
       </header>
       <main>
-        <div class="login-page">
-            <div class="form">
-            <form class="login-form">
-                <input type="text" placeholder="username"/>
-                <input type="password" placeholder="password"/>
-                <button>login</button>
-            </form>
-            </div>
-        </div>
+        <LoginForm imagen={logoApolo} />
         <br />
         <hr />
         <h3>Link a otra seccion:</h3>
@@ -33,6 +26,7 @@ function Index() {
       </main>
       <footer></footer>
     </div>
+    // <LoginForm imagen={logoApolo} />
   );
 }
 
