@@ -18,7 +18,7 @@ function Index() {
                 <Link to='/login'>Login</Link>
               </li>
               <li>
-                <Link to='/litasdo-ventas'>Listado-ventas</Link>
+                <Link to='/listado-ventas'>Listado-ventas</Link>
               </li>
             </ul>
           </section>
