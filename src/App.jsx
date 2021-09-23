@@ -1,7 +1,5 @@
-import Layout from 'layouts/Layout';
 import Index from 'pages';
 import ListadoVentasInfoPage from 'pages/listado-ventas';
-import LoginFormInfoPage from 'pages/login';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import 'styles/styles.css';
 
@@ -9,21 +7,15 @@ function App() {
   return (
     <div className='App'>
       <Router>
-        <Layout>
-          <Switch>
-            <Route path='/login'>
-              <LoginFormInfoPage />
-            </Route>
-            <Route path='/listado-ventas'>
-              <ListadoVentasInfoPage />
-            </Route>
-            <Route path='/'>
-              <Index />
-            </Route>
-          </Switch>
-        </Layout>
+        <Switch>
+          <Route path='/listado-ventas'>
+            <ListadoVentasInfoPage />
+          </Route>
+          <Route path='/'>
+            <Index />
+          </Route>
+        </Switch>
       </Router>
-
     </div>
   );
 }
