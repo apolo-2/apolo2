@@ -1,1 +1,0 @@
-Practica: manejo de repositorios en GitHub.
