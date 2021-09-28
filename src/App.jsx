@@ -1,4 +1,4 @@
-import Layout from 'layouts/Layout';
+// import Layout from 'layouts/Layout';
 import PrivateLayout from 'layouts/PrivateLayout';
 import PublicLayout from 'layouts/PublicLayout';
 
@@ -8,7 +8,7 @@ import Ventas from 'pages/admin/Ventas';
 
 
 import Index from 'pages';
-import ListadoVentasInfoPage from 'pages/Listado-ventas';
+// import ListadoVentasInfoPage from 'pages/Listado-ventas';
 import LoginFormInfoPage from 'pages/Login';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import 'styles/styles.css';

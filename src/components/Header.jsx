@@ -1,4 +1,4 @@
-import logo from 'media/apolo_logo.png';
+// import logo from 'media/apolo_logo.png';
 
 const Header = () => {
   return (

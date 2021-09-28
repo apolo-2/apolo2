@@ -1,10 +1,5 @@
-import LoginForm from 'components/LoginForm';
-// import logo from 'media/logo.png';
-// import borderCollie from 'media/borderCollie.jpg';
-// import rhodesian from 'media/rhodesian.jpg';
- import logoApolo from 'media/apolo_logo.png';
- import { Link } from 'react-router-dom';
- import Google from 'media/google_logo.png';
+import { Link } from 'react-router-dom';
+import Google from 'media/google_logo.png';
 
 function Index() {
   return (
@@ -18,13 +13,11 @@ function Index() {
                 Continua con Google
               </a>
             </div>
-
             <ul>
               <li>
                 <Link to='/login'>Login Anterior Prueba </Link>
               </li>
             </ul>
-
           </section>
   );
 }

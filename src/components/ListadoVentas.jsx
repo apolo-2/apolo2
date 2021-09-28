@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 function ListadoVentas({ imagen }) {
   return (
@@ -6,12 +6,12 @@ function ListadoVentas({ imagen }) {
           <br />
           <h5>Componente  prueba</h5>
           <div className='contenedorImagen'>
-            <img src={imagen} title='' height='50px'/>
+            <img src={imagen} title='' height='50px' alt="logo_apolo2"/>
           </div>
 
           {/* bootstrap  */}
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h2 class="h2"></h2>
+            {/* <h2 class="h2"></h2> */}
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group me-2">
                 <button type="button" class="btn btn-sm btn-outline-secondary">Compartir</button>
@@ -26,7 +26,7 @@ function ListadoVentas({ imagen }) {
 
           {/* <canvas class="my-4 w-100 chartjs-render-monitor" id="myChart" width="1076" height="454" style="display: block; width: 1076px; height: 454px;"></canvas> */}
 
-          <h2></h2>
+          {/* <h2></h2> */}
           <div class="table-responsive">
             <table class="table table-striped table-sm">
               <thead>
