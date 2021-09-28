@@ -72,6 +72,11 @@ body {
     margin-top: 10%;
 }
 
+.logo-google{
+  height: 27px;
+  margin-right: 10px;
+}
+
 /* daniel css proyecto */
 .mainContainer {
   display: flex;
@@ -79,6 +84,7 @@ body {
   height: 100vh;
   overflow-y: hidden;
 }
+
 
 .mainContainer > main {
   height: 100%;
@@ -97,4 +103,29 @@ header a{
   text-decoration: none;
 }
 
+/* sidebar */
+#sidebar{
+  display: flex; 
+  background-color:lightgreen; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: space-between; 
+  width: 14rem; 
+  height: 100%; 
+}
 
+/* custom content content, tailwind classes */
+.columnContainer{
+  display: flex; 
+  width: 100vw; 
+  height: 100vh; 
+}
+.flexContainer{
+  display: flex; 
+  flex-wrap: nowrap; 
+  width: 100%; 
+  height: 100%; 
+}
+.flexContainer > main{
+  width: 100%; 
+}
