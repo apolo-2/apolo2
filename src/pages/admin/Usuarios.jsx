@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+// import logoApolo from 'media/apolo_logo.png';
+import 'styles/usuarios.css';
 
 // realizar un formulario que le pida al usuario su edad y muestre un mensaje
 // que diga si el usuario es mayor de edad o no
@@ -41,7 +43,7 @@ const vehiculosBackend = [
   },
 ];
 
-const Vehiculos = () => {
+const Usuarios = () => {
   const [mostrarTabla, setMostrarTabla] = useState(true);
   const [vehiculos, setVehiculos] = useState([]);
   const [textoBoton, setTextoBoton] = useState('Crear Nuevo Vehículo');
@@ -59,10 +61,12 @@ const Vehiculos = () => {
     }
   }, [mostrarTabla]);
   return (
-    <div className='flex h-full w-full flex-col items-center justify-start p-8'>
+    <div className='flex h-full w-full flex-col items-center justify-start p-8 div-seccion-usuarios'>
+      <div>Sección usuarios 🤼‍♀️</div>
+      <br /><br />
       <div className='flex flex-col'>
         <h2 className='text-3xl font-extrabold text-gray-900'>
-          Página de administración de vehículos segun el Ejemplo de Daniel
+            Clase Daniel miercoles 29 de septiembre:  Ejemplo vehículos  (renderizado con condicion)
         </h2>
         <button
           onClick={() => {
@@ -130,19 +134,4 @@ const FormularioCreacionVehiculos = () => {
   );
 };
 
-export default Vehiculos;
-
-
-
-// import React from 'react';
-
-// const Productos = () => {
-//   return <div>Administracion de Productos 🥑</div>;
-// };
-
-// // crea form 
-// // add funcionalidad con use effect 
-
-
-
-// export default Productos;
+export default Usuarios;

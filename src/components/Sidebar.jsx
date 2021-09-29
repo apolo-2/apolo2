@@ -12,6 +12,9 @@ const Sidebar = () => {
           <li>
             <Link to='/admin/productos'>Modulo productos </Link>
           </li>
+          <li>
+            <Link to='/admin/usuarios'>Modulo usuarios </Link>
+          </li>
         </ul>
     </aside>
   );
