@@ -15,6 +15,9 @@ const Sidebar = () => {
           <li>
             <Link to='/admin/usuarios'>Modulo usuarios </Link>
           </li>
+          <li>
+            <Link to='/admin/clase-sept-29'>Vehiculo clase-sept-29</Link>
+          </li>
         </ul>
     </aside>
   );
