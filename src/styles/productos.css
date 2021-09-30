@@ -1,1 +1,15 @@
 /* Sección para  Estilos personalizados por pagina */
+
+.container-productos{
+    display: flex; 
+    padding: 2rem; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: flex-start; 
+    align-items: center; 
+    width: 100%; 
+    height: 100%; 
+}
+.container-productos > div{
+    width: 70%;
+}

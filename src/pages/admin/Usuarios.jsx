@@ -4,7 +4,7 @@ import React from 'react';
 import 'styles/usuarios.css';
 
 const Productos = () => {
-  return <div>Administracion de Usuarios 👨‍👨‍👧‍👧</div>;
+  return <div>Administracion de Usuarios 👨‍👨‍👧‍👧 </div>;
 };
 
 export default Productos;
