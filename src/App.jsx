@@ -1,57 +1,92 @@
-import Layout from 'layouts/Layout';
+import PrivateLayout from 'layouts/PrivateLayout';
+import PublicLayout from 'layouts/PublicLayout';
+import Admin from 'pages/admin/Index';
+import Productos from 'pages/admin/Productos';
+import Ventas from 'pages/admin/Ventas';
+import Usuarios from 'pages/admin/Usuarios';
+
+import ClaseSept29 from 'pages/admin/ClaseSept29';
+
 import Index from 'pages';
-import ListadoVentasInfoPage from 'pages/listado-ventas';
-import LoginFormInfoPage from 'pages/login';
+import LoginFormInfoPage from 'pages/Login';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import 'styles/styles.css';
+
 
 function App() {
   return (
     <div className='App'>
       <Router>
-        <Layout>
-          <Switch>
-            <Route path='/login'>
-              <LoginFormInfoPage />
-            </Route>
-            <Route path='/listado-ventas'>
-              <ListadoVentasInfoPage />
-            </Route>
-            <Route path='/'>
-              <Index />
-            </Route>
-          </Switch>
-        </Layout>
-      </Router>
-
+        <Switch>
+          <Route path={['/admin', '/admin/productos', '/admin/ventas']}>
+            <PrivateLayout>
+              <Switch>
+                <Route path='/admin/productos'>
+                  <Productos />
+                </Route>
+                <Route path='/admin/ventas'>
+                  <Ventas />
+                </Route>
+                <Route path='/admin/usuarios'>
+                  <Usuarios />
+                </Route>
+                <Route path='/admin/clase-sept-29'>
+                  <ClaseSept29 />
+                </Route>
+                <Route path='/admin'>
+                  <Admin />
+                </Route>
+              </Switch>
+            </PrivateLayout>
+          </Route>
+          <Route path={['/login']}>
+            <PublicLayout>
+              <Switch>
+                <Route path='/login'>
+                  <LoginFormInfoPage />
+                </Route>
+              </Switch>
+            </PublicLayout>
+          </Route>
+          <Route path={['/']}>
+            <PublicLayout>
+              <Switch>
+                <Route path='/'>
+                  <Index />
+                </Route>
+              </Switch>
+            </PublicLayout>
+          </Route>
+        </Switch>
+      </Router> 
     </div>
   );
 }
 
-export default App;
-
-// import logo from './logo.svg';
-// import './App.css';
-
+// Version con un solo layout
 // function App() {
 //   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
+//     <div className='App'>
+//       <Router>
+//         <Layout>
+//           <Switch>
+//             <Route path='/login'>
+//               <LoginFormInfoPage />
+//             </Route>
+//             <Route path='/listado-ventas'>
+//               <ListadoVentasInfoPage />
+//             </Route>
+//             {/* De ultimo la ruta base */}
+//             <Route path='/'>
+//               <Index />
+//             </Route>
+//           </Switch>
+//         </Layout>
+//       </Router>
+
 //     </div>
 //   );
 // }
 
-// export default App;
+export default App;
+

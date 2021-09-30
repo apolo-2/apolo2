@@ -1,26 +1,4 @@
-/* test  borrar*/
-table, tr, td{
-    border: 2px;
-    border-color: gray;
-    border-style: double;
-    padding: 5px 40px;
-}
-
-/* login bootstrap */
-<style>
-.bd-placeholder-img {
-  font-size: 1.125rem;
-  text-anchor: middle;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
-}
-
-@media (min-width: 768px) {
-  .bd-placeholder-img-lg {
-    font-size: 3.5rem;
-  }
-}
+/* Estilos globales */
 
 /*
 <!-- Custom styles for this template -->
@@ -31,6 +9,21 @@ body {
   height: 100%;
 }
 
+
+/* login bootstrap  ejemplo de login con usuario y contraseña, como referencia.  BORRAR*/
+<style>
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
 /* body { */
 #loginForm{
   display: flex;
@@ -39,56 +32,54 @@ body {
   padding-bottom: 40px;
   background-color: #f5f5f5;
 }
-
 .form-signin {
   width: 100%;
   max-width: 330px;
   padding: 15px;
   margin: auto;
 }
-
 .form-signin .checkbox {
   font-weight: 400;
 }
-
 .form-signin .form-floating:focus-within {
   z-index: 2;
 }
-
 .form-signin input[type="email"] {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
-
 .form-signin input[type="password"] {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+/* FIN CSS login bootstrap  ejemplo de login con usuario y contraseña, como referencia.  BORRAR*/
 
-/* custom login */
+/* custom login con gmail, del index */
 #loginForm{
     margin-top: 10%;
 }
+.logo-google{
+  height: 27px;
+  margin-right: 10px;
+}
 
-/* daniel css proyecto */
+/* daniel css segun tailwind */
 .mainContainer {
   display: flex;
   flex-direction: column;
   height: 100vh;
   overflow-y: hidden;
 }
-
 .mainContainer > main {
   height: 100%;
   overflow-y: scroll;
 }
 
-
 /* footer */
 footer{
-  background-color: lightblue;
+  background-color: lightsalmon;
 }
 header{
   background-color: lightgreen;
@@ -97,4 +88,29 @@ header a{
   text-decoration: none;
 }
 
+/* sidebar */
+#sidebar{
+  display: flex; 
+  background-color:lightgreen; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: space-between; 
+  width: 14rem; 
+  height: 100%; 
+}
 
+/* custom content content, tailwind classes */
+.columnContainer{
+  display: flex; 
+  width: 100vw; 
+  height: 100vh; 
+}
+.flexContainer{
+  display: flex; 
+  flex-wrap: nowrap; 
+  width: 100%; 
+  height: 100%; 
+}
+.flexContainer > main{
+  width: 100%; 
+}

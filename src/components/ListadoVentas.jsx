@@ -1,18 +1,17 @@
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 function ListadoVentas({ imagen }) {
   return (
         <div>
-          <h5>Esto es un componente</h5>
-          <small>Imagen como parametro:</small>
-          <div className='contenedorImagen'>
-            <img src={imagen} title='' height='50px'/>
-          </div>
           <br />
-          
+          <h5>Componente  prueba</h5>
+          <div className='contenedorImagen'>
+            <img src={imagen} title='' height='50px' alt="logo_apolo2"/>
+          </div>
+
           {/* bootstrap  */}
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h2 class="h2">Listado Ejemplo</h2>
+            {/* <h2 class="h2"></h2> */}
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group me-2">
                 <button type="button" class="btn btn-sm btn-outline-secondary">Compartir</button>
@@ -27,7 +26,7 @@ function ListadoVentas({ imagen }) {
 
           {/* <canvas class="my-4 w-100 chartjs-render-monitor" id="myChart" width="1076" height="454" style="display: block; width: 1076px; height: 454px;"></canvas> */}
 
-          <h2>Ventas..</h2>
+          {/* <h2></h2> */}
           <div class="table-responsive">
             <table class="table table-striped table-sm">
               <thead>
@@ -123,34 +122,6 @@ function ListadoVentas({ imagen }) {
                   <td>placeholder</td>
                   <td>illustrative</td>
                   <td>data</td>
-                </tr>
-                <tr>
-                  <td>1,012</td>
-                  <td>text</td>
-                  <td>placeholder</td>
-                  <td>layout</td>
-                  <td>dashboard</td>
-                </tr>
-                <tr>
-                  <td>1,013</td>
-                  <td>dashboard</td>
-                  <td>irrelevant</td>
-                  <td>text</td>
-                  <td>visual</td>
-                </tr>
-                <tr>
-                  <td>1,014</td>
-                  <td>dashboard</td>
-                  <td>illustrative</td>
-                  <td>rich</td>
-                  <td>data</td>
-                </tr>
-                <tr>
-                  <td>1,015</td>
-                  <td>random</td>
-                  <td>tabular</td>
-                  <td>information</td>
-                  <td>text</td>
                 </tr>
               </tbody>
             </table>

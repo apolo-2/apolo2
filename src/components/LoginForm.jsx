@@ -3,6 +3,7 @@
 function LoginForm({ imagen }) {
   return (
     <div idName="loginForm" class="text-center">
+      <span>Esto es un ejemplo de un componente dentro de una pagina.</span>
       <main className='form-signin'>
         <form>
           <img className='mb-4' src={imagen} alt='' width='120'  />

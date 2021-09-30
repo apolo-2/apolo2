@@ -1,7 +1,7 @@
 # Apolo 2
 
 > Proyecto desarrollado para dar cumpliento a la propuesta de trabajo del ciclo 3 de MinTic - Universidad de Anquioquia
-> Demo del proyecto: [Clic aquí](https://www.google.com). <!-- Enlace a proyecto -->
+> Demo del proyecto: [Clic aquí](https://www.figma.com/file/eQpbHYfsfTrXeVpBFhk8O3/apolo2_template?node-id=0%3A1). <!-- Enlace a proyecto -->
 
 ### Tabla de contenido
 

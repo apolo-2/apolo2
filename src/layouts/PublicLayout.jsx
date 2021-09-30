@@ -1,10 +1,9 @@
-// import Header from 'components/Header';
 import Footer from 'components/Footer';
 import Header from 'components/Header';
 
 import React from 'react';
 
-const Layout = ({ children }) => {
+const PublicLayout = ({ children }) => {
   return (
     <div className='mainContainer'>
       <Header />
@@ -14,4 +13,4 @@ const Layout = ({ children }) => {
   );
 };
 
-export default Layout;
+export default PublicLayout;
