@@ -9,7 +9,7 @@ const DataTableProducto = ({listaProductos}) => {
                    
             <div class="table-responsive">
             {/*   table-striped  border-light*/}
-                <table class="table  table- table-hover  table-bordered caption-top table-listado">
+                <table class="table  table-sm table-hover  table-bordered caption-top table-listado">
                     <caption>Lista de productos</caption>
                     <thead className='table-light text-center'>
                         <tr>
@@ -26,7 +26,8 @@ const DataTableProducto = ({listaProductos}) => {
                     return (
                         <tr className='text-center'>
                             <td>{index+1}</td>
-                            <td>{producto.codigo}</td>
+                            {/* <td>{producto.codigo}</td> */}
+                            <td>000{index+1}</td>
                             <td>{producto.descripcion}</td>
                             <td>{producto.valorUnit}</td>
                             <td>{producto.estado}</td>
@@ -56,13 +57,13 @@ const DataTableProducto = ({listaProductos}) => {
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center">
                     <li class="page-item disabled">
-                    <a class="page-link" href="admin/productos">&laquo;</a>
+                    <a class="page-link" href="/admin/productos">&laquo;</a>
                     </li>
-                    <li class="page-item active"><a class="page-link" href="admin/productos">1</a></li>
-                    <li class="page-item"><a class="page-link" href="admin/productos">2</a></li>
-                    <li class="page-item"><a class="page-link" href="admin/productos">3</a></li>
+                    <li class="page-item active"><a class="page-link" href="/admin/productos">1</a></li>
+                    <li class="page-item"><a class="page-link" href="/admin/productos">2</a></li>
+                    <li class="page-item"><a class="page-link" href="/admin/productos">3</a></li>
                     <li class="page-item">
-                    <a class="page-link" href="admin/productos">&raquo;</a>
+                    <a class="page-link" href="/admin/productos">&raquo;</a>
                     </li>
                 </ul>
             </nav>

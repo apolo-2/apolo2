@@ -2,9 +2,9 @@
 
 .container-productos{
     display: flex; 
-    /* padding: 2rem;  */
+    padding-top: 5%; 
     flex-direction: column; 
-    justify-content: center; 
+    /* justify-content: center;  */
     align-items: center; 
     width: 100%; 
     height: 100%; 
@@ -13,16 +13,13 @@
 .container-productos > div{
     width: 65%;
 }
-/* svg.bi{
-    margin-right: 5px;
-    width: 1.5em;
-    height: 1.5em;
-} */
+
 svg.bi-plus-circle-fill{
     width: 1.5em;
     height: 1.5em;
     margin-right: 5px;
 }
+
 .container-title{
     /* width: 100%; */
     /* height: 100px; */
@@ -30,7 +27,7 @@ svg.bi-plus-circle-fill{
     color: #fff;
     padding: 16px 30px;
     margin: -20px -25px 10px;
-    border-radius: 3px 3px 0 0;
+    border-radius: 10px 10px 0 0;
     display: flex;
     justify-content: space-between;
 }
