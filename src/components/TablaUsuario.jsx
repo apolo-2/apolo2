@@ -59,6 +59,8 @@ export const TablaUsuario = ({usuarios},{ setMostrarTabla }) => {
             
             {/* fin bootstrap */}
         </div>
+        
+
     )
 }
 
