@@ -3,7 +3,7 @@ import PublicLayout from 'layouts/PublicLayout';
 import Admin from 'pages/admin/Index';
 import Productos from 'pages/admin/Productos';
 import Ventas from 'pages/admin/Ventas';
-import Usuarios from 'pages/admin/Usuarios';
+
 
 import ClaseSept29 from 'pages/admin/ClaseSept29';
 
@@ -11,6 +11,7 @@ import Index from 'pages';
 import LoginFormInfoPage from 'pages/Login';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import 'styles/styles.css';
+import Usuarios from 'pages/admin/Usuarios';
 
 
 function App() {
