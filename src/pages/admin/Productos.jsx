@@ -35,6 +35,36 @@ const productosBackend = [
     valorUnit: 568500,
     estado: 'Disponible',
   },
+  {
+    codigo: '0006',
+    descripcion: 'Monitor Samsung 21"',
+    valorUnit: 568500,
+    estado: 'Disponible',
+  },
+  {
+    codigo: '0007',
+    descripcion: 'Monitor Samsung 21"',
+    valorUnit: 568500,
+    estado: 'Disponible',
+  },
+  {
+    codigo: '0008',
+    descripcion: 'Monitor Samsung 21"',
+    valorUnit: 568500,
+    estado: 'Disponible',
+  },
+  {
+    codigo: '0009',
+    descripcion: 'Monitor Samsung 21"',
+    valorUnit: 568500,
+    estado: 'Disponible',
+  },
+  {
+    codigo: '0010',
+    descripcion: 'Impresora Canon LX400"',
+    valorUnit: 968500,
+    estado: 'Disponible',
+  },
   
 ];
 
