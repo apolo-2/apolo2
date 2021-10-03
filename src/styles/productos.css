@@ -39,3 +39,15 @@ svg.bi-plus-circle-fill{
     flex-direction: row;
     justify-content: space-around;
 }
+.table-search-fields{
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    padding-top: 3%;
+}
+.btn-secondary{
+    background-color: cadetblue!important;
+}
+button i{
+    width: 20px;
+}
