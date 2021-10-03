@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import DataTableProducto from 'components/DataTableProducto';
 import 'styles/productos.css';
 
+
 const productosBackend = [
   {
     codigo: '0001',
