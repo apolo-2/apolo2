@@ -13,11 +13,11 @@ function Index() {
                 Continua con Google
               </a>
             </div>
-            <ul>
+            {/* <ul>
               <li>
                 <Link to='/login'>Login Anterior Prueba </Link>
               </li>
-            </ul>
+            </ul> */}
           </section>
   );
 }
