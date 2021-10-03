@@ -1,6 +1,6 @@
-// import { Link } from 'react-router-dom';
 
 function ListadoVentas({ imagen }) {
+  
   return (
         <div>
           <br />
@@ -27,6 +27,7 @@ function ListadoVentas({ imagen }) {
           {/* <canvas class="my-4 w-100 chartjs-render-monitor" id="myChart" width="1076" height="454" style="display: block; width: 1076px; height: 454px;"></canvas> */}
 
           {/* <h2></h2> */}
+          
           <div class="table-responsive">
             <table class="table table-striped table-sm">
               <thead>
@@ -130,6 +131,7 @@ function ListadoVentas({ imagen }) {
 
         </div>
   );
+  
 }
 
 export default ListadoVentas;
