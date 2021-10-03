@@ -152,10 +152,7 @@ const FormularioCreacionProducto = ({ setMostrarTabla, listaProductos, setProduc
     setProductos([...listaProductos, nuevoProducto]);
     console.log('nuevoProducto::',nuevoProducto);
     // identificar el caso de éxito y mostrar un toast de éxito
-    toast.success('Producto agregado con éxito', {
-      // position: toast.POSITION.BOTTOM_RIGHT,
-      // className: 'foo-bar'
-    });
+    toast.success('Producto agregado con éxito');
     // identificar el caso de error y mostrar un toast de error
     // toast.error('Error creando un vehículo');
   };

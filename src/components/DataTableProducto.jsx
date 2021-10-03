@@ -99,7 +99,7 @@ const DataTableProducto = ({listaProductos}) => {
                     </div>
                     </div>
                 </div>
-            </div>
+            </div> 
             
             {/* fin bootstrap */}
         </div>
