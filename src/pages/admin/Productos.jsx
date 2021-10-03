@@ -38,8 +38,8 @@ const productosBackend = [
   },
   {
     codigo: '0006',
-    descripcion: 'Monitor Samsung 21"',
-    valorUnit: 568500,
+    descripcion: 'Monitor Samsung 29"',
+    valorUnit: 868500,
     estado: 'Disponible',
   },
   {
@@ -50,15 +50,15 @@ const productosBackend = [
   },
   {
     codigo: '0008',
-    descripcion: 'Monitor Samsung 21"',
-    valorUnit: 568500,
+    descripcion: 'Laptop ASUS X441UV',
+    valorUnit: 1568500,
     estado: 'Disponible',
   },
   {
     codigo: '0009',
-    descripcion: 'Monitor Samsung 21"',
-    valorUnit: 568500,
-    estado: 'Disponible',
+    descripcion: 'Monitor Samsung 19"',
+    valorUnit: 368600,
+    estado: 'No Disponible',
   },
   {
     codigo: '0010',
@@ -165,7 +165,7 @@ const FormularioCreacionProducto = ({ setMostrarTabla, listaProductos, setProduc
         <div className="container">
           <br />
           <h5 className=''>Formulario nuevo producto</h5>
-          
+          <br />
           <form ref={form} onSubmit={submitForm} className=''>
 
             <div class="mb-3 row">
@@ -211,16 +211,21 @@ const FormularioCreacionProducto = ({ setMostrarTabla, listaProductos, setProduc
               </div>
             </div>
 
-            <div className="col-md-11 d-flex justify-content-end ">
+            <div className="col-md-11 d-flex justify-content-end div-btn-actions">
+                <button
+                  type=''
+                  className='btn btn-secondary btn'
+                  onClick={()=>{setMostrarTabla(true);}}
+                >
+                  <i class="far fa-window-close space-button-icon"></i>
+                  Cancelar
+                </button>
                 <button
                   type='submit'
-                  className='btn btn-primary btn-lg'
+                  className='btn btn-primary btn'
                 >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sd-card" viewBox="0 0 16 16">
-                  <path d="M6.25 3.5a.75.75 0 0 0-1.5 0v2a.75.75 0 0 0 1.5 0v-2zm2 0a.75.75 0 0 0-1.5 0v2a.75.75 0 0 0 1.5 0v-2zm2 0a.75.75 0 0 0-1.5 0v2a.75.75 0 0 0 1.5 0v-2zm2 0a.75.75 0 0 0-1.5 0v2a.75.75 0 0 0 1.5 0v-2z"/>
-                  <path fill-rule="evenodd" d="M5.914 0H12.5A1.5 1.5 0 0 1 14 1.5v13a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5V3.914c0-.398.158-.78.44-1.06L4.853.439A1.5 1.5 0 0 1 5.914 0zM13 1.5a.5.5 0 0 0-.5-.5H5.914a.5.5 0 0 0-.353.146L3.146 3.561A.5.5 0 0 0 3 3.914V14.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-13z"/>
-                </svg>
-                   Guardar
+                  <i class="fas fa-save space-button-icon"></i>
+                  Guardar
                 </button>
             </div>
           </form>   

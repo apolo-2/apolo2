@@ -54,3 +54,9 @@ button i{
 button .fa-lg{
     margin-right: 5px;
 }
+button .space-button-icon{
+    margin-right: 5px;
+}
+.div-btn-actions button{
+    margin-right: 5px;
+}
