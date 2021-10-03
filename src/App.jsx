@@ -4,6 +4,7 @@ import Admin from 'pages/admin/Index';
 import Productos from 'pages/admin/Productos';
 import Ventas from 'pages/admin/Ventas';
 import ClaseSept29 from 'pages/admin/ClaseSept29';
+
 import Index from 'pages';
 import LoginFormInfoPage from 'pages/Login';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -27,9 +28,6 @@ function App() {
                 </Route>
                 <Route path='/admin/usuarios'>
                   <Usuarios />
-                </Route>
-                <Route path='/admin/clase-sept-29'>
-                  <ClaseSept29 />
                 </Route>
                 <Route path='/admin'>
                   <Admin />
