@@ -14,11 +14,11 @@
     width: 65%;
 }
 
-svg.bi-plus-circle-fill{
+/* svg.bi-plus-circle-fill{
     width: 1.5em;
     height: 1.5em;
     margin-right: 5px;
-}
+} */
 
 .container-title{
     /* width: 100%; */
@@ -50,4 +50,13 @@ svg.bi-plus-circle-fill{
 }
 button i{
     width: 20px;
+}
+button .fa-lg{
+    margin-right: 5px;
+}
+button .space-button-icon{
+    margin-right: 5px;
+}
+.div-btn-actions button{
+    margin-right: 5px;
 }
