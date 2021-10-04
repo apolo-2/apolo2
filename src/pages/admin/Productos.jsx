@@ -222,7 +222,7 @@ const FormularioCreacionProducto
                   max={9999999999999}
                   placeholder='Ingrese valor por unidad'
                   required
-                  value={dataEditarProduct.valorUnit}
+                  defaultValue={dataEditarProduct.valorUnit}
                   />
                 {/* <div id="descHelp" class="form-text">Descripción del producto</div> */}
               </div>
