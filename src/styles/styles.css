@@ -87,7 +87,8 @@ footer{
 
 /* header */
 header{
-  background-color: #e6dbfb;
+  /* background-color: #e6dbfb; */
+  background-color: lightcyan;
   height: 10%;
   height: 110px;
   /* border: medium solid gray; */

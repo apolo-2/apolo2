@@ -4,7 +4,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import DataTableProducto from 'components/DataTableProducto';
 import 'styles/productos.css';
 
-
 const productosBackend = [
   {
     codigo: '0001',
@@ -42,39 +41,35 @@ const productosBackend = [
     valorUnit: 868500,
     estado: 'Disponible',
   },
-  {
-    codigo: '0007',
-    descripcion: 'Monitor Samsung 21"',
-    valorUnit: 568500,
-    estado: 'Disponible',
-  },
-  {
-    codigo: '0008',
-    descripcion: 'Laptop ASUS X441UV',
-    valorUnit: 1568500,
-    estado: 'Disponible',
-  },
-  {
-    codigo: '0009',
-    descripcion: 'Monitor Samsung 19"',
-    valorUnit: 368600,
-    estado: 'No Disponible',
-  },
-  {
-    codigo: '0010',
-    descripcion: 'Impresora Canon LX400"',
-    valorUnit: 968500,
-    estado: 'Disponible',
-  },
-  
+  // {
+  //   codigo: '0007',
+  //   descripcion: 'Monitor Samsung 21"',
+  //   valorUnit: 568500,
+  //   estado: 'Disponible',
+  // },
+  // {
+  //   codigo: '0008',
+  //   descripcion: 'Laptop ASUS X441UV',
+  //   valorUnit: 1568500,
+  //   estado: 'Disponible',
+  // },
 ];
 
+let dataEjemploEditarProduct = {
+  codigo: '0001',
+  descripcion: 'Monitor Samsung 27',
+  valorUnit: 685000,
+  estado: 'Disponible',
+}
 
 const Productos = () => {
-  const [mostrarTabla, setMostrarTabla] = useState(true);
+  const [mostrarTabla, setMostrarTabla] = useState(1); // 1 listar prod, 2 crear prod, 3 editar prod
   const [productos, setProductos] = useState([]);
   const [textoBoton, setTextoBoton] = useState('Nuevo Producto');
   const [colorBoton, setColorBoton] = useState('btn-secondary');
+
+  const [textoTituloFormulario, setTextoTituloFormulario] = useState('Formulario nuevo producto');
+  const [dataEditarProduct, setDataEditarProduct] = useState({});  
 
   useEffect(() => {
     //obtener lista  desde el backend
@@ -82,19 +77,29 @@ const Productos = () => {
   }, []);
 
   useEffect(() => {
-    if (mostrarTabla) {
+
+    // 1 listar prod, 2 crear prod, 3 editar prod
+    if (mostrarTabla ===1) {
       setTextoBoton('Nuevo Producto');
       setColorBoton('btn-secondary');
-    } else {
+      setDataEditarProduct({});
+      
+    } else  if(mostrarTabla ===2){
       setTextoBoton('Mostrar Todos los productos');
       setColorBoton('btn-info');
+      setDataEditarProduct({});
+
+    } else  if(mostrarTabla ===3){
+      setTextoBoton('Mostrar Todos los productos');
+      setColorBoton('btn-info');
+      setTextoTituloFormulario('Formulario actualizar producto');
+      setDataEditarProduct(dataEjemploEditarProduct);
     }
   }, [mostrarTabla]);
   return (
-    // <div className='flex h-full w-full flex-col items-center justify-start p-8 container-productos'>
+
     <div className='container-productos'>
-      <div className=''>
-        
+      <div className=''>       
         <div className="container-title">
           <h3 className=''>
             Administrador de productos
@@ -103,9 +108,8 @@ const Productos = () => {
         <br />
         <button
             onClick={() => {
-              setMostrarTabla(!mostrarTabla);
+              setMostrarTabla(mostrarTabla === 1? 2 : 1);
             }}
-            // className={`text-white bg-${colorBoton}-500 p-5 rounded-full m-6 w-28 self-end`}
             className={`btn ${colorBoton} btn-rounded`}
           >
            <i class="fas fa-plus-circle fa-lg"></i>
@@ -113,7 +117,7 @@ const Productos = () => {
           </button>
       </div>
 
-      {mostrarTabla ? (
+      {/* {mostrarTabla ? (
         <TablaProductos listaProductos={productos} />
       ) : (
         <FormularioCreacionProducto
@@ -122,23 +126,51 @@ const Productos = () => {
           setProductos={setProductos}
         />
       )}
+      */}
+      {/* Rendirizado dinamico, 3 secciones */}
+      {(() => {
+              switch (mostrarTabla) {
+                case 1:   
+                  return <DataTableProducto listaProductos={productos} setMostrarTabla={setMostrarTabla}/>;
+                case 2: 
+                    return <FormularioCreacionProducto
+                              setMostrarTabla={setMostrarTabla}
+                              listaProductos={productos}
+                              setProductos={setProductos}
+                              textoTituloFormulario = {textoTituloFormulario}
+                              dataEditarProduct = {dataEditarProduct}
+                            />;
+                case 3: 
+                    // temporalmente el mismo form  
+                    return <FormularioCreacionProducto
+                                setMostrarTabla={setMostrarTabla}
+                                listaProductos={productos}
+                                setProductos={setProductos}
+                                textoTituloFormulario = {textoTituloFormulario}
+                                dataEditarProduct = {dataEditarProduct}
+                              />;
+                default:      
+                  return <DataTableProducto listaProductos={productos} setMostrarTabla={setMostrarTabla} />;
+              }
+            })()}
       <ToastContainer position='bottom-right' autoClose={5000} />
     </div>
   );
 };
 
-const TablaProductos = ({ listaProductos }) => {
-  useEffect(() => {
-    console.log('este es el listado  en el componente de tabla', listaProductos);
-  }, [listaProductos]);
-  return (
-    <DataTableProducto  listaProductos={listaProductos}/>
-  );
-};
+// const TablaProductos = ({ listaProductos }) => {
+//   useEffect(() => {
+//     console.log('este es el listado  en el componente de tabla', listaProductos);
+//   }, [listaProductos]);
+//   return (
+//     <DataTableProducto  listaProductos={listaProductos}/>
+//   );
+// };
 
-const FormularioCreacionProducto = ({ setMostrarTabla, listaProductos, setProductos }) => {
+const FormularioCreacionProducto 
+  = ({ setMostrarTabla, listaProductos, setProductos, textoTituloFormulario, dataEditarProduct }) => {
+  
   const form = useRef(null);
-
   const submitForm = (e) => {
     e.preventDefault();
     const fd = new FormData(form.current);
@@ -148,7 +180,7 @@ const FormularioCreacionProducto = ({ setMostrarTabla, listaProductos, setProduc
       nuevoProducto[key] = value;
     });
 
-    setMostrarTabla(true);
+    setMostrarTabla(1);
     setProductos([...listaProductos, nuevoProducto]);
     console.log('nuevoProducto::',nuevoProducto);
     // identificar el caso de éxito y mostrar un toast de éxito
@@ -161,7 +193,8 @@ const FormularioCreacionProducto = ({ setMostrarTabla, listaProductos, setProduc
         // form nuevo prod
         <div className="container">
           <br />
-          <h5 className=''>Formulario nuevo producto</h5>
+          {/* <h4 className=''>Formulario nuevo producto</h4> */}
+          <h4 className=''>{textoTituloFormulario}</h4>
           <br />
           <form ref={form} onSubmit={submitForm} className=''>
 
@@ -172,7 +205,9 @@ const FormularioCreacionProducto = ({ setMostrarTabla, listaProductos, setProduc
                   name='descripcion'
                   className='form-control'
                   placeholder='Ingrese descripción del producto'
-                  required />
+                  required 
+                  defaultValue={dataEditarProduct.descripcion}
+                  />
                 {/* <div id="descHelp" class="form-text">Descripción del producto</div> */}
               </div>
             </div>
@@ -186,7 +221,9 @@ const FormularioCreacionProducto = ({ setMostrarTabla, listaProductos, setProduc
                   min={0}
                   max={9999999999999}
                   placeholder='Ingrese valor por unidad'
-                  required />
+                  required
+                  value={dataEditarProduct.valorUnit}
+                  />
                 {/* <div id="descHelp" class="form-text">Descripción del producto</div> */}
               </div>
             </div>
@@ -212,7 +249,7 @@ const FormularioCreacionProducto = ({ setMostrarTabla, listaProductos, setProduc
                 <button
                   type=''
                   className='btn btn-secondary btn'
-                  onClick={()=>{setMostrarTabla(true);}}
+                  onClick={()=>{setMostrarTabla(1);}}
                 >
                   <i class="far fa-window-close space-button-icon"></i>
                   Cancelar
@@ -227,16 +264,7 @@ const FormularioCreacionProducto = ({ setMostrarTabla, listaProductos, setProduc
             </div>
           </form>   
         </div>
-      
   );
 };
 
 export default Productos;
-
-
-// const Productos = () => {
-//   return <div>
-//             <span>Administracion de Productos 🥑</span>      
-//             <DataTableProducto />
-//         </div>;
-// };
