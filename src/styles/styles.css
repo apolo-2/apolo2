@@ -96,10 +96,16 @@ footer {
 }
 
 /* header */
+<<<<<<< HEAD
 
 /*
 header {
   background-color: #e6dbfb;
+=======
+header{
+  /* background-color: #e6dbfb; */
+  background-color: lightcyan;
+>>>>>>> 5637c6b522b85c1294fa6a4c82f64506a6ac0d9a
   height: 10%;
   height: 110px;
 }*/
