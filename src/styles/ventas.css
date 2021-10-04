@@ -1,5 +1,3 @@
-/* Sección para  Estilos personalizados por pagina */
-
 .container-ventas {
     display: flex;
     padding-top: 5%;
@@ -21,8 +19,6 @@ svg.bi-plus-circle-fill {
 }
 
 .container-title {
-    /* width: 100%; */
-    /* height: 100px; */
     background: #435d7d;
     color: #fff;
     padding: 16px 30px;

@@ -8,7 +8,6 @@ const DataTableVenta = ({ listaVentas }) => {
           <caption>Listado de ventas</caption>
           <thead className="table-light text-center">
             <tr>
-              <th scope="col">#</th>
               <th scope="col"># Venta</th>
               <th scope="col">Cliente</th>
               <th scope="col">Vendedor</th>
@@ -18,15 +17,13 @@ const DataTableVenta = ({ listaVentas }) => {
           </thead>
 
           <tbody>
-            {listaVentas.map((venta, index) => {
+            {listaVentas.map((venta) => {
               return (
                 <tr className="text-center">
-                  <td>{index + 1}</td>
-                  {/* <td>{producto.codigo}</td> */}
-                  <td>000{index + 1}</td>
-                  <td>{venta.descripcion}</td>
-                  <td>{venta.valorUnit}</td>
-                  <td>{venta.estado}</td>
+                  <td>{venta.numVenta}</td>
+                  <td>{venta.cliente}</td>
+                  <td>{venta.vendedor}</td>
+                  <td>{venta.total}</td>
                   <td className="td_acciones">
                     <button
                       type="button"

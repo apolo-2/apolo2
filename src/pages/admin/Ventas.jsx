@@ -8,26 +8,26 @@ const VentasBackend = [
   {
     numVenta: "0001",
     cliente: "Pablo Perez",
-    vendedor: 685000,
-    total: "Disponible",
+    vendedor: "Lucia",
+    total: 150000,
   },
   {
     numVenta: "0002",
     cliente: "Diana Duran",
-    vendedor: 168500,
-    total: "No Disponible",
+    vendedor: "Leidy",
+    total: 180000,
   },
   {
     numVenta: "0003",
-    cliente: 'Monitor LG 27"',
-    vendedor: 568500,
-    total: "Disponible",
+    cliente: "Diana Duran",
+    vendedor: "Laura",
+    total: 250000,
   },
   {
     numVenta: "0004",
     cliente: 'Mouse Gamer Genious"',
-    vendedor: 212500,
-    total: "No Disponible",
+    vendedor: "Leidy",
+    total: 12500,
   },
 ];
 
@@ -116,13 +116,7 @@ const FormularioCreacionVentas = ({
     setMostrarTabla(true);
     setVentas([...listaVentas, nuevoVentas]);
     console.log("nuevoVentas::", nuevoVentas);
-    // identificar el caso de éxito y mostrar un toast de éxito
-    toast.success("Ventas agregado con éxito", {
-      // position: toast.POSITION.BOTTOM_RIGHT,
-      // className: 'foo-bar'
-    });
-    // identificar el caso de error y mostrar un toast de error
-    // toast.error('Error creando un vehículo');
+    toast.success("Genial!, se registró la venta", {});
   };
 
   return (
@@ -141,10 +135,9 @@ const FormularioCreacionVentas = ({
               type="text"
               name="cliente"
               className="form-control"
-              placeholder="Ingrese descripción del Ventas"
+              placeholder="Ingrese descripción de la venta"
               required
             />
-            {/* <div id="descHelp" class="form-text">Descripción del Ventas</div> */}
           </div>
         </div>
 
@@ -162,7 +155,6 @@ const FormularioCreacionVentas = ({
               placeholder="Ingrese valor por unidad"
               required
             />
-            {/* <div id="descHelp" class="form-text">Descripción del Ventas</div> */}
           </div>
         </div>
 
@@ -183,7 +175,6 @@ const FormularioCreacionVentas = ({
               </option>
               <option value="No disponible">No disponible</option>
             </select>
-            {/* <div id="descHelp" class="form-text">Descripción del Ventas</div> */}
           </div>
         </div>
 
