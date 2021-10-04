@@ -87,6 +87,7 @@ const Productos = () => {
     } else  if(mostrarTabla ===2){
       setTextoBoton('Mostrar Todos los productos');
       setColorBoton('btn-info');
+      setTextoTituloFormulario('Formulario nuevo producto');
       setDataEditarProduct({});
 
     } else  if(mostrarTabla ===3){
