@@ -1,23 +1,12 @@
 import React from 'react'
 
-const DataTableProducto = ({listaProductos}) => {
+const DataTableProducto = ({listaProductos, setMostrarTabla}) => {
     return (
         <div>
             {/* bootstrap  */}
-            {/* Pendiente encabezado tabla */}
-            {/* <h2></h2> */}
-                   
             <div class="table-responsive">
             {/*   table-striped  border-light*/}
                 <section className="table-search-fields">
-                    {/* <div class="row g-3 align-items-end ">
-                        <div class="col-auto">
-                            <label for="search-field" class="col-form-label">Buscar:</label>
-                        </div>
-                        <div class="col-auto">
-                            <input type="text" id="search-field" class="form-control" />
-                        </div>
-                    </div> */}
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
                         <input type="text" class="form-control" placeholder="Buscar..." aria-label="search" aria-describedby="search" />
@@ -48,7 +37,12 @@ const DataTableProducto = ({listaProductos}) => {
                             <td>{producto.valorUnit}</td>
                             <td>{producto.estado}</td>
                             <td className="td_acciones"> 
-                                <button type="button" class="btn  btn-sm btn-outline-info" title='Editar'>
+                                <button type="button" class="btn  btn-sm btn-outline-info" title='Editar'
+                                    onClick={() => {
+                                        console.log('click edit');
+                                        setMostrarTabla(3); //editar
+                                    }}
+                                >
                                     <i class="fas fa-pencil-alt "></i>
                                     {/* Editar */}
                                 </button>
@@ -95,7 +89,7 @@ const DataTableProducto = ({listaProductos}) => {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary">Confirmar</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Confirmar</button>
                     </div>
                     </div>
                 </div>

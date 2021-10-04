@@ -5,7 +5,6 @@ import Productos from 'pages/admin/Productos';
 import Ventas from 'pages/admin/Ventas';
 
 import Index from 'pages';
-import LoginFormInfoPage from 'pages/Login';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import 'styles/styles.css';
 import Usuarios from 'pages/admin/Usuarios';
@@ -34,7 +33,7 @@ function App() {
               </Switch>
             </PrivateLayout>
           </Route>
-          <Route path={['/login']}>
+          {/* <Route path={['/login']}>
             <PublicLayout>
               <Switch>
                 <Route path='/login'>
@@ -42,7 +41,7 @@ function App() {
                 </Route>
               </Switch>
             </PublicLayout>
-          </Route>
+          </Route> */}
           <Route path={['/']}>
             <PublicLayout>
               <Switch>
@@ -57,31 +56,6 @@ function App() {
     </div>
   );
 }
-
-// Version con un solo layout
-// function App() {
-//   return (
-//     <div className='App'>
-//       <Router>
-//         <Layout>
-//           <Switch>
-//             <Route path='/login'>
-//               <LoginFormInfoPage />
-//             </Route>
-//             <Route path='/listado-ventas'>
-//               <ListadoVentasInfoPage />
-//             </Route>
-//             {/* De ultimo la ruta base */}
-//             <Route path='/'>
-//               <Index />
-//             </Route>
-//           </Switch>
-//         </Layout>
-//       </Router>
-
-//     </div>
-//   );
-// }
 
 export default App;
 

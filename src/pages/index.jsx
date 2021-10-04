@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import Google from 'media/google_logo.png';
 
 function Index() {
@@ -13,11 +13,6 @@ function Index() {
                 Continua con Google
               </a>
             </div>
-            {/* <ul>
-              <li>
-                <Link to='/login'>Login Anterior Prueba </Link>
-              </li>
-            </ul> */}
           </section>
   );
 }
