@@ -3,7 +3,7 @@
 const Header = () => {
   return (
         <header>
-            <small> <a href="./"><h5>🚀 Grupo Apolo2</h5></a> </small>   
+            
         </header>
   );
 };
