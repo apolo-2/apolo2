@@ -7,18 +7,19 @@ import Nave from 'media/Nave.png';
 function Index() {
   return (
           <section>
-            <br /><br /><br />
+            <br />
+            {/* <br /><br /> */}
             <div class="bg-light p-5 rounded mt-3">
             <section id="pantalla_dividida">
               <div class="izquierda">
-                  <h1>INTEGRANTES</h1>
+                  <h2>INTEGRANTES</h2>
 
-                  <h3>Yenni Delgado Balaguera</h3>
-                  <h3>Juan David Martinez</h3>
-                  <h3>Mayerlín Mondol Cortés</h3>
-                  <h3>Hamilton Hernandez Loaiza</h3>
-                  <h3>Héctor Alexander Martínez</h3>
-                  <h3>Jhojan Smith Sanchez</h3>
+                  <h5>Yenni Delgado Balaguera</h5>
+                  <h5>Juan David Martinez</h5>
+                  <h5>Mayerlín Mondol Cortés</h5>
+                  <h5>Hamilton Hernandez Loaiza</h5>
+                  <h5>Héctor Alexander Martínez</h5>
+                  <h5>Jhojan Smith Sanchez</h5>
               
                   
                     <img src={Nave} alt="" />

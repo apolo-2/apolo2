@@ -6,7 +6,7 @@ import 'styles/Style_footer.css';
 const Footer = () => {
     return (
         <footer>
-            <h1>MINTIC 2021 - Universidad de Antioquia</h1>
+            <h5>MINTIC 2021 - Universidad de Antioquia</h5>
                 <div class="boton">
                     <button>SOPORTE</button>
                     

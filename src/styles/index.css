@@ -11,20 +11,22 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-
 .izquierda{
     background: white;
-    height: 80vh;
+    /* height: 80vh; */
     width: 60%;
     text-align: center;
+    
+
 }
 
 .izquierda img{
-    width: 80%;
-    margin: 80px;
-    margin-top: -800px;
-    opacity: 50%;
-    
+    /* width: 80%; */
+    width: 57%;
+    /* margin: 80px; */
+    /* margin-top: -800px; */
+    margin-top: -305px;
+    opacity: 55%;
     
 }
 
@@ -57,18 +59,20 @@ h3{
     background-size: cover;
     background-position: center;
     width: 50%;
-    height: 80vh;
-    width: 900px;
+    /* height: 80vh; */
+    /* width: 900px; */
     text-align: center;
     
 }
 
 
 .cuadrado p{
-    font-size: 30px;
+    /* font-size: 30px; */
+    font-size: 20px;
     width: 80%;
     margin: auto;
-    margin-top: 150px;
+    /* margin-top: 150px; */
+    margin-top: 50px;
     color: white;
     font-family: 'Montserrat', sans-serif;
 }
@@ -80,7 +84,7 @@ h3{
 .cuadrado h2{
     font-size: 40px;
     width: 100%;
-    margin-top: 150px;
+    /* margin-top: 150px; */
     color: white;
     padding: 60px;
     
@@ -91,4 +95,5 @@ h3{
     padding: 20px;
     text-decoration: none;
     color: rgb(117,117,117,255);
+    margin-bottom: 10px;
 }
