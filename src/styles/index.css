@@ -3,13 +3,13 @@
 
 
 
-*{
+/* *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
     font-family: 'Montserrat', sans-serif;
-}
+} */
 
 .izquierda{
     background: white;
@@ -48,7 +48,7 @@ h3{
     font-size: 23px;
     font-weight: 600;
     line-height: 100px;
-    color: rgb(97,218,251,255);
+    /* color: rgb(97,218,251,255); */
     
 }
 
