@@ -1,1 +1,94 @@
 /* Sección para  Estilos personalizados por pagina */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,600;1,900&display=swap');
+
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+.izquierda{
+    background: white;
+    height: 80vh;
+    width: 60%;
+    text-align: center;
+}
+
+.izquierda img{
+    width: 80%;
+    margin: 80px;
+    margin-top: -800px;
+    opacity: 50%;
+    
+    
+}
+
+
+
+#pantalla_dividida{
+    display: flex;
+}
+
+.izquierda h1{
+    font-size: 60px;
+    font-weight: 900;
+    width: 45%;
+    color: rgb(97,218,251,255);    
+    margin: auto;
+}
+
+h3{
+    font-size: 23px;
+    font-weight: 600;
+    line-height: 100px;
+    color: rgb(97,218,251,255);
+    
+}
+
+/*Parte derecha*/
+
+.cuadrado{
+    background: rgb(97,218,251,255);
+    background-size: cover;
+    background-position: center;
+    width: 50%;
+    height: 80vh;
+    width: 900px;
+    text-align: center;
+    
+}
+
+
+.cuadrado p{
+    font-size: 30px;
+    width: 80%;
+    margin: auto;
+    margin-top: 150px;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+    
+
+
+.cuadrado h2{
+    font-size: 40px;
+    width: 100%;
+    margin-top: 150px;
+    color: white;
+    padding: 60px;
+    
+}
+.cuadrado a{
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    text-decoration: none;
+    color: rgb(117,117,117,255);
+}
