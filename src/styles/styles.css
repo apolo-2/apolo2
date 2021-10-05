@@ -78,7 +78,7 @@ html, body {
 /* daniel css segun tailwind */
 
 .mainContainer {
-  display: flex;
+  display: absolute;
   flex-direction: column;
   height: 100vh;
   overflow-y: hidden;
@@ -96,32 +96,10 @@ footer {
 }
 
 /* header */
-<<<<<<< HEAD
 
-/*
-header {
-  background-color: #e6dbfb;
-=======
-header{
-  /* background-color: #e6dbfb; */
-  background-color: lightcyan;
->>>>>>> 5637c6b522b85c1294fa6a4c82f64506a6ac0d9a
-  height: 10%;
-  height: 110px;
-}*/
-
-/* @media (min-width: 640px) { 
-  display: flex; 
-  display: flex; 
-  width: 18rem; 
-} */
-
-/* custom content content, tailwind classes */
-
-.columnContainer {
-  display: flex;
-  width: 100vw;
-  height: 100vh;
+content-wrapper {
+  min-height: calc(100vh - 56px);
+  padding-top: 1rem;
 }
 
 .flexContainer {
