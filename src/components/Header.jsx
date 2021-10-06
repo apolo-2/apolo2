@@ -1,4 +1,3 @@
-// import logo from 'media/apolo_logo.png';
 import "styles/header.css";
 
 const Header = () => {
@@ -14,7 +13,5 @@ const Header = () => {
         </small>
       </h1>
     </header>
-  );
-};
-
 export default Header;
+

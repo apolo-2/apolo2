@@ -1,0 +1,23 @@
+
+/*Header*/
+
+header{
+    max-width: 1600px;
+    display: flex;
+    justify-content: space-between;
+    background: white;
+
+}
+
+
+
+.logo img{
+    width: 140px;
+    margin-left: 180px;
+}
+
+.logo2 img{
+    width: 600px;
+    margin-top: 20px;
+    
+}
