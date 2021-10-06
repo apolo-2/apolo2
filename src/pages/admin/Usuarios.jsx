@@ -83,9 +83,14 @@ const TablaUsuario = ({usuarios, setMostrarTabla }) => {
           
                    
             <div class="table-responsive">
-          
+              <section className="table-search-fields">
+                    <div class="input-group mb-3 ">
+                        <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
+                        <input type="text" class="form-control" placeholder="Buscar..." aria-label="search" aria-describedby="search" />
+                    </div>
+                </section>
                 <table class="table  table-sm table-hover  table-bordered caption-top table-listado">
-                   
+               
                     <thead className='table-light text-center'>
                         <tr>
                             <th scope="col">#</th>

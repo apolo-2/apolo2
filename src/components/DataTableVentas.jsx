@@ -4,6 +4,14 @@ const DataTableVenta = ({ listaVentas }) => {
   return (
     <div>
       <div class="table-responsive">
+      
+       <section className="table-search-fields">
+                    <div class="input-group mb-3 ">
+                        <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
+                        <input type="text" class="form-control" placeholder="Buscar..." aria-label="search" aria-describedby="search" />
+                    </div>
+                </section>
+
         <table class="table table-sm table-hover table-bordered caption-top table-listado">
           <caption>Listado de ventas</caption>
           <thead className="table-light text-center">
@@ -27,16 +35,18 @@ const DataTableVenta = ({ listaVentas }) => {
                   <td className="td_acciones">
                     <button
                       type="button"
-                      class="btn  btn-sm btn-sm btn-outline-danger"
-                      title="Ver detalles"
+                      class="btn  btn-sm btn-outline-warning"
+                      title="Ver detalle"
                     >
                       <i class="fas fa-eye"></i>
                     </button>
                     <button
                       type="button"
-                      class="btn  btn-sm btn-outline-warning"
+                      class="btn btn-success"
                       title="Editar"
-                    ></button>
+                    >
+                      <i class="far fa-edit"></i>
+                    </button>
                     <button
                       type="button"
                       class="btn  btn-sm btn-sm btn-outline-danger"

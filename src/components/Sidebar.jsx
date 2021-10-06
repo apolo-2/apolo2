@@ -1,6 +1,7 @@
 // import logo from 'media/apolo_logo.png';
 import { Link } from "react-router-dom";
 import "styles/sidebar.css";
+import userImage from "./../media/users.png";
 
 const Sidebar = () => {
   return (
@@ -12,7 +13,10 @@ const Sidebar = () => {
         className="social-buttons"
       />
       <nav>
+        <img src={userImage} alt="" class="image--cover" />
+        <p></p>
         <span class="title-sidebar">OPCIONES DISPONIBLES</span>
+        <p></p>
         <a id="nav-collapse" href="#">
           <span class="icon icon-cross" />
         </a>
@@ -27,13 +31,21 @@ const Sidebar = () => {
           ruta="/admin/usuarios"
           nombre="Usuarios"
         />
+        <p></p>
+        <Ruta icono="fas fa-sign-out-alt" ruta="/" nombre="SALIR" />
       </nav>
     </aside>
   );
 };
 
 const Ruta = ({ icono, ruta, nombre }) => {
-  return <Link to={ruta}>{nombre}</Link>;
+  return (
+    <>
+      <Link to={ruta}>
+        <i class={`fa ${icono}`} aria-hidden="true" /> {nombre}
+      </Link>
+    </>
+  );
 };
 
 export default Sidebar;

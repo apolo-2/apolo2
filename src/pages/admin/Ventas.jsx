@@ -128,14 +128,14 @@ const FormularioCreacionVentas = ({
       <form ref={form} onSubmit={submitForm} className="">
         <div class="mb-3 row">
           <label for="cliente" class="col-sm-2 col-form-label">
-            Descripción:{" "}
+            Cliente:{" "}
           </label>
           <div class="col-sm-9">
             <input
               type="text"
               name="cliente"
               className="form-control"
-              placeholder="Ingrese descripción de la venta"
+              placeholder="Ingrese cliente"
               required
             />
           </div>
@@ -143,16 +143,14 @@ const FormularioCreacionVentas = ({
 
         <div class="mb-3 row">
           <label for="vendedor" class="col-sm-2 col-form-label">
-            Valor unitario:{" "}
+            Vendedor:{" "}
           </label>
           <div class="col-sm-9">
             <input
-              type="number"
+              type="text"
               name="vendedor"
               className="form-control"
-              min={0}
-              max={9999999999999}
-              placeholder="Ingrese valor por unidad"
+              placeholder="Ingrese el nombre del vendedor"
               required
             />
           </div>
@@ -163,18 +161,13 @@ const FormularioCreacionVentas = ({
             total:{" "}
           </label>
           <div class="col-sm-9">
-            <select
+            <input
               className="form-select"
               aria-label="Default select"
               name="total"
               required
               defaultValue={0}
-            >
-              <option value="Disponible" selected>
-                Disponible
-              </option>
-              <option value="No disponible">No disponible</option>
-            </select>
+            ></input>
           </div>
         </div>
 

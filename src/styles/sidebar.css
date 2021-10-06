@@ -4,11 +4,6 @@ body {
   overflow-x: hidden;
 }
 
-main {
-  padding: 40px 25px;
-  transition: .5s ease-in-out;
-  width: 100%;
-}
 
 nav {
   background: #36a;
@@ -189,4 +184,15 @@ input[type=checkbox]:checked~.sidebarIconToggle>.diagonal.part-2 {
   display: flex;
   justify-content: center;
   color: #fff;
+  font-size: 20px;
+  font-style: bold;
+}
+
+.image--cover {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 20px;
+  object-fit: cover;
+  object-position: center;
 }

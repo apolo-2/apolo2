@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "styles/index.css";
+import Nave from "media/Nave.png";
 
 const Admin = () => {
   return (
     <div class="content-wrapper">
       <div class="container-fluid">
-        <div class="row">
+        <div class="row center-main">
           <div class="col-xl-3 col-sm-6 mb-3">
             <div class="card text-white bg-primary o-hidden h-100">
               <Card
@@ -31,6 +32,9 @@ const Admin = () => {
             </div>
           </div>
         </div>
+        <row class="center-main">
+          <img src={Nave} alt="" />
+        </row>
       </div>
     </div>
   );
@@ -43,7 +47,7 @@ const Card = ({ icono, ruta, nombre }) => {
         <i class={`fa ${icono}`} aria-hidden="true" />
       </div>
       <div class="mr-5">{nombre}</div>
-      <Link to={ruta}>
+      <Link to={ruta} class="colorLinkCard">
         <span class="float-left d-flex justify-content-center">
           VER DETALLES
         </span>

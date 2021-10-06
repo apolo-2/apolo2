@@ -3,7 +3,14 @@ import React from "react";
 export const TablaUsuario = ({ usuarios }, { setMostrarTabla }) => {
   return (
     <div>
+    <section className="table-search-fields">
+                    <div class="input-group mb-3 ">
+                        <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
+                        <input type="text" class="form-control" placeholder="Buscar..." aria-label="search" aria-describedby="search" />
+                    </div>
+                </section>
       <div class="table-responsive">
+      
         <table class="table  table-sm table-hover  table-bordered caption-top table-listado">
           <thead className="table-light text-center">
             <tr>

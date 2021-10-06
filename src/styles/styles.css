@@ -78,7 +78,7 @@ html, body {
 /* daniel css segun tailwind */
 
 .mainContainer {
-  display: absolute;
+  display: as;
   flex-direction: column;
   height: 100vh;
   overflow-y: hidden;
@@ -89,17 +89,17 @@ html, body {
   overflow-y: scroll;
 }
 
-/* footer */
-
-footer {
-  background-color: lightsalmon;
+header {
+  height: 10%;
+  height: 110px;
 }
-
-/* header */
 
 content-wrapper {
   min-height: calc(100vh - 56px);
   padding-top: 1rem;
+  justify-items: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .flexContainer {
@@ -107,6 +107,9 @@ content-wrapper {
   flex-wrap: nowrap;
   width: 100%;
   height: 100%;
+  justify-items: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .flexContainer>main {

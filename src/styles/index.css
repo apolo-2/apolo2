@@ -23,15 +23,15 @@ card {
     width: 8em
 }
 
-a.link {
-    color: #fdfdfd;
-    text-decoration: underline;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 a.span {
     align-items: stretch;
     justify-items: center;
     place-content: center;
+}
+
+.colorLinkCard {
+    color: #fdfdfd;
+    text-align: center;
+    font-size: 12px;
+    text-decoration: none;
 }
