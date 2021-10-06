@@ -1,0 +1,31 @@
+footer {
+    font-size: 20px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+    background:#1A237E ;
+    text-align: center;
+    color: white;
+}
+
+.boton button {
+    background-color: white;
+    border: 1px solid grey;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.boton2 button {
+    background-color: white;
+    border: 1px solid grey;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}

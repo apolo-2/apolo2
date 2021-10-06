@@ -1,11 +1,11 @@
-import Footer from 'components/Footer';
-import Header from 'components/Header';
+import Footer from "components/Footer";
+import Header from "components/Header";
 
-import React from 'react';
+import React from "react";
 
 const PublicLayout = ({ children }) => {
   return (
-    <div className='mainContainer'>
+    <div className="mainContainer">
       <Header />
       <main>{children}</main>
       <Footer />

@@ -1,17 +1,19 @@
-import React from 'react';
-import Sidebar from 'components/Sidebar';
-import Header from 'components/Header';
+import React from "react";
+import Sidebar from "components/Sidebar";
+import Header from "components/Header";
+import Footer from "components/Footer";
 
 const PrivateLayout = ({ children }) => {
   return (
     <div>
       <Header />
       <div className="columnContainer">
-        <div className='flexContainer'>
-            <Sidebar />
-            <main>{children}</main>
+        <div className="flexContainer">
+          <Sidebar />
+          <main>{children}</main>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

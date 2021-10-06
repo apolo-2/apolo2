@@ -1,14 +1,344 @@
 /* css proyecto react default */
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+
+
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+
+/* body { */
+
+#loginForm {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-signin .checkbox {
+  font-weight: 400;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* FIN CSS login bootstrap  ejemplo de login con usuario y contraseña, como referencia.  BORRAR*/
+
+/* custom login con gmail, del index */
+
+#loginForm {
+  margin-top: 10%;
+}
+
+.logo-google {
+  height: 27px;
+  margin-right: 10px;
+}
+
+/* daniel css segun tailwind */
+
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow-y: hidden;
+}
+
+.mainContainer>main {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+/* header */
+
+header {
+  /* background-color: #e6dbfb; */
+  background-color: white;
+  height: 10%;
+  height: 110px;
+  /* border: medium solid gray; */
+}
+
+.center-main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* sidebar */
+
+#sidebar>ul {
+  padding-top: 20%;
+  height: 30%;
+  /* background-color: yellow; */
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#sidebar>nav {
+  /* display: none;  */
+  padding: 1rem;
+  /* background-color: #E5E7EB;  */
+  flex-direction: column;
+  height: 100%;
+  border-width: 1px;
+  border-color: #D1D5DB;
+}
+
+#sidebar .btn_menu {
+  display: flex;
+  padding: 0.25rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  background-color: #435d7d;
+  color: white!important;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  font-family: sans-serif;
+}
+
+#sidebar .btn_menu:hover {
+  background-color: #312E81;
+}
+
+.btn_menu i {
+  width: 2.5rem;
+}
+
+#sidebar nav a {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+#sidebar h6 {
+  text-align: center;
+  color: white;
+  font-weight: 600;
+}
+
+#sidebar h6:hover {
+  color: gray;
+  font-size: 1.05em;
+}
+
+#sidebar .menu-items {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 23%;
+}
+
+/* @media (min-width: 640px) { 
+  display: flex; 
+  display: flex; 
+  width: 18rem; 
+} */
+
+/* custom content content, tailwind classes */
+
+.columnContainer {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+.flexContainer {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 100%;
+}
+
+.flexContainer>main {
+  width: 100%;
+}
+
+/*Parte derecha*/
+
+.cuadrado {
+  background: rgb(97, 218, 251, 255);
+  background-size: cover;
+  background-position: center;
+  width: 50%;
+  /* height: 80vh; */
+  /* width: 900px; */
+  text-align: center;
+}
+
+.cuadrado p {
+  /* font-size: 30px; */
+  font-size: 20px;
+  width: 80%;
+  margin: auto;
+  /* margin-top: 150px; */
+  margin-top: 50px;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.box {
+  display: flex;
+  justify-content: space-between;
+}
+
+.izquierda {
+  width: 60%;
+  text-align: center;
+  width: auto;
+}
+
+.izquierda img {
+  width: auto;
+  margin-top: auto;
+  opacity: 55%;
+}
+
+#pantalla_dividida {
+  display: flex;
+}
+
+.izquierda h1 {
+  font-size: 60px;
+  font-weight: 900;
+  width: 70%;
+  color: rgb(97, 218, 251, 255);
+
+}
+
+.izquierda span {
+  color: white;
+
+}
+
+@keyframes colorAnimate {
+  0% {
+     background: rgb(46, 46, 46);
+ }
+  25% {
+     background: rgb(41, 90, 131);
+ }
+  50% {
+     background: rgb(20, 100, 153);
+ }
+  75% {
+     background: rgb(62, 46, 100);
+ }
+  100% {
+     background: rgb(46, 46, 46);
+ }
+}
+@-webkit-keyframes colorAnimate 
+/* Safari and Chrome - necessary duplicate */
+{
+  0% {
+     background: rgb(46, 46, 46);
+ }
+  25% {
+     background: rgb(41, 90, 131);
+ }
+  50% {
+     background: rgb(20, 100, 153);
+ }
+  75% {
+     background: rgb(62, 46, 100);
+ }
+  100% {
+     background: rgb(46, 46, 46);
+ }
+}
+.form {
+  background-color: #ffffff;
+  width: 500px;
+  margin: 50px auto 10px auto;
+  padding: 30px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px -3px #333;
+  text-align: center;
+}
+
+html, body, .wrapper, .sct {
+  height: 100%;
+  margin: 0;
+}
+.text-center {
+  text-align: center;
+}
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: "centerLeft centerRight";
+}
+.sct {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.brand {
+  grid-area: centerLeft;
+  background-color: blue;
+  animation: colorAnimate 30s;
+  -webkit-animation: colorAnimate 30s;
+  animation-iteration-count: infinite;
+  -webkit-iteration-count: infinite;
+}
+@media (max-width: 768px) {
+  .wrapper {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-auto-rows: minmax(20%, 80vmax);
+      grid-template-areas: "centerLeft" "centerRight";
+ }
+  .login > form {
+      width: 100%;
+      margin: 0 3rem;
+ }
 }
