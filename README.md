@@ -40,6 +40,7 @@ Desarrollado por:
 - HECTOR ALEXANDER MARTINEZ
 - JUAN DAVID MARTINEZ
 - JHOJAN SMITH SANCHEZ
+- MAYERLIN MONDOL CORTES
 
 ### Tecnologías implementadas
 
