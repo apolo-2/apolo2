@@ -13,5 +13,6 @@ const Header = () => {
         </small>
       </h1>
     </header>
+  );
+};
 export default Header;
-
