@@ -4,56 +4,59 @@ import 'react-toastify/dist/ReactToastify.css';
 import DataTableProducto from 'components/DataTableProducto';
 import 'styles/productos.css';
 
-const productosBackend = [
-  {
-    codigo: '0001',
-    descripcion: 'Monitor Samsung 27"',
-    valorUnit: 685000,
-    estado: 'Disponible',
-  },
-  {
-    codigo: '0002',
-    descripcion: 'Disco SSD Kingston 256GB',
-    valorUnit: 168500,
-    estado: 'No Disponible',
-  },
-  {
-    codigo: '0003',
-    descripcion: 'Monitor LG 27"',
-    valorUnit: 568500,
-    estado: 'Disponible',
-  },
-  {
-    codigo: '0004',
-    descripcion: 'Mouse Gamer Genious"',
-    valorUnit: 212500,
-    estado: 'No Disponible',
-  },
-  {
-    codigo: '0005',
-    descripcion: 'Monitor Samsung 21"',
-    valorUnit: 568500,
-    estado: 'Disponible',
-  },
-  {
-    codigo: '0006',
-    descripcion: 'Monitor Samsung 29"',
-    valorUnit: 868500,
-    estado: 'Disponible',
-  },
-  // {
-  //   codigo: '0007',
-  //   descripcion: 'Monitor Samsung 21"',
-  //   valorUnit: 568500,
-  //   estado: 'Disponible',
-  // },
-  // {
-  //   codigo: '0008',
-  //   descripcion: 'Laptop ASUS X441UV',
-  //   valorUnit: 1568500,
-  //   estado: 'Disponible',
-  // },
-];
+import { obtenerProductos} from 'utils/api';
+
+
+// const productosBackend = [
+//   {
+//     codigo: '0001',
+//     descripcion: 'Monitor Samsung 27"',
+//     valorUnit: 685000,
+//     estado: 'Disponible',
+//   },
+//   {
+//     codigo: '0002',
+//     descripcion: 'Disco SSD Kingston 256GB',
+//     valorUnit: 168500,
+//     estado: 'No Disponible',
+//   },
+//   {
+//     codigo: '0003',
+//     descripcion: 'Monitor LG 27"',
+//     valorUnit: 568500,
+//     estado: 'Disponible',
+//   },
+//   {
+//     codigo: '0004',
+//     descripcion: 'Mouse Gamer Genious"',
+//     valorUnit: 212500,
+//     estado: 'No Disponible',
+//   },
+//   {
+//     codigo: '0005',
+//     descripcion: 'Monitor Samsung 21"',
+//     valorUnit: 568500,
+//     estado: 'Disponible',
+//   },
+//   {
+//     codigo: '0006',
+//     descripcion: 'Monitor Samsung 29"',
+//     valorUnit: 868500,
+//     estado: 'Disponible',
+//   },
+//   // {
+//   //   codigo: '0007',
+//   //   descripcion: 'Monitor Samsung 21"',
+//   //   valorUnit: 568500,
+//   //   estado: 'Disponible',
+//   // },
+//   // {
+//   //   codigo: '0008',
+//   //   descripcion: 'Laptop ASUS X441UV',
+//   //   valorUnit: 1568500,
+//   //   estado: 'Disponible',
+//   // },
+// ];
 
 let dataEjemploEditarProduct = {
   codigo: '0001',
@@ -71,10 +74,29 @@ const Productos = () => {
   const [textoTituloFormulario, setTextoTituloFormulario] = useState('Formulario nuevo producto');
   const [dataEditarProduct, setDataEditarProduct] = useState({});  
 
+  const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
+
+
   useEffect(() => {
-    //obtener lista  desde el backend
-    setProductos(productosBackend);
-  }, []);
+    console.log('consulta', ejecutarConsulta);
+    if (ejecutarConsulta) {
+      obtenerProductos(setProductos, setEjecutarConsulta);
+      console.log('productos:::::', productos);
+    }
+  }, [ejecutarConsulta]);
+
+  useEffect(() => {
+    // if (mostrarTabla) {
+    if (mostrarTabla ===1 ) {
+
+      setEjecutarConsulta(true);
+    }
+  }, [mostrarTabla]);
+
+  // useEffect(() => {
+  //   //obtener lista  desde el backend
+  //   setProductos(productosBackend);
+  // }, []);
 
   useEffect(() => {
 
@@ -151,7 +173,7 @@ const Productos = () => {
                                 dataEditarProduct = {dataEditarProduct}
                               />;
                 default:      
-                  return <DataTableProducto listaProductos={productos} setMostrarTabla={setMostrarTabla} />;
+                  return <DataTableProducto listaProductos={productos} setMostrarTabla={setMostrarTabla} setEjecutarConsulta={setEjecutarConsulta}/>;
               }
             })()}
       <ToastContainer position='bottom-right' autoClose={5000} />
