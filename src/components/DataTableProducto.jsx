@@ -19,7 +19,7 @@ const DataTableProducto = ({listaProductos, setMostrarTabla}) => {
                     <thead className='table-light text-center'>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Código</th>
+                            <th scope="col">Identificador</th>
                             <th scope="col">Descripción</th>
                             <th scope="col">Valor Unitarío</th>
                             <th scope="col">Estado</th>
@@ -32,7 +32,7 @@ const DataTableProducto = ({listaProductos, setMostrarTabla}) => {
                         <tr className='text-center'>
                             <td>{index+1}</td>
                             {/* <td>{producto.codigo}</td> */}
-                            <td>000{index+1}</td>
+                            <td>{producto._id.substring(17) }</td>
                             <td>{producto.descripcion}</td>
                             <td>{producto.valorUnit}</td>
                             <td>{producto.estado}</td>

@@ -5,6 +5,8 @@ import DataTableProducto from 'components/DataTableProducto';
 import 'styles/productos.css';
 
 import { obtenerProductos} from 'utils/api';
+import axios from 'axios'; //temporal
+
 
 
 // const productosBackend = [
@@ -81,7 +83,7 @@ const Productos = () => {
     console.log('consulta', ejecutarConsulta);
     if (ejecutarConsulta) {
       obtenerProductos(setProductos, setEjecutarConsulta);
-      console.log('productos:::::', productos);
+      
     }
   }, [ejecutarConsulta]);
 
@@ -181,6 +183,7 @@ const Productos = () => {
   );
 };
 
+// Esto no es necesario, este ya quedó como un componente
 // const TablaProductos = ({ listaProductos }) => {
 //   useEffect(() => {
 //     console.log('este es el listado  en el componente de tabla', listaProductos);
@@ -194,7 +197,7 @@ const FormularioCreacionProducto
   = ({ setMostrarTabla, listaProductos, setProductos, textoTituloFormulario, dataEditarProduct }) => {
   
   const form = useRef(null);
-  const submitForm = (e) => {
+  const submitForm = async (e) => {
     e.preventDefault();
     const fd = new FormData(form.current);
     
@@ -203,11 +206,31 @@ const FormularioCreacionProducto
       nuevoProducto[key] = value;
     });
 
+    // comunicacion con API
+    const options = {
+      method: 'POST',
+      url: 'http://localhost:5000/producto/crear',
+      headers: { 'Content-Type': 'application/json' },
+      data: { descripcion: nuevoProducto.descripcion, valorUnit: nuevoProducto.valorUnit, estado: nuevoProducto.estado },
+    };
+
+    await axios
+      .request(options)
+      .then(function (response) {
+        console.log(response.data);
+        toast.success('Producto agregado con éxito');
+      })
+      .catch(function (error) {
+        console.error(error);
+        toast.error('Error creando un producto');
+      });
+
+
     setMostrarTabla(1);
-    setProductos([...listaProductos, nuevoProducto]);
-    console.log('nuevoProducto::',nuevoProducto);
+    // setProductos([...listaProductos, nuevoProducto]);
+    // console.log('nuevoProducto::',nuevoProducto);
     // identificar el caso de éxito y mostrar un toast de éxito
-    toast.success('Producto agregado con éxito');
+    // toast.success('Producto agregado con éxito');
     // identificar el caso de error y mostrar un toast de error
     // toast.error('Error creando un vehículo');
   };
