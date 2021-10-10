@@ -115,6 +115,7 @@ const Productos = () => {
       setDataEditarProduct(dataEjemploEditarProduct);
     }
   }, [mostrarTabla]);
+
   return (
     <div className="container-productos">
       <div className="">

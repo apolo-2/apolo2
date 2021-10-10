@@ -14,3 +14,18 @@ export const obtenerProductos = async (setProductos, setEjecutarConsulta) => {
     });
   setEjecutarConsulta(false);
 };
+
+export const obtenerUsuarios = async (setUsuarios, setEjecutarConsulta) => {
+  const options = { method: "GET", url: "http://localhost:27017/usuarios" };
+  console.log("ini axios");
+  await axios
+    .request(options)
+    .then(function (response) {
+      console.log("Llamada  axios:", response.data);
+      setUsuarios(response.data);
+    })
+    .catch(function (error) {
+      console.error("error::::", error.message);
+    });
+  setEjecutarConsulta(false);
+};

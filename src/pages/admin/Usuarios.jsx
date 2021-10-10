@@ -1,72 +1,93 @@
 import React, { useEffect, useState, useRef } from "react";
-import "styles/productos.css";
+
 import "styles/usuarios.css";
 import Swal from "sweetalert2";
+import axios from "axios";
+import { Dialog, Tooltip } from "@material-ui/core";
+import { ToastContainer, toast } from "react-toastify";
+import DataTableUsuario from "components/DataTableUsuario";
 import { obtenerUsuarios } from "utils/api";
-
-//Lista de datos de prueba: usuarios
-const Usuariosdata = [
-  {
-    email: "yenni@gmail.com",
-    nombre: "yenni delgado",
-    rol: "administradora",
-    estado: "Autorizado",
-  },
-  {
-    email: "sandra@gmail.com",
-    nombre: "sandra lopez",
-    rol: "Vendedora",
-    estado: "Pendiente",
-  },
-  {
-    email: "cristian@gmail.com",
-    nombre: "cristian martinez",
-    rol: "Vendedor",
-    estado: "No Autorizado",
-  },
-  {
-    email: "sami@gmail.com",
-    nombre: "samy perez",
-    rol: "Vendedor",
-    estado: "Autorizado",
-  },
-  {
-    email: "david@gmail.com",
-    nombre: "david rey",
-    rol: "Vendedor",
-    estado: "Autorizado",
-  },
-];
+import { nanoid } from "nanoid";
 
 const Usuarios = () => {
   const [mostrarTabla, setMostrarTabla] = useState(true);
-  useEffect(() => {}, [mostrarTabla]);
-  console.log(mostrarTabla);
+  const [usuarios, setUsuarios] = useState([]);
+  const [textoBoton, setTextoBoton] = useState("Crear Nuevo Usuario");
+  const [colorBoton, setColorBoton] = useState("indigo");
+  const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
+
+  useEffect(() => {
+    console.log("consulta", ejecutarConsulta);
+    if (ejecutarConsulta) {
+      obtenerUsuarios(setUsuarios, setEjecutarConsulta);
+      console.log("usuarios:::::", usuarios);
+    }
+  }, [ejecutarConsulta, usuarios]);
+
+  useEffect(() => {
+    if (mostrarTabla) {
+      setEjecutarConsulta(true);
+    }
+  }, [mostrarTabla]);
+
+  useEffect(() => {
+    if (mostrarTabla) {
+      setTextoBoton("Crear Nuevo usuario");
+      setColorBoton("indigo");
+    } else {
+      setTextoBoton("Mostrar Todos los usuarios");
+      setColorBoton("green");
+    }
+  }, [mostrarTabla]);
+
   return (
     <div className="container-productos">
-      <div>
+      <div className="flex flex-col w-full">
         <div className="container-title">
-          <h3>Listado de usuarios</h3>
+          <h2 className="text-3xl font-extrabold text-gray-900">
+            Página de administración de usuarios
+          </h2>
         </div>
-        <br />
+        <button
+          onClick={() => {
+            setMostrarTabla(!mostrarTabla);
+          }}
+          className={`text-white bg-${colorBoton}-500 p-5 rounded-full m-6 w-28 self-end`}
+        >
+          {textoBoton}
+        </button>
       </div>
-
       {mostrarTabla ? (
-        <TablaUsuario
-          usuarios={Usuariosdata}
+        <DataTableUsuario
+          listaUsuarios={usuarios}
           setMostrarTabla={setMostrarTabla}
+          setEjecutarConsulta={setEjecutarConsulta}
         />
       ) : (
-        <FormularioEditarUsuario setMostrarTabla={setMostrarTabla} />
+        <FormularioCreacionUsuarios
+          setMostrarTabla={setMostrarTabla}
+          listaUsuarios={usuarios}
+          setUsuarios={setUsuarios}
+        />
       )}
+      <ToastContainer position="bottom-center" autoClose={5000} />
     </div>
   );
 };
 
-const TablaUsuario = ({ usuarios, setMostrarTabla }) => {
-  const editar = () => {
-    setMostrarTabla(false);
-  };
+/*
+const TablaUsuarios = ({ listaUsuarios, setEjecutarConsulta }) => {
+  const [busqueda, setBusqueda] = useState("");
+  const [usuariosFiltrados, setUsuariosFiltrados] = useState(listaUsuarios);
+  useEffect(() => {
+    setUsuariosFiltrados(
+      listaUsuarios.filter((elemento) => {
+        return JSON.stringify(elemento)
+          .toLowerCase()
+          .includes(busqueda.toLowerCase());
+      })
+    );
+  }, [busqueda, listaUsuarios]);
   return (
     <div>
       <div class="table-responsive">
@@ -76,11 +97,10 @@ const TablaUsuario = ({ usuarios, setMostrarTabla }) => {
               <i class="fas fa-search"></i>
             </span>
             <input
-              type="text"
-              class="form-control"
-              placeholder="Buscar..."
-              aria-label="search"
-              aria-describedby="search"
+              value={busqueda}
+              onChange={(e) => setBusqueda(e.target.value)}
+              placeholder="Buscar"
+              className="form-control border-2 border-gray-700 px-3 py-1 self-start rounded-md focus:outline-none focus:border-indigo-500"
             />
           </div>
         </section>
@@ -96,198 +116,313 @@ const TablaUsuario = ({ usuarios, setMostrarTabla }) => {
             </tr>
           </thead>
           <tbody>
-            {usuarios.map((usuario, index) => {
+            {usuariosFiltrados.map((usuario) => {
               return (
-                <tr key={index} className="text-center">
-                  <td>{index + 1}</td>
-                  <td>{usuario.email}</td>
-                  <td>{usuario.nombre}</td>
-                  <td>{usuario.rol}</td>
-                  <td>{usuario.estado}</td>
-                  <td className="td_acciones">
-                    <button
-                      onClick={() => {
-                        editar();
-                      }}
-                      type="button"
-                      class="btn  btn-sm btn-outline-warning"
-                      title="Editar"
-                    >
-                      Editar
-                      {/* Editar */}
-                    </button>
-                  </td>
-                </tr>
+                <FilaUsuario
+                  key={nanoid()}
+                  usuario={usuario}
+                  setEjecutarConsulta={setEjecutarConsulta}
+                />
               );
             })}
           </tbody>
         </table>
       </div>
-      {/* paginator */}
-      <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-          <li class="page-item disabled">
-            <a class="page-link" href="/admin/productos">
-              &laquo;
-            </a>
-          </li>
-          <li class="page-item active">
-            <a class="page-link" href="/admin/productos">
-              1
-            </a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="/admin/productos">
-              2
-            </a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="/admin/productos">
-              3
-            </a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="/admin/productos">
-              &raquo;
-            </a>
-          </li>
-        </ul>
-      </nav>
+      <div className="flex flex-col w-full m-2 md:hidden">
+        {usuariosFiltrados.map((el) => {
+          return (
+            <div className="bg-gray-400 m-2 shadow-xl flex flex-col p-2 rounded-xl">
+              <span>{el.correo}</span>
+              <span>{el.nombre}</span>
+              <span>{el.rol}</span>
+              <span>{el.estado}</span>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
-};
+}; */
+/*
+const FilaUsuario = ({ usuario, setEjecutarConsulta }) => {
+  const [edit, setEdit] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [infoNuevoUsuario, setInfoNuevoUsuario] = useState({
+    _id: usuario._id,
+    correo: usuario.correo,
+    nombre: usuario.nombre,
+    rol: usuario.rol,
+    estado: usuario.estado,
+  });
 
-const FormularioEditarUsuario = ({ setMostrarTabla }) => {
+  const actualizarUsuario = async () => {
+    //enviar la info al backend
+    const options = {
+      method: "PATCH",
+      url: `http://localhost:27017/usuarios/${usuario._id}/`,
+      headers: { "Content-Type": "application/json" },
+      data: { ...infoNuevoUsuario },
+    };
+
+    await axios
+      .request(options)
+      .then(function (response) {
+        console.log(response.data);
+        toast.success("Usuario modificado con éxito");
+        setEdit(false);
+        setEjecutarConsulta(true);
+      })
+      .catch(function (error) {
+        toast.error("Error modificando el usuario");
+        console.error(error);
+      });
+  };
+
+  const eliminarUsuario = async () => {
+    const options = {
+      method: "DELETE",
+      url: "http://localhost:27017/usuarios/eliminar/",
+      headers: { "Content-Type": "application/json" },
+      data: { id: usuario._id },
+    };
+    await axios
+      .request(options)
+      .then(function (response) {
+        console.log(response.data);
+        toast.success("usuario eliminado con éxito");
+        setEjecutarConsulta(true);
+      })
+      .catch(function (error) {
+        console.error(error);
+        toast.error("Error eliminando el usuario");
+      });
+    setOpenDialog(false);
+  };
+  return (
+    <tr>
+      {edit ? (
+        <>
+          <td>{infoNuevoUsuario._id}</td>
+          <td>
+            <input
+              className="bg-gray-50 border border-gray-600 p-2 rounded-lg m-2"
+              type="text"
+              value={infoNuevoUsuario.correo}
+              onChange={(e) =>
+                setInfoNuevoUsuario({
+                  ...infoNuevoUsuario,
+                  correo: e.target.value,
+                })
+              }
+            />
+          </td>
+          <td>
+            <input
+              className="bg-gray-50 border border-gray-600 p-2 rounded-lg m-2"
+              type="text"
+              value={infoNuevoUsuario.nombre}
+              onChange={(e) =>
+                setInfoNuevoUsuario({
+                  ...infoNuevoUsuario,
+                  nombre: e.target.value,
+                })
+              }
+            />
+          </td>
+          <td>
+            <input
+              className="bg-gray-50 border border-gray-600 p-2 rounded-lg m-2"
+              type="text"
+              value={infoNuevoUsuario.rol}
+              onChange={(e) =>
+                setInfoNuevoUsuario({
+                  ...infoNuevoUsuario,
+                  rol: e.target.value,
+                })
+              }
+            />
+          </td>
+          <td>
+            <input
+              className="bg-gray-50 border border-gray-600 p-2 rounded-lg m-2"
+              type="text"
+              value={infoNuevoUsuario.estado}
+              onChange={(e) =>
+                setInfoNuevoUsuario({
+                  ...infoNuevoUsuario,
+                  estado: e.target.value,
+                })
+              }
+            />
+          </td>
+        </>
+      ) : (
+        <>
+          <td>{usuario._id.slice(20)}</td>
+          <td>{usuario.correo}</td>
+          <td>{usuario.nombre}</td>
+          <td>{usuario.rol}</td>
+          <td>{usuario.estado}</td>
+        </>
+      )}
+      <td>
+        <div className="flex w-full justify-around">
+          {edit ? (
+            <>
+              <Tooltip title="Confirmar Edición" arrow>
+                <i
+                  onClick={() => actualizarUsuario()}
+                  className="fas fa-check text-green-700 hover:text-green-500"
+                />
+              </Tooltip>
+              <Tooltip title="Cancelar edición" arrow>
+                <i
+                  onClick={() => setEdit(!edit)}
+                  className="fas fa-ban text-yellow-700 hover:text-yellow-500"
+                />
+              </Tooltip>
+            </>
+          ) : (
+            <>
+              <Tooltip title="Editar Usuario" arrow>
+                <i
+                  onClick={() => setEdit(!edit)}
+                  className="fas fa-pencil-alt text-yellow-700 hover:text-yellow-500"
+                />
+              </Tooltip>
+              <Tooltip title="Eliminar Usuario" arrow>
+                <i
+                  onClick={() => setOpenDialog(true)}
+                  className="fas fa-trash text-red-700 hover:text-red-500"
+                />
+              </Tooltip>
+            </>
+          )}
+        </div>
+        <Dialog open={openDialog}>
+          <div className="p-8 flex flex-col">
+            <h1 className="text-gray-900 text-2xl font-bold">
+              ¿Está seguro de querer eliminar el usuario?
+            </h1>
+            <div className="flex w-full items-center justify-center my-4">
+              <button
+                onClick={() => eliminarUsuario()}
+                className="mx-2 px-4 py-2 bg-green-500 text-white hover:bg-green-700 rounded-md shadow-md"
+              >
+                Sí
+              </button>
+              <button
+                onClick={() => setOpenDialog(false)}
+                className="mx-2 px-4 py-2 bg-red-500 text-white hover:bg-red-700 rounded-md shadow-md"
+              >
+                No
+              </button>
+            </div>
+          </div>
+        </Dialog>
+      </td>
+    </tr>
+  );
+}; */
+
+const FormularioCreacionUsuarios = ({
+  setMostrarTabla,
+  listaUsuarios,
+  setUsuarios,
+}) => {
   const form = useRef(null);
-  const submitForm = (e) => {
+  const submitForm = async (e) => {
     e.preventDefault();
-    Swal.fire({
-      position: "center-center",
-      icon: "success",
-      title: "Usuario actualizado!.",
-      showConfirmButton: false,
-      timer: 1500,
+    const fd = new FormData(form.current);
+    const nuevoUsuario = {};
+    fd.forEach((value, key) => {
+      nuevoUsuario[key] = value;
     });
+    const options = {
+      method: "POST",
+      url: "http://localhost:27017/usuarios/",
+      headers: { "Content-Type": "application/json" },
+      data: {
+        correo: nuevoUsuario.correo,
+        nombre: nuevoUsuario.nombre,
+        rol: nuevoUsuario.rol,
+        estado: nuevoUsuario.estado,
+      },
+    };
+    await axios
+      .request(options)
+      .then(function (response) {
+        console.log(response.data);
+        toast.success("Usuario agregado con éxito");
+      })
+      .catch(function (error) {
+        console.error(error);
+        toast.error("Error creando un Usuario");
+      });
     setMostrarTabla(true);
   };
 
   return (
-    // form nuevo prod
-    <div className="container">
-      <br />
-      <h5 className="">Editar usuario</h5>
-      <form ref={form} onSubmit={submitForm} className="">
-        <div class="mb-3 row">
-          <label for="descripcion" class="col-sm-2 col-form-label">
-            Correo:{" "}
-          </label>
-          <div class="col-sm-9">
-            <input
-              type="text"
-              name="descripcion"
-              className="form-control"
-              placeholder=""
-              required
-            />
-          </div>
-        </div>
-
-        <div class="mb-3 row">
-          <label for="valorUnit" class="col-sm-2 col-form-label">
-            Nombre:{" "}
-          </label>
-          <div class="col-sm-9">
-            <input
-              type="text"
-              name="valorUnit"
-              className="form-control"
-              placeholder=""
-              required
-            />
-          </div>
-        </div>
-
-        <div class="mb-3 row">
-          <label for="estado" class="col-sm-2 col-form-label">
-            Estado:{" "}
-          </label>
-          <div class="col-sm-9">
-            <select
-              className="form-select"
-              aria-label="Default select"
-              name="estado"
-              required
-              defaultValue={0}
-            >
-              <option value="Disponible" selected>
-                Autorizado
-              </option>
-              <option value="No disponible">No autorizado</option>
-              <option value="No disponible">Pendiente</option>
-            </select>
-          </div>
-        </div>
-        <div class="mb-3 row">
-          <label for="estado" class="col-sm-2 col-form-label">
-            Rol:{" "}
-          </label>
-          <div class="col-sm-9">
-            <select
-              className="form-select"
-              aria-label="Default select"
-              name="estado"
-              required
-              defaultValue={0}
-            >
-              <option value="Disponible" selected>
-                Administrador
-              </option>
-              <option value="No disponible">Vendedor</option>
-            </select>
-          </div>
-        </div>
-
-        <div className="col-md-11 d-flex justify-content-end ">
-          <button
-            className="btn btn-danger btn-lg"
-            onClick={() => {
-              setMostrarTabla(true);
-            }}
+    <div className="flex flex-col items-center justify-center">
+      <h2 className="text-2xl font-extrabold text-gray-800">
+        Crear un nuevo usuario
+      </h2>
+      <form ref={form} onSubmit={submitForm} className="flex flex-col">
+        <label className="flex flex-col" htmlFor="nombre">
+          Nombre
+          <input
+            name="nombre"
+            className="bg-gray-50 border border-gray-600 p-2 rounded-lg m-2"
+            type="text"
+            required
+          />
+        </label>
+        <label className="flex flex-col" htmlFor="correo">
+          Correo
+          <input
+            name="correo"
+            className="bg-gray-50 border border-gray-600 p-2 rounded-lg m-2"
+            type="correo"
+            placeholder="Ingrese aquí el nombre del usuario"
+            required
+          />
+        </label>
+        <label className="flex flex-col" htmlFor="rol">
+          Rol
+          <select
+            className="bg-gray-50 border border-gray-600 p-2 rounded-lg m-2"
+            name="rol"
+            required
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              class="bi bi-sd-card"
-              viewBox="0 0 16 16"
-            >
-              <path d="M6.25 3.5a.75.75 0 0 0-1.5 0v2a.75.75 0 0 0 1.5 0v-2zm2 0a.75.75 0 0 0-1.5 0v2a.75.75 0 0 0 1.5 0v-2zm2 0a.75.75 0 0 0-1.5 0v2a.75.75 0 0 0 1.5 0v-2zm2 0a.75.75 0 0 0-1.5 0v2a.75.75 0 0 0 1.5 0v-2z" />
-              <path
-                fill-rule="evenodd"
-                d="M5.914 0H12.5A1.5 1.5 0 0 1 14 1.5v13a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5V3.914c0-.398.158-.78.44-1.06L4.853.439A1.5 1.5 0 0 1 5.914 0zM13 1.5a.5.5 0 0 0-.5-.5H5.914a.5.5 0 0 0-.353.146L3.146 3.561A.5.5 0 0 0 3 3.914V14.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-13z"
-              />
-            </svg>
-            Cancelar
-          </button>
-          <button type="submit" class="btn btn-primary btn-lg">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              class="bi bi-sd-card"
-              viewBox="0 0 16 16"
-            >
-              <path d="M6.25 3.5a.75.75 0 0 0-1.5 0v2a.75.75 0 0 0 1.5 0v-2zm2 0a.75.75 0 0 0-1.5 0v2a.75.75 0 0 0 1.5 0v-2zm2 0a.75.75 0 0 0-1.5 0v2a.75.75 0 0 0 1.5 0v-2zm2 0a.75.75 0 0 0-1.5 0v2a.75.75 0 0 0 1.5 0v-2z" />
-              <path
-                fill-rule="evenodd"
-                d="M5.914 0H12.5A1.5 1.5 0 0 1 14 1.5v13a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5V3.914c0-.398.158-.78.44-1.06L4.853.439A1.5 1.5 0 0 1 5.914 0zM13 1.5a.5.5 0 0 0-.5-.5H5.914a.5.5 0 0 0-.353.146L3.146 3.561A.5.5 0 0 0 3 3.914V14.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-13z"
-              />
-            </svg>
-            Guardar
-          </button>
-        </div>
+            <option disabled value={0}>
+              Seleccione una opción
+            </option>
+            <option>Administrador/a</option>
+            <option>Vendedor/a</option>
+          </select>
+        </label>
+        <label className="flex flex-col" htmlFor="estado">
+          Estado
+          <select
+            className="bg-gray-50 border border-gray-600 p-2 rounded-lg m-2"
+            name="estado"
+            required
+            defaultValue={0}
+          >
+            <option disabled value={0}>
+              Seleccione una opción
+            </option>
+            <option>Autorizado</option>
+            <option>Pendiente</option>
+            <option>No autorizado</option>
+          </select>
+        </label>
+        <button
+          type="submit"
+          className="col-span-2 bg-green-400 p-2 rounded-full shadow-md hover:bg-green-600 text-white"
+        >
+          Guardar Usuario
+        </button>
       </form>
     </div>
   );
