@@ -5,15 +5,15 @@ import userImage from "./../media/users.png";
 
 const Sidebar = () => {
   return (
-    <aside id="sidebar" class="s-sidebar__nav">
+    <aside id="sidebar" className="s-sidebar__nav">
       <input
         id="nav-expand"
         type="button"
-        Value="MENU"
+        value="MENU"
         className="social-buttons"
       />
       <nav>
-        <img src={userImage} alt="" class="image--cover" />
+        <img src={userImage} alt="" className="image--cover" />
         <p></p>
         <span class="title-sidebar">OPCIONES DISPONIBLES</span>
         <p></p>
