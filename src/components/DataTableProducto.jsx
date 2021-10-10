@@ -1,6 +1,22 @@
-import React from 'react'
+// import React from 'react'
+import React, { useEffect, useState} from 'react';
 
 const DataTableProducto = ({listaProductos, setMostrarTabla}) => {
+
+     //****************************Maye funcionalidad buscar**********************/
+    const [busqueda, setBusqueda] = useState('');
+    const [productosFiltrados, setProductosFiltrados] = useState(listaProductos);
+ 
+   useEffect(() => {
+    
+     setProductosFiltrados(
+         listaProductos.filter((elemento) => {
+             return JSON.stringify(elemento).toLowerCase().includes(busqueda.toLowerCase());
+         })
+     );
+   }, [busqueda, listaProductos]);
+    //****************************fin Maye funcionalidad buscar**********************/
+
     return (
         <div>
             {/* bootstrap  */}
@@ -9,7 +25,14 @@ const DataTableProducto = ({listaProductos, setMostrarTabla}) => {
                 <section className="table-search-fields">
                     <div class="input-group mb-3 ">
                         <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
-                        <input type="text" class="form-control" placeholder="Buscar..." aria-label="search" aria-describedby="search" />
+                        {/* <input type="text" class="form-control" placeholder="Buscar..." aria-label="search" aria-describedby="search" /> */}
+                        <input
+                            // Maye modifico Value/onChange
+                            value={busqueda}
+                            onChange={(e) => setBusqueda(e.target.value)}
+                            placeholder="Buscar..."
+                            type="text" class="form-control" 
+                            aria-label="search" aria-describedby="search" />
                     </div>
                 </section>
 
@@ -27,7 +50,9 @@ const DataTableProducto = ({listaProductos, setMostrarTabla}) => {
                         </tr>
                     </thead>
                     <tbody>
-                    {listaProductos.map((producto, index) => {
+                    {/* {listaProductos.map((producto, index) => { */}
+                    {/* Maye cambio de listaProductos a productosFiltrados  */}
+                    {productosFiltrados.map((producto, index) => {
                     return (
                         <tr className='text-center'>
                             <td>{index+1}</td>
