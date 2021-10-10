@@ -209,7 +209,7 @@ const FormularioCreacionProducto
     // comunicacion con API
     const options = {
       method: 'POST',
-      url: 'http://localhost:5000/producto/crear',
+      url: 'http://localhost:5000/producto',
       headers: { 'Content-Type': 'application/json' },
       data: { descripcion: nuevoProducto.descripcion, valorUnit: nuevoProducto.valorUnit, estado: nuevoProducto.estado },
     };
