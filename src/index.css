@@ -11,8 +11,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-
-
 .bd-placeholder-img {
   font-size: 1.125rem;
   text-anchor: middle;
@@ -249,50 +247,51 @@ header {
   font-weight: 900;
   width: 70%;
   color: rgb(97, 218, 251, 255);
-
 }
 
 .izquierda span {
   color: white;
-
 }
 
 @keyframes colorAnimate {
   0% {
-     background: rgb(46, 46, 46);
- }
+    background: rgb(46, 46, 46);
+  }
   25% {
-     background: rgb(41, 90, 131);
- }
+    background: rgb(41, 90, 131);
+  }
   50% {
-     background: rgb(20, 100, 153);
- }
+    background: rgb(20, 100, 153);
+  }
   75% {
-     background: rgb(62, 46, 100);
- }
+    background: rgb(62, 46, 100);
+  }
   100% {
-     background: rgb(46, 46, 46);
- }
+    background: rgb(46, 46, 46);
+  }
 }
-@-webkit-keyframes colorAnimate 
+
+@-webkit-keyframes colorAnimate
 /* Safari and Chrome - necessary duplicate */
-{
+
+  {
   0% {
-     background: rgb(46, 46, 46);
- }
+    background: rgb(46, 46, 46);
+  }
   25% {
-     background: rgb(41, 90, 131);
- }
+    background: rgb(41, 90, 131);
+  }
   50% {
-     background: rgb(20, 100, 153);
- }
+    background: rgb(20, 100, 153);
+  }
   75% {
-     background: rgb(62, 46, 100);
- }
+    background: rgb(62, 46, 100);
+  }
   100% {
-     background: rgb(46, 46, 46);
- }
+    background: rgb(46, 46, 46);
+  }
 }
+
 .form {
   background-color: #ffffff;
   width: 500px;
@@ -308,20 +307,24 @@ html, body, .wrapper, .sct {
   height: 100%;
   margin: 0;
 }
+
 .text-center {
   text-align: center;
 }
+
 .wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
   grid-template-areas: "centerLeft centerRight";
 }
+
 .sct {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .brand {
   grid-area: centerLeft;
   background-color: blue;
@@ -330,15 +333,16 @@ html, body, .wrapper, .sct {
   animation-iteration-count: infinite;
   -webkit-iteration-count: infinite;
 }
+
 @media (max-width: 768px) {
   .wrapper {
-      display: grid;
-      grid-template-columns: 1fr;
-      grid-auto-rows: minmax(20%, 80vmax);
-      grid-template-areas: "centerLeft" "centerRight";
- }
-  .login > form {
-      width: 100%;
-      margin: 0 3rem;
- }
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: minmax(20%, 80vmax);
+    grid-template-areas: "centerLeft" "centerRight";
+  }
+  .login>form {
+    width: 100%;
+    margin: 0 3rem;
+  }
 }

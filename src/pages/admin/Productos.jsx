@@ -120,7 +120,7 @@ const Productos = () => {
     <div className="container-productos">
       <div className="">
         <div className="container-title">
-          <h3 className="">Administrador de productos</h3>
+          <h3 className="">Administración de productos</h3>
         </div>
         <br />
         <button
