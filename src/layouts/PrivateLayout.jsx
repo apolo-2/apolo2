@@ -1,7 +1,7 @@
 import React from "react";
 import Sidebar from "components/Sidebar";
 import Header from "components/Header";
-import Footer from "components/Footer";
+// import Footer from "components/Footer";
 
 const PrivateLayout = ({ children }) => {
   return (
@@ -13,7 +13,7 @@ const PrivateLayout = ({ children }) => {
           <main>{children}</main>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
