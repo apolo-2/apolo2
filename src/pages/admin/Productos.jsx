@@ -3,7 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import DataTableProducto from 'components/DataTableProducto';
 import 'styles/productos.css';
-import { obtenerProductos, crearProducto, editarProducto} from 'utils/api';
+import { obtenerProductos, crearProducto, editarProducto, eliminarProducto} from 'utils/api';
 
 const Productos = () => {
   const [mostrarTabla, setMostrarTabla] = useState('LISTAR'); //LISTAR, CREAR, ACTUALIZAR
@@ -11,7 +11,8 @@ const Productos = () => {
   const [textoBoton, setTextoBoton] = useState('Nuevo Producto');
   const [colorBoton, setColorBoton] = useState('btn-secondary');
   const [textoTituloFormulario, setTextoTituloFormulario] = useState('Formulario nuevo producto');
-  const [productToEdit, setProductToEdit] = useState({});  
+  const [productToEdit, setProductToEdit] = useState({});
+  const [idProductToDelete, setIdProductToDelete] = useState();  
   const [ejecutarConsulta, setEjecutarConsulta] = useState(false);
 
   useEffect(() => {
@@ -54,6 +55,24 @@ const Productos = () => {
     }
   }, [mostrarTabla]);
 
+  // function Maye - eliminar prod, accionado desde DataTableProducto.jsx
+  const deleteProducto =  async () => {
+    
+    await eliminarProducto(
+      idProductToDelete,
+      (response) => {
+        console.log(response.data);
+        toast.success('Producto eliminado con éxito! ');
+        setEjecutarConsulta(true);
+      },
+      (error) => {
+        console.error(error);
+        toast.error('Error eliminando el producto');
+      }
+    )
+  };
+  //./
+
   return (
 
     <div className='container-productos'>
@@ -89,7 +108,8 @@ const Productos = () => {
       {(() => {
               switch (mostrarTabla) {
                 case 'LISTAR':   
-                    return <DataTableProducto listaProductos={productos} setMostrarTabla={setMostrarTabla} setProductToEdit = {setProductToEdit}/>;
+                    return <DataTableProducto listaProductos={productos} setMostrarTabla={setMostrarTabla} 
+                            setProductToEdit = {setProductToEdit} deleteProducto = {deleteProducto} setIdProductToDelete={setIdProductToDelete}/>;
                 case 'CREAR': 
                     return <FormularioCreacionProducto
                               setMostrarTabla={setMostrarTabla}

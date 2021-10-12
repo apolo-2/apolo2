@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from 'react';
 
-const DataTableProducto = ({listaProductos, setMostrarTabla, setProductToEdit}) => {
+const DataTableProducto = ({listaProductos, setMostrarTabla, setProductToEdit, deleteProducto, setIdProductToDelete}) => {
 
     const [busqueda, setBusqueda] = useState('');
     const [productosFiltrados, setProductosFiltrados] = useState(listaProductos);
@@ -55,7 +55,7 @@ const DataTableProducto = ({listaProductos, setMostrarTabla, setProductToEdit}) 
                             <td className="td_acciones"> 
                                 <button type="button" class="btn  btn-sm btn-outline-info" title='Editar'
                                     onClick={() => {
-                                        console.log('click edit');
+                                        console.log('Action: edit');
                                         setProductToEdit(producto);
                                         setMostrarTabla('ACTUALIZAR');
                                     }}
@@ -64,7 +64,11 @@ const DataTableProducto = ({listaProductos, setMostrarTabla, setProductToEdit}) 
                                     {/* Editar */}
                                 </button>
                                 <button type="button" class="btn  btn-sm btn-sm btn-outline-danger" title='Eliminar'
-                                 data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
+                                 data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"
+                                 onClick={() => {
+                                    setIdProductToDelete(producto._id);
+                                }}
+                                >
                                     <i class="far fa-trash-alt "></i>
                                     {/* Eliminar */}
                                 </button>
@@ -107,7 +111,10 @@ const DataTableProducto = ({listaProductos, setMostrarTabla, setProductToEdit}) 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                         <button  onClick={
-                            () =>  console.log('Eliminar acción')
+                            () =>  {
+                                console.log('Action: Delete')
+                                deleteProducto()
+                            }
                             } type="button" class="btn btn-primary" data-bs-dismiss="modal">Confirmar</button>
                     </div>
                     </div>
