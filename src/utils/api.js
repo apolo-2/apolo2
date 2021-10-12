@@ -29,5 +29,3 @@ export const obtenerUsuarios = async (setUsuarios, setEjecutarConsulta) => {
     });
   setEjecutarConsulta(false);
 };
-
-export const crearVehiculo = async (setUsuarios, setEjecutarConsulta) => {};

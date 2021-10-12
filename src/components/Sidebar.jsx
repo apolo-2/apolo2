@@ -15,10 +15,10 @@ const Sidebar = () => {
       <nav>
         <img src={userImage} alt="" className="image--cover" />
         <p></p>
-        <span class="title-sidebar">OPCIONES DISPONIBLES</span>
+        <span className="title-sidebar">OPCIONES DISPONIBLES</span>
         <p></p>
-        <a id="nav-collapse" href="#">
-          <span class="icon icon-cross" />
+        <a id="nav-collapse" href="/#">
+          <span className="icon icon-cross" />
         </a>
         <Ruta
           icono="fas fa-hand-holding-usd"
@@ -42,7 +42,7 @@ const Ruta = ({ icono, ruta, nombre }) => {
   return (
     <>
       <Link to={ruta}>
-        <i class={`fa ${icono}`} aria-hidden="true" /> {nombre}
+        <i className={`fa ${icono}`} aria-hidden="true" /> {nombre}
       </Link>
     </>
   );
