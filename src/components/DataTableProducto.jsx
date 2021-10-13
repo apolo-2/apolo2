@@ -1,20 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const DataTableProducto = ({ listaProductos, setMostrarTabla }) => {
+const DataTableProducto = ({
+  listaProductos,
+  setMostrarTabla,
+  setProductToEdit,
+  deleteProducto,
+  setIdProductToDelete,
+}) => {
+  const [busqueda, setBusqueda] = useState("");
+  const [productosFiltrados, setProductosFiltrados] = useState(listaProductos);
+
+  useEffect(() => {
+    setProductosFiltrados(
+      listaProductos.filter((elemento) => {
+        return JSON.stringify(elemento)
+          .toLowerCase()
+          .includes(busqueda.toLowerCase());
+      })
+    );
+  }, [busqueda, listaProductos]);
+
   return (
     <div>
       {/* bootstrap  */}
       <div class="table-responsive">
-        {/*   table-striped  border-light*/}
         <section className="table-search-fields">
           <div class="input-group mb-3 ">
             <span class="input-group-text" id="basic-addon1">
               <i class="fas fa-search"></i>
             </span>
             <input
+              value={busqueda}
+              onChange={(e) => setBusqueda(e.target.value)}
+              placeholder="Buscar..."
               type="text"
               class="form-control"
-              placeholder="Buscar..."
               aria-label="search"
               aria-describedby="search"
             />
@@ -22,12 +42,10 @@ const DataTableProducto = ({ listaProductos, setMostrarTabla }) => {
         </section>
 
         <table class="table  table-sm table-hover  table-bordered caption-top table-listado">
-          {/* <caption>Lista de productos</caption> */}
-
           <thead className="table-light text-center">
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Código</th>
+              <th scope="col">Identificador</th>
               <th scope="col">Descripción</th>
               <th scope="col">Valor Unitarío</th>
               <th scope="col">Estado</th>
@@ -35,12 +53,12 @@ const DataTableProducto = ({ listaProductos, setMostrarTabla }) => {
             </tr>
           </thead>
           <tbody>
-            {listaProductos.map((producto, index) => {
+            {productosFiltrados.map((producto, index) => {
               return (
                 <tr className="text-center">
                   <td>{index + 1}</td>
                   {/* <td>{producto.codigo}</td> */}
-                  <td>000{index + 1}</td>
+                  <td>{producto._id.substring(17)}</td>
                   <td>{producto.descripcion}</td>
                   <td>{producto.valorUnit}</td>
                   <td>{producto.estado}</td>
@@ -50,8 +68,9 @@ const DataTableProducto = ({ listaProductos, setMostrarTabla }) => {
                       class="btn  btn-sm btn-outline-info"
                       title="Editar"
                       onClick={() => {
-                        console.log("click edit");
-                        setMostrarTabla(3); //editar
+                        console.log("Action: edit");
+                        setProductToEdit(producto);
+                        setMostrarTabla("ACTUALIZAR");
                       }}
                     >
                       <i class="fas fa-pencil-alt "></i>
@@ -63,6 +82,9 @@ const DataTableProducto = ({ listaProductos, setMostrarTabla }) => {
                       title="Eliminar"
                       data-bs-toggle="modal"
                       data-bs-target="#confirmDeleteModal"
+                      onClick={() => {
+                        setIdProductToDelete(producto._id);
+                      }}
                     >
                       <i class="far fa-trash-alt "></i>
                       {/* Eliminar */}
@@ -137,6 +159,10 @@ const DataTableProducto = ({ listaProductos, setMostrarTabla }) => {
                 Cancelar
               </button>
               <button
+                onClick={() => {
+                  console.log("Action: Delete");
+                  deleteProducto();
+                }}
                 type="button"
                 class="btn btn-primary"
                 data-bs-dismiss="modal"
@@ -147,7 +173,6 @@ const DataTableProducto = ({ listaProductos, setMostrarTabla }) => {
           </div>
         </div>
       </div>
-
       {/* fin bootstrap */}
     </div>
   );

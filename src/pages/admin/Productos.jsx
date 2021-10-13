@@ -3,129 +3,88 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import DataTableProducto from "components/DataTableProducto";
 import "styles/productos.css";
-
-import { obtenerProductos } from "utils/api";
-
-// const productosBackend = [
-//   {
-//     codigo: '0001',
-//     descripcion: 'Monitor Samsung 27"',
-//     valorUnit: 685000,
-//     estado: 'Disponible',
-//   },
-//   {
-//     codigo: '0002',
-//     descripcion: 'Disco SSD Kingston 256GB',
-//     valorUnit: 168500,
-//     estado: 'No Disponible',
-//   },
-//   {
-//     codigo: '0003',
-//     descripcion: 'Monitor LG 27"',
-//     valorUnit: 568500,
-//     estado: 'Disponible',
-//   },
-//   {
-//     codigo: '0004',
-//     descripcion: 'Mouse Gamer Genious"',
-//     valorUnit: 212500,
-//     estado: 'No Disponible',
-//   },
-//   {
-//     codigo: '0005',
-//     descripcion: 'Monitor Samsung 21"',
-//     valorUnit: 568500,
-//     estado: 'Disponible',
-//   },
-//   {
-//     codigo: '0006',
-//     descripcion: 'Monitor Samsung 29"',
-//     valorUnit: 868500,
-//     estado: 'Disponible',
-//   },
-//   // {
-//   //   codigo: '0007',
-//   //   descripcion: 'Monitor Samsung 21"',
-//   //   valorUnit: 568500,
-//   //   estado: 'Disponible',
-//   // },
-//   // {
-//   //   codigo: '0008',
-//   //   descripcion: 'Laptop ASUS X441UV',
-//   //   valorUnit: 1568500,
-//   //   estado: 'Disponible',
-//   // },
-// ];
-
-let dataEjemploEditarProduct = {
-  codigo: "0001",
-  descripcion: "Monitor Samsung 27",
-  valorUnit: 685000,
-  estado: "Disponible",
-};
+import {
+  obtenerProductos,
+  crearProducto,
+  editarProducto,
+  eliminarProducto,
+} from "utils/api";
 
 const Productos = () => {
-  const [mostrarTabla, setMostrarTabla] = useState(1); // 1 listar prod, 2 crear prod, 3 editar prod
+  const [mostrarTabla, setMostrarTabla] = useState("LISTAR"); //LISTAR, CREAR, ACTUALIZAR
   const [productos, setProductos] = useState([]);
   const [textoBoton, setTextoBoton] = useState("Nuevo Producto");
   const [colorBoton, setColorBoton] = useState("btn-secondary");
-
   const [textoTituloFormulario, setTextoTituloFormulario] = useState(
     "Formulario nuevo producto"
   );
-  const [dataEditarProduct, setDataEditarProduct] = useState({});
-
-  const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
+  const [productToEdit, setProductToEdit] = useState({});
+  const [idProductToDelete, setIdProductToDelete] = useState();
+  const [ejecutarConsulta, setEjecutarConsulta] = useState(false);
 
   useEffect(() => {
-    console.log("consulta", ejecutarConsulta);
     if (ejecutarConsulta) {
-      obtenerProductos(setProductos, setEjecutarConsulta);
-      console.log("productos:::::", productos);
+      obtenerProductos(
+        (response) => {
+          setProductos(response.data);
+        },
+        (error) => {
+          console.error("Salio un error:", error);
+        }
+      );
+      setEjecutarConsulta(false);
     }
-  }, [ejecutarConsulta, productos]);
+  }, [ejecutarConsulta]);
 
   useEffect(() => {
     // if (mostrarTabla) {
-    if (mostrarTabla === 1) {
+    if (mostrarTabla === "LISTAR") {
       setEjecutarConsulta(true);
     }
   }, [mostrarTabla]);
 
-  // useEffect(() => {
-  //   //obtener lista  desde el backend
-  //   setProductos(productosBackend);
-  // }, []);
-
   useEffect(() => {
-    // 1 listar prod, 2 crear prod, 3 editar prod
-    if (mostrarTabla === 1) {
+    if (mostrarTabla === "LISTAR") {
       setTextoBoton("Nuevo Producto");
       setColorBoton("btn-secondary");
-      setDataEditarProduct({});
-    } else if (mostrarTabla === 2) {
+    } else if (mostrarTabla === "CREAR") {
       setTextoBoton("Mostrar Todos los productos");
       setColorBoton("btn-info");
       setTextoTituloFormulario("Formulario nuevo producto");
-      setDataEditarProduct({});
-    } else if (mostrarTabla === 3) {
+    } else if (mostrarTabla === "ACTUALIZAR") {
       setTextoBoton("Mostrar Todos los productos");
       setColorBoton("btn-info");
       setTextoTituloFormulario("Formulario actualizar producto");
-      setDataEditarProduct(dataEjemploEditarProduct);
     }
   }, [mostrarTabla]);
+
+  // function Maye - eliminar prod, accionado desde DataTableProducto.jsx
+  const deleteProducto = async () => {
+    await eliminarProducto(
+      idProductToDelete,
+      (response) => {
+        console.log(response.data);
+        toast.success("Producto eliminado con éxito! ");
+        setEjecutarConsulta(true);
+      },
+      (error) => {
+        console.error(error);
+        toast.error("Error eliminando el producto");
+      }
+    );
+  };
+  //./
 
   return (
     <div className="container-productos">
       <div className="">
         <div className="container-title">
-          <h3 className="">Administración de productos</h3>
+          <h3 className="">Administrador de productos</h3>
         </div>
         <br />
         <button
           onClick={() => {
-            setMostrarTabla(mostrarTabla === 1 ? 2 : 1);
+            setMostrarTabla(mostrarTabla === "LISTAR" ? "CREAR" : "LISTAR");
           }}
           className={`btn ${colorBoton} btn-rounded`}
         >
@@ -144,70 +103,56 @@ const Productos = () => {
         />
       )}
       */}
-      {/* Rendirizado dinamico, 3 secciones */}
+      {/* Renderizado dinamico con 3 secciones */}
       {(() => {
         switch (mostrarTabla) {
-          case 1:
+          case "LISTAR":
             return (
               <DataTableProducto
                 listaProductos={productos}
                 setMostrarTabla={setMostrarTabla}
+                setProductToEdit={setProductToEdit}
+                deleteProducto={deleteProducto}
+                setIdProductToDelete={setIdProductToDelete}
               />
             );
-          case 2:
+          case "CREAR":
             return (
               <FormularioCreacionProducto
                 setMostrarTabla={setMostrarTabla}
                 listaProductos={productos}
                 setProductos={setProductos}
                 textoTituloFormulario={textoTituloFormulario}
-                dataEditarProduct={dataEditarProduct}
+                setProductToEdit={setProductToEdit}
               />
             );
-          case 3:
-            // temporalmente el mismo form
+          case "ACTUALIZAR":
             return (
-              <FormularioCreacionProducto
+              <FormularioActualizarProducto
                 setMostrarTabla={setMostrarTabla}
-                listaProductos={productos}
-                setProductos={setProductos}
+                setEjecutarConsulta={setEjecutarConsulta}
+                setProductToEdit={setProductToEdit}
                 textoTituloFormulario={textoTituloFormulario}
-                dataEditarProduct={dataEditarProduct}
+                producto={productToEdit}
               />
             );
           default:
-            return (
-              <DataTableProducto
-                listaProductos={productos}
-                setMostrarTabla={setMostrarTabla}
-                setEjecutarConsulta={setEjecutarConsulta}
-              />
-            );
+            return <h2>Error!</h2>;
         }
       })()}
+
       <ToastContainer position="bottom-right" autoClose={5000} />
     </div>
   );
 };
 
-// const TablaProductos = ({ listaProductos }) => {
-//   useEffect(() => {
-//     console.log('este es el listado  en el componente de tabla', listaProductos);
-//   }, [listaProductos]);
-//   return (
-//     <DataTableProducto  listaProductos={listaProductos}/>
-//   );
-// };
-
 const FormularioCreacionProducto = ({
   setMostrarTabla,
-  listaProductos,
-  setProductos,
   textoTituloFormulario,
-  dataEditarProduct,
 }) => {
   const form = useRef(null);
-  const submitForm = (e) => {
+
+  const submitForm = async (e) => {
     e.preventDefault();
     const fd = new FormData(form.current);
 
@@ -216,20 +161,28 @@ const FormularioCreacionProducto = ({
       nuevoProducto[key] = value;
     });
 
-    setMostrarTabla(1);
-    setProductos([...listaProductos, nuevoProducto]);
-    console.log("nuevoProducto::", nuevoProducto);
-    // identificar el caso de éxito y mostrar un toast de éxito
-    toast.success("Producto agregado con éxito");
-    // identificar el caso de error y mostrar un toast de error
-    // toast.error('Error creando un vehículo');
+    await crearProducto(
+      {
+        descripcion: nuevoProducto.descripcion,
+        valorUnit: nuevoProducto.valorUnit,
+        estado: nuevoProducto.estado,
+      },
+      (response) => {
+        console.log(response.data);
+        toast.success("Producto agregado con éxito");
+        setMostrarTabla("LISTAR");
+      },
+      (error) => {
+        console.error(error);
+        toast.error("Error creando proyecto");
+      }
+    );
   };
 
   return (
-    // form nuevo prod
+    // form nuevo producto
     <div className="container">
       <br />
-      {/* <h4 className=''>Formulario nuevo producto</h4> */}
       <h4 className="">{textoTituloFormulario}</h4>
       <br />
       <form ref={form} onSubmit={submitForm} className="">
@@ -244,9 +197,8 @@ const FormularioCreacionProducto = ({
               className="form-control"
               placeholder="Ingrese descripción del producto"
               required
-              defaultValue={dataEditarProduct.descripcion}
+              defaultValue=""
             />
-            {/* <div id="descHelp" class="form-text">Descripción del producto</div> */}
           </div>
         </div>
 
@@ -263,9 +215,8 @@ const FormularioCreacionProducto = ({
               max={9999999999999}
               placeholder="Ingrese valor por unidad"
               required
-              defaultValue={dataEditarProduct.valorUnit}
+              defaultValue=""
             />
-            {/* <div id="descHelp" class="form-text">Descripción del producto</div> */}
           </div>
         </div>
 
@@ -279,14 +230,13 @@ const FormularioCreacionProducto = ({
               aria-label="Default select"
               name="estado"
               required
-              defaultValue={0}
+              defaultValue=""
             >
               <option value="Disponible" selected>
                 Disponible
               </option>
               <option value="No disponible">No disponible</option>
             </select>
-            {/* <div id="descHelp" class="form-text">Descripción del producto</div> */}
           </div>
         </div>
 
@@ -295,7 +245,125 @@ const FormularioCreacionProducto = ({
             type=""
             className="btn btn-secondary btn"
             onClick={() => {
-              setMostrarTabla(1);
+              setMostrarTabla("LISTAR");
+            }}
+          >
+            <i class="far fa-window-close space-button-icon"></i>
+            Cancelar
+          </button>
+          <button type="submit" className="btn btn-primary btn">
+            <i class="fas fa-save space-button-icon"></i>
+            Guardar
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+const FormularioActualizarProducto = ({
+  setMostrarTabla,
+  textoTituloFormulario,
+  producto,
+}) => {
+  const form = useRef(null);
+
+  const submitForm = async (e) => {
+    e.preventDefault();
+    const fd = new FormData(form.current);
+
+    const nuevoProducto = {};
+    fd.forEach((value, key) => {
+      nuevoProducto[key] = value;
+    });
+    console.log("nuevoProducto:", nuevoProducto, "producto._id:", producto._id);
+
+    // Actualizar producto
+    await editarProducto(
+      producto._id,
+      {
+        descripcion: nuevoProducto.descripcion,
+        valorUnit: nuevoProducto.valorUnit,
+        estado: nuevoProducto.estado,
+      },
+      (response) => {
+        console.log(response.data);
+        toast.success("Producto modificado con éxito! ");
+        setMostrarTabla("LISTAR");
+      },
+      (error) => {
+        toast.error("Error modificando el producto");
+        console.error(error);
+      }
+    );
+  };
+
+  return (
+    <div className="container">
+      <br />
+      <h4 className="">{textoTituloFormulario}</h4>
+      <br />
+      <form ref={form} onSubmit={submitForm} className="">
+        <div class="mb-3 row">
+          <label for="descripcion" class="col-sm-2 col-form-label">
+            Descripción:{" "}
+          </label>
+          <div class="col-sm-9">
+            <input
+              type="text"
+              name="descripcion"
+              className="form-control"
+              placeholder="Ingrese descripción del producto"
+              required
+              defaultValue={producto.descripcion}
+            />
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <label for="valorUnit" class="col-sm-2 col-form-label">
+            Valor unitario:{" "}
+          </label>
+          <div class="col-sm-9">
+            <input
+              type="number"
+              name="valorUnit"
+              className="form-control"
+              min={0}
+              max={9999999999999}
+              placeholder="Ingrese valor por unidad"
+              required
+              defaultValue={producto.valorUnit}
+            />
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <label for="estado" class="col-sm-2 col-form-label">
+            Estado:{" "}
+          </label>
+          <div class="col-sm-9">
+            <select
+              className="form-select"
+              aria-label="Default select"
+              name="estado"
+              required
+              defaultValue={producto.estado}
+            >
+              <option value="Disponible" selected>
+                Disponible
+              </option>
+              <option value="No disponible">No disponible</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="col-md-11 d-flex justify-content-end div-btn-actions">
+          <button
+            type=""
+            className="btn btn-secondary btn"
+            onClick={() => {
+              setMostrarTabla("LISTAR");
             }}
           >
             <i class="far fa-window-close space-button-icon"></i>

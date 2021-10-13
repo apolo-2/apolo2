@@ -4,7 +4,6 @@ import axios from "axios";
 import { nanoid } from "nanoid";
 import { Dialog, Tooltip } from "@material-ui/core";
 import { ToastContainer, toast } from "react-toastify";
-//import DataTableUsuario from "components/DataTableUsuario";
 import { obtenerUsuarios, editarUsuario, eliminarUsuario } from "utils/api2";
 
 const Usuarios = () => {
@@ -92,8 +91,6 @@ const FilaUsuario = ({ usuario }) => {
   });
 
   const actualizarUsuario = async () => {
-    //enviar la info al backend
-
     await editarUsuario(
       usuario._id,
       {
@@ -115,7 +112,6 @@ const FilaUsuario = ({ usuario }) => {
   };
   const deleteUsuario = async () => {
     await eliminarUsuario(
-      // Metodo desde la api utility
       usuario._id,
       (response) => {
         console.log(response.data);
