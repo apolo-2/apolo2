@@ -1,17 +1,16 @@
 import "styles/header.css";
+import Mision from "media/logo_misiontic.png";
+import Apolo2 from "media/APOLO_2.png";
 
 const Header = () => {
   return (
     <header>
-      <h1>
-        APOLO 2{" "}
-        <small>
-          {" "}
-          <a href="./">
-            <h5>🚀</h5>
-          </a>{" "}
-        </small>
-      </h1>
+      <div class="logo">
+        <img src={Apolo2} alt="" />
+      </div>
+      <div class="logo2">
+        <img src={Mision} alt="" />
+      </div>
     </header>
   );
 };

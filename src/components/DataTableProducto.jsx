@@ -173,7 +173,6 @@ const DataTableProducto = ({
           </div>
         </div>
       </div>
-      {/* fin bootstrap */}
     </div>
   );
 };

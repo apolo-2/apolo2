@@ -88,7 +88,7 @@ const Ventas = () => {
         />
       )}
 
-      <ToastContainer position="bottom-right" autoClose={5000} />
+      <ToastContainer position="bottom-right" autoClose={27017} />
     </div>
   );
 };

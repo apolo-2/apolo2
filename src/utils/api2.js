@@ -1,14 +1,14 @@
 import axios from "axios";
 
 export const obtenerProductos = async (successCallback, errorCallback) => {
-  const options = { method: "GET", url: "http://localhost:5000/producto" };
+  const options = { method: "GET", url: "http://localhost:27017/producto" };
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
 
 export const crearProducto = async (data, successCallback, errorCallback) => {
   const options = {
     method: "POST",
-    url: "http://localhost:5000/producto",
+    url: "http://localhost:27017/producto",
     headers: { "Content-Type": "application/json" },
     data,
   };
@@ -23,7 +23,7 @@ export const editarProducto = async (
 ) => {
   const options = {
     method: "PATCH",
-    url: `http://localhost:5000/producto/${id}/`,
+    url: `http://localhost:27017/producto/${id}/`,
     headers: { "Content-Type": "application/json" },
     data,
   };
@@ -33,7 +33,7 @@ export const editarProducto = async (
 export const eliminarProducto = async (id, successCallback, errorCallback) => {
   const options = {
     method: "DELETE",
-    url: `http://localhost:5000/producto/${id}/`,
+    url: `http://localhost:27017/producto/${id}/`,
     headers: { "Content-Type": "application/json" },
   };
   await axios.request(options).then(successCallback).catch(errorCallback);

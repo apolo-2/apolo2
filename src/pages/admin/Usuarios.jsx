@@ -129,7 +129,6 @@ const FilaUsuario = ({ usuario }) => {
     <tr>
       {edit ? (
         <>
-          <td>{infoNuevoUsuario._id}</td>
           <td>
             <input
               className="bg-gray-50 border border-gray-600 p-2 rounded-lg m-2"
@@ -185,7 +184,6 @@ const FilaUsuario = ({ usuario }) => {
         </>
       ) : (
         <>
-          <td>{usuario._id.slice(20)}</td>
           <td>{usuario.nombre}</td>
           <td>{usuario.correo}</td>
           <td>{usuario.rol}</td>
@@ -287,7 +285,6 @@ const DataTableUsuario = ({ listaUsuarios }) => {
       <table className="table  table-sm table-hover  table-bordered caption-top table-listado">
         <thead className="table-light text-center">
           <tr>
-            <th scope="col">#</th>
             <th scope="col">Nombre</th>
             <th scope="col">Correo</th>
             <th scope="col">Rol</th>
@@ -297,13 +294,7 @@ const DataTableUsuario = ({ listaUsuarios }) => {
         </thead>
         <tbody>
           {usuariosFiltrados.map((usuario) => {
-            return (
-              <FilaUsuario
-                key={nanoid()}
-                usuario={usuario}
-                setMostrarTabla={false}
-              />
-            );
+            return <FilaUsuario usuario={usuario} setMostrarTabla={false} />;
           })}
         </tbody>
       </table>
