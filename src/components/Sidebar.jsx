@@ -5,20 +5,20 @@ import userImage from "./../media/users.png";
 
 const Sidebar = () => {
   return (
-    <aside id="sidebar" class="s-sidebar__nav">
+    <aside id="sidebar" className="s-sidebar__nav">
       <input
         id="nav-expand"
         type="button"
-        Value="MENU"
+        value="MENU"
         className="social-buttons"
       />
       <nav>
-        <img src={userImage} alt="" class="image--cover" />
+        <img src={userImage} alt="" className="image--cover" />
         <p></p>
-        <span class="title-sidebar">OPCIONES DISPONIBLES</span>
+        <span className="title-sidebar">OPCIONES DISPONIBLES</span>
         <p></p>
-        <a id="nav-collapse" href="#">
-          <span class="icon icon-cross" />
+        <a id="nav-collapse" href="/#">
+          <span className="icon icon-cross" />
         </a>
         <Ruta
           icono="fas fa-hand-holding-usd"
@@ -42,7 +42,7 @@ const Ruta = ({ icono, ruta, nombre }) => {
   return (
     <>
       <Link to={ruta}>
-        <i class={`fa ${icono}`} aria-hidden="true" /> {nombre}
+        <i className={`fa ${icono}`} aria-hidden="true" /> {nombre}
       </Link>
     </>
   );

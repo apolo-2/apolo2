@@ -5,11 +5,11 @@ import Nave from "media/Nave.png";
 
 const Admin = () => {
   return (
-    <div class="content-wrapper">
-      <div class="container-fluid">
-        <div class="row center-main">
-          <div class="col-xl-3 col-sm-6 mb-3">
-            <div class="card text-white bg-primary o-hidden h-100">
+    <div className="content-wrapper">
+      <div className="container-fluid">
+        <div className="row center-main">
+          <div className="col-xl-3 col-sm-6 mb-3">
+            <div className="card text-white bg-primary o-hidden h-100">
               <Card
                 icono="fa-shopping-basket"
                 ruta="/admin/ventas"
@@ -17,8 +17,8 @@ const Admin = () => {
               />
             </div>
           </div>
-          <div class="col-xl-3 col-sm-6 mb-3">
-            <div class="card text-white bg-primary o-hidden h-100">
+          <div className="col-xl-3 col-sm-6 mb-3">
+            <div className="card text-white bg-primary o-hidden h-100">
               <Card
                 icono="fa-list"
                 ruta="/admin/productos"
@@ -26,13 +26,13 @@ const Admin = () => {
               />
             </div>
           </div>
-          <div class="col-xl-3 col-sm-6 mb-3">
-            <div class="card text-white bg-primary o-hidden h-100">
+          <div className="col-xl-3 col-sm-6 mb-3">
+            <div className="card text-white bg-primary o-hidden h-100">
               <Card icono="fa-users" ruta="/admin/usuarios" nombre="Usuarios" />
             </div>
           </div>
         </div>
-        <row class="center-main">
+        <row className="center-main">
           <img src={Nave} alt="" />
         </row>
       </div>
@@ -42,13 +42,13 @@ const Admin = () => {
 
 const Card = ({ icono, ruta, nombre }) => {
   return (
-    <div class="card-body icon-card">
-      <div class="card-body-icon">
-        <i class={`fa ${icono}`} aria-hidden="true" />
+    <div className="card-body icon-card">
+      <div className="card-body-icon">
+        <i className={`fa ${icono}`} aria-hidden="true" />
       </div>
-      <div class="mr-5">{nombre}</div>
-      <Link to={ruta} class="colorLinkCard">
-        <span class="float-left d-flex justify-content-center">
+      <div className="mr-5">{nombre}</div>
+      <Link to={ruta} className="colorLinkCard">
+        <span className="float-left d-flex justify-content-center">
           VER DETALLES
         </span>
       </Link>

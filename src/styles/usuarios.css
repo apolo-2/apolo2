@@ -1,1 +1,190 @@
-/* Sección para  Estilos personalizados por pagina */
+.container-usuarios {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.td_acciones {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.table-search-fields {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    padding-top: 3%;
+}
+
+/* Zebra striping */
+
+tr:nth-of-type(odd) {
+    background: rgb(214, 235, 250);
+}
+
+.btn-secondary {
+    background-color: cadetblue!important;
+}
+
+button i {
+    width: 20px;
+}
+
+button .fa-lg {
+    margin-right: 5px;
+}
+
+button .space-button-icon {
+    margin-right: 5px;
+}
+
+.div-btn-actions button {
+    margin-right: 5px;
+}
+
+.form-usuarios {
+    background-color: #ffffff;
+    margin: auto;
+    padding: 15px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px -3px #333;
+    height: 100%;
+}
+
+.title {
+    font-size: 27px;
+    padding-right: 15px;
+}
+
+.button-swho-users {
+    position: relative;
+    vertical-align: top;
+    height: 40px;
+    width: 25%;
+    padding: 0;
+    font-size: 15px;
+    color: #fff;
+    text-align: center;
+    background: #4d4d4d;
+    border: 0;
+    border-bottom: 2px solid #d0d0d0;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+input:not([type="submit"]) {
+    flex: 1;
+    padding: 10px 20px;
+    box-sizing: border-box;
+}
+
+p {
+    display: flex;
+}
+
+label {
+    width: 7em;
+    margin-right: .5em;
+    text-align: right
+}
+
+.form-center {
+    top: 50%;
+    left: 50%;
+    transform: translate(0%, 10%);
+}
+
+.buttons {
+    position: relative;
+    vertical-align: top;
+    width: 50%;
+    margin-left: auto;
+    position: relative;
+    vertical-align: right;
+    width: 100%;
+    text-align: center
+}
+
+.buttons button {
+    margin-left: 5px;
+}
+
+@media (max-width: 600px) {
+    p {
+        display: block;
+    }
+    input {
+        width: 100%;
+    }
+    input[type="submit"] {
+        width: 100%;
+    }
+    .buttons {
+        position: relative;
+        vertical-align: top;
+        width: 50%;
+        margin-left: auto;
+        position: relative;
+        vertical-align: right;
+        width: 100%;
+        margin-right: auto;
+        margin-left: 25%;
+    }
+    .buttons button {
+        margin-left: 5px;
+    }
+    .label-usuarios {
+        padding-top: calc(.375rem + 1px);
+        padding-bottom: calc(.375rem + 1px);
+        margin-bottom: 0;
+        font-size: inherit;
+        line-height: 0.3;
+        max-height: fit-content;
+    }
+    .form-center {
+        top: 50%;
+    }
+    table {
+        width: 100%;
+    }
+    /* Force table to not be like tables anymore */
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+    /* Hide table headers (but not display: none;, for accessibility) */
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    tr {
+        border: 1px solid #ccc;
+    }
+    td {
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+    }
+    td:before {
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        /* Label the data */
+        content: attr(data-column);
+        color: #000;
+        font-weight: bold;
+    }
+    footer {
+        visibility: hidden
+    }
+}

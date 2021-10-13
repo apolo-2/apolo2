@@ -102,6 +102,15 @@ content-wrapper {
   margin-right: auto;
 }
 
+.center-main {
+  padding-top: 40px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
 .flexContainer {
   display: flex;
   flex-wrap: nowrap;

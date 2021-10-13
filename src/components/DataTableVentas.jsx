@@ -3,16 +3,23 @@ import React from "react";
 const DataTableVenta = ({ listaVentas }) => {
   return (
     <div>
-      <div class="table-responsive">
-      
-       <section className="table-search-fields">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
-                        <input type="text" class="form-control" placeholder="Buscar..." aria-label="search" aria-describedby="search" />
-                    </div>
-                </section>
+      <div className="table-responsive">
+        <section className="table-search-fields">
+          <div className="input-group mb-3 ">
+            <span className="input-group-text" id="basic-addon1">
+              <i className="fas fa-search"></i>
+            </span>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Buscar..."
+              aria-label="search"
+              aria-describedby="search"
+            />
+          </div>
+        </section>
 
-        <table class="table table-sm table-hover table-bordered caption-top table-listado">
+        <table className="table table-sm table-hover table-bordered caption-top table-listado">
           <caption>Listado de ventas</caption>
           <thead className="table-light text-center">
             <tr>
@@ -35,26 +42,26 @@ const DataTableVenta = ({ listaVentas }) => {
                   <td className="td_acciones">
                     <button
                       type="button"
-                      class="btn  btn-sm btn-outline-warning"
+                      className="btn  btn-sm btn-outline-warning"
                       title="Ver detalle"
                     >
-                      <i class="fas fa-eye"></i>
+                      <i className="fas fa-eye"></i>
                     </button>
                     <button
                       type="button"
-                      class="btn btn-success"
+                      className="btn btn-success"
                       title="Editar"
                     >
-                      <i class="far fa-edit"></i>
+                      <i className="far fa-edit"></i>
                     </button>
                     <button
                       type="button"
-                      class="btn  btn-sm btn-sm btn-outline-danger"
+                      className="btn  btn-sm btn-sm btn-outline-danger"
                       title="Eliminar"
                       data-bs-toggle="modal"
                       data-bs-target="#confirmDeleteModal"
                     >
-                      <i class="far fa-trash-alt"></i>
+                      <i className="far fa-trash-alt"></i>
                     </button>
                   </td>
                 </tr>
@@ -66,35 +73,35 @@ const DataTableVenta = ({ listaVentas }) => {
 
       {/* <!-- Modal --> */}
       <div
-        class="modal fade"
+        className="modal fade"
         id="confirmDeleteModal"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="confirmDeleteModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="confirmDeleteModalLabel">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="confirmDeleteModalLabel">
                 Confirmación
               </h5>
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">Desea eliminar el registro?</div>
-            <div class="modal-footer">
+            <div className="modal-body">Desea eliminar el registro?</div>
+            <div className="modal-footer">
               <button
                 type="button"
-                class="btn btn-secondary"
+                className="btn btn-secondary"
                 data-bs-dismiss="modal"
               >
                 Cancelar
               </button>
-              <button type="button" class="btn btn-primary">
+              <button type="button" className="btn btn-primary">
                 Confirmar
               </button>
             </div>
