@@ -35,3 +35,10 @@ a.span {
     font-size: 12px;
     text-decoration: none;
 }
+
+@media (max-width: 600px) {
+    .imagenCenter {
+        bottom: 100px;
+        width: 120px;
+    }
+}

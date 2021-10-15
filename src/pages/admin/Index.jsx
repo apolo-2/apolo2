@@ -33,7 +33,7 @@ const Admin = () => {
           </div>
         </div>
         <row className="center-main">
-          <img src={Nave} alt="" />
+          <img src={Nave} alt="" class="imagenCenter" />
         </row>
       </div>
     </div>
