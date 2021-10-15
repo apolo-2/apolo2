@@ -23,25 +23,25 @@ const DataTableProducto = ({
   return (
     <div>
       {/* bootstrap  */}
-      <div class="table-responsive">
+      <div className="table-responsive">
         <section className="table-search-fields">
-          <div class="input-group mb-3 ">
-            <span class="input-group-text" id="basic-addon1">
-              <i class="fas fa-search"></i>
+          <div className="input-group mb-3 ">
+            <span className="input-group-text" id="basic-addon1">
+              <i className="fas fa-search"></i>
             </span>
             <input
               value={busqueda}
               onChange={(e) => setBusqueda(e.target.value)}
               placeholder="Buscar..."
               type="text"
-              class="form-control"
+              className="form-control"
               aria-label="search"
               aria-describedby="search"
             />
           </div>
         </section>
 
-        <table class="table  table-sm table-hover  table-bordered caption-top table-listado">
+        <table className="table  table-sm table-hover  table-bordered caption-top table-listado">
           <thead className="table-light text-center">
             <tr>
               <th scope="col">#</th>
@@ -65,7 +65,7 @@ const DataTableProducto = ({
                   <td className="td_acciones">
                     <button
                       type="button"
-                      class="btn  btn-sm btn-outline-info"
+                      className="btn  btn-sm btn-outline-info"
                       title="Editar"
                       onClick={() => {
                         console.log("Action: edit");
@@ -73,12 +73,12 @@ const DataTableProducto = ({
                         setMostrarTabla("ACTUALIZAR");
                       }}
                     >
-                      <i class="fas fa-pencil-alt "></i>
+                      <i className="fas fa-pencil-alt "></i>
                       {/* Editar */}
                     </button>
                     <button
                       type="button"
-                      class="btn  btn-sm btn-sm btn-outline-danger"
+                      className="btn  btn-sm btn-sm btn-outline-danger"
                       title="Eliminar"
                       data-bs-toggle="modal"
                       data-bs-target="#confirmDeleteModal"
@@ -86,7 +86,7 @@ const DataTableProducto = ({
                         setIdProductToDelete(producto._id);
                       }}
                     >
-                      <i class="far fa-trash-alt "></i>
+                      <i className="far fa-trash-alt "></i>
                       {/* Eliminar */}
                     </button>
                   </td>
@@ -99,29 +99,29 @@ const DataTableProducto = ({
 
       {/* paginator */}
       <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-          <li class="page-item disabled">
-            <a class="page-link" href="/admin/productos">
+        <ul className="pagination justify-content-center">
+          <li className="page-item disabled">
+            <a className="page-link" href="/admin/productos">
               &laquo;
             </a>
           </li>
-          <li class="page-item active">
-            <a class="page-link" href="/admin/productos">
+          <li className="page-item active">
+            <a className="page-link" href="/admin/productos">
               1
             </a>
           </li>
-          <li class="page-item">
-            <a class="page-link" href="/admin/productos">
+          <li className="page-item">
+            <a className="page-link" href="/admin/productos">
               2
             </a>
           </li>
-          <li class="page-item">
-            <a class="page-link" href="/admin/productos">
+          <li className="page-item">
+            <a className="page-link" href="/admin/productos">
               3
             </a>
           </li>
-          <li class="page-item">
-            <a class="page-link" href="/admin/productos">
+          <li className="page-item">
+            <a className="page-link" href="/admin/productos">
               &raquo;
             </a>
           </li>
@@ -130,30 +130,30 @@ const DataTableProducto = ({
 
       {/* <!-- Modal --> */}
       <div
-        class="modal fade"
+        className="modal fade"
         id="confirmDeleteModal"
         tabindex="-1"
         aria-labelledby="confirmDeleteModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="confirmDeleteModalLabel">
-                <i class="fas fa-exclamation-circle "></i> Importante
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="confirmDeleteModalLabel">
+                <i className="fas fa-exclamation-circle "></i> Importante
               </h5>
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">Desea eliminar el registro?</div>
-            <div class="modal-footer">
+            <div className="modal-body">Desea eliminar el registro?</div>
+            <div className="modal-footer">
               <button
                 type="button"
-                class="btn btn-secondary"
+                className="btn btn-secondary"
                 data-bs-dismiss="modal"
               >
                 Cancelar
@@ -164,7 +164,7 @@ const DataTableProducto = ({
                   deleteProducto();
                 }}
                 type="button"
-                class="btn btn-primary"
+                className="btn btn-primary"
                 data-bs-dismiss="modal"
               >
                 Confirmar

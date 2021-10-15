@@ -15,7 +15,8 @@ function App() {
     <Auth0Provider
     domain="misiontic-apolo2-appventas.us.auth0.com"
     clientId="DNOD2uQnF7gGDbJU9RnFt2C4shNBTUUh"
-    redirectUri={window.location.origin}
+    // redirectUri={window.location.origin}
+    redirectUri='http://localhost:3000/admin'
     >
       <div className="App">
         <Router>
