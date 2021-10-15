@@ -3,7 +3,7 @@ import "styles/usuarios.css";
 import axios from "axios";
 import { Dialog, Tooltip } from "@material-ui/core";
 import { ToastContainer, toast } from "react-toastify";
-import { obtenerUsuarios, editarUsuario, eliminarUsuario } from "utils/api2";
+import { obtenerUsuarios, editarUsuario, eliminarUsuario } from "utils/api";
 
 const Usuarios = () => {
   const [mostrarTabla, setMostrarTabla] = useState(true);
