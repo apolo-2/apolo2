@@ -8,20 +8,20 @@ function ListadoVentas({ imagen }) {
       </div>
 
       {/* bootstrap  */}
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        {/* <h2 class="h2"></h2> */}
-        <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary">
+      <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        {/* <h2 className="h2"></h2> */}
+        <div className="btn-toolbar mb-2 mb-md-0">
+          <div className="btn-group me-2">
+            <button type="button" className="btn btn-sm btn-outline-secondary">
               Compartir
             </button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">
+            <button type="button" className="btn btn-sm btn-outline-secondary">
               Exportar
             </button>
           </div>
           <button
             type="button"
-            class="btn btn-sm btn-outline-secondary dropdown-toggle"
+            className="btn btn-sm btn-outline-secondary dropdown-toggle"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -33,7 +33,7 @@ function ListadoVentas({ imagen }) {
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              class="feather feather-calendar"
+              className="feather feather-calendar"
               aria-hidden="true"
             >
               <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
@@ -46,12 +46,12 @@ function ListadoVentas({ imagen }) {
         </div>
       </div>
 
-      {/* <canvas class="my-4 w-100 chartjs-render-monitor" id="myChart" width="1076" height="454" style="display: block; width: 1076px; height: 454px;"></canvas> */}
+      {/* <canvas className="my-4 w-100 chartjs-render-monitor" id="myChart" width="1076" height="454" style="display: block; width: 1076px; height: 454px;"></canvas> */}
 
       {/* <h2></h2> */}
 
-      <div class="table-responsive">
-        <table class="table table-striped table-sm">
+      <div className="table-responsive">
+        <table className="table table-striped table-sm">
           <thead>
             <tr>
               <th scope="col">#</th>

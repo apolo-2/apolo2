@@ -126,11 +126,11 @@ const FormularioCreacionVentas = ({
       <h5 className="">Formulario nuevo Ventas</h5>
 
       <form ref={form} onSubmit={submitForm} className="">
-        <div class="mb-3 row">
-          <label for="cliente" class="col-sm-2 col-form-label">
+        <div className="mb-3 row">
+          <label htmlFor="cliente" className="col-sm-2 col-form-label">
             Cliente:{" "}
           </label>
-          <div class="col-sm-9">
+          <div className="col-sm-9">
             <input
               type="text"
               name="cliente"
@@ -141,11 +141,11 @@ const FormularioCreacionVentas = ({
           </div>
         </div>
 
-        <div class="mb-3 row">
-          <label for="vendedor" class="col-sm-2 col-form-label">
+        <div className="mb-3 row">
+          <label htmlFor="vendedor" className="col-sm-2 col-form-label">
             Vendedor:{" "}
           </label>
-          <div class="col-sm-9">
+          <div className="col-sm-9">
             <input
               type="text"
               name="vendedor"
@@ -156,11 +156,11 @@ const FormularioCreacionVentas = ({
           </div>
         </div>
 
-        <div class="mb-3 row">
-          <label for="total" class="col-sm-2 col-form-label">
+        <div className="mb-3 row">
+          <label htmlFor="total" className="col-sm-2 col-form-label">
             total:{" "}
           </label>
-          <div class="col-sm-9">
+          <div className="col-sm-9">
             <input
               className="form-select"
               aria-label="Default select"
@@ -178,7 +178,7 @@ const FormularioCreacionVentas = ({
               width="16"
               height="16"
               fill="currentColor"
-              class="bi bi-sd-card"
+              className="bi bi-sd-card"
               viewBox="0 0 16 16"
             >
               <path d="M6.25 3.5a.75.75 0 0 0-1.5 0v2a.75.75 0 0 0 1.5 0v-2zm2 0a.75.75 0 0 0-1.5 0v2a.75.75 0 0 0 1.5 0v-2zm2 0a.75.75 0 0 0-1.5 0v2a.75.75 0 0 0 1.5 0v-2zm2 0a.75.75 0 0 0-1.5 0v2a.75.75 0 0 0 1.5 0v-2z" />

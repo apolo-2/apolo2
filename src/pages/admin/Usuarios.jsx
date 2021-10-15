@@ -1,9 +1,15 @@
 import React, { useEffect, useState, useRef } from "react";
+import "styles/styles.css";
 import "styles/usuarios.css";
-import axios from "axios";
+import { nanoid } from "nanoid";
 import { Dialog, Tooltip } from "@material-ui/core";
 import { ToastContainer, toast } from "react-toastify";
-import { obtenerUsuarios, editarUsuario, eliminarUsuario } from "utils/api";
+import {
+  obtenerUsuarios,
+  crearUsuario,
+  editarUsuario,
+  eliminarUsuario,
+} from "utils/api";
 
 const Usuarios = () => {
   const [mostrarTabla, setMostrarTabla] = useState(true);
@@ -14,22 +20,26 @@ const Usuarios = () => {
 
   //hooks
   useEffect(() => {
-    console.log("consulta", ejecutarConsulta);
-    if (ejecutarConsulta) {
-      obtenerUsuarios(
+    const fetchUsuarios = async () => {
+      await obtenerUsuarios(
         (response) => {
           console.log("la respuesta que se recibio fue", response);
           setUsuarios(response.data);
+          setEjecutarConsulta(false);
         },
         (error) => {
           console.error("Salio un error:", error);
         }
       );
-      setEjecutarConsulta(false);
+    };
+    console.log("consulta", ejecutarConsulta);
+    if (ejecutarConsulta) {
+      fetchUsuarios();
     }
   }, [ejecutarConsulta]);
 
   useEffect(() => {
+    //obtener lista de vehículos desde el backend
     if (mostrarTabla) {
       setEjecutarConsulta(true);
     }
@@ -62,13 +72,14 @@ const Usuarios = () => {
         </button>
       </div>
       {mostrarTabla ? (
-        <DataTableUsuario
+        <TablaUsuarios
           listaUsuarios={usuarios}
-          setMostrarTabla={setMostrarTabla}
+          //setMostrarTabla={setMostrarTabla}
+          setEjecutarConsulta={setEjecutarConsulta}
         />
       ) : (
-        <FormularioCreacionUsuarios
-          setMostrarTabla={setMostrarTabla}
+        <FormularioCreacionUsuario
+          //setMostrarTabla={setMostrarTabla}
           listaUsuarios={usuarios}
           setUsuarios={setUsuarios}
         />
@@ -78,7 +89,65 @@ const Usuarios = () => {
   );
 };
 
-const FilaUsuario = ({ usuario }) => {
+const TablaUsuarios = ({ listaUsuarios, setEjecutarConsulta }) => {
+  const [busqueda, setBusqueda] = useState("");
+  const [usuariosFiltrados, setUsuariosFiltrados] = useState(listaUsuarios);
+
+  useEffect(() => {
+    setUsuariosFiltrados(
+      listaUsuarios.filter((elemento) => {
+        return JSON.stringify(elemento)
+          .toLowerCase()
+          .includes(busqueda.toLowerCase());
+      })
+    );
+  }, [busqueda, listaUsuarios]);
+
+  return (
+    <div className="table-responsive">
+      <section className="table-search-fields">
+        <div className="input-group mb-3 ">
+          <span className="input-group-text" id="basic-addon1">
+            <i className="fas fa-search"></i>
+          </span>
+          <input
+            value={busqueda}
+            onChange={(e) => setBusqueda(e.target.value)}
+            type="text"
+            className="form-control"
+            placeholder="Buscar..."
+            aria-label="search"
+            aria-describedby="search"
+          />
+        </div>
+      </section>
+      <table className="table  table-sm table-hover  table-bordered caption-top table-listado">
+        <thead className="table-light text-center">
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Rol</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {usuariosFiltrados.map((usuario) => {
+            return (
+              <FilaUsuario
+                key={nanoid()}
+                usuario={usuario}
+                setEjecutarConsulta={setEjecutarConsulta}
+              />
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+const FilaUsuario = ({ usuario, setEjecutarConsulta }) => {
   const [edit, setEdit] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   const [infoNuevoUsuario, setInfoNuevoUsuario] = useState({
@@ -102,6 +171,8 @@ const FilaUsuario = ({ usuario }) => {
         setEdit(false);
         console.log(response.data);
         toast.success("Usuario modificado con éxito");
+        setEdit(false);
+        setEjecutarConsulta(true);
       },
       (error) => {
         toast.error("Error modificando el usuario");
@@ -115,6 +186,7 @@ const FilaUsuario = ({ usuario }) => {
       (response) => {
         console.log(response.data);
         toast.success("usuario eliminado con éxito");
+        setEjecutarConsulta(true);
       },
       (error) => {
         console.error(error);
@@ -155,22 +227,27 @@ const FilaUsuario = ({ usuario }) => {
             />
           </td>
           <td>
-            <input
-              className="bg-gray-50 border border-gray-600 p-2 rounded-lg m-2"
-              type="text"
-              value={infoNuevoUsuario.rol}
+            <select
+              className="bg-gray-50 border border-gray-600 p-2 rounded-lg"
+              name="rol"
+              required
+              defaultValue={infoNuevoUsuario.rol}
               onChange={(e) =>
                 setInfoNuevoUsuario({
                   ...infoNuevoUsuario,
                   rol: e.target.value,
                 })
               }
-            />
+            >
+              <option value="Administrador/a">Administrador/a</option>
+              <option value="Vendedor">Vendedor/a</option>
+            </select>
           </td>
           <td>
-            <input
-              className="bg-gray-50 border border-gray-600 p-2 rounded-lg m-2"
-              type="text"
+            <select
+              className="bg-gray-50 border border-gray-600 p-2 rounded-lg"
+              name="estado"
+              required
               value={infoNuevoUsuario.estado}
               onChange={(e) =>
                 setInfoNuevoUsuario({
@@ -178,7 +255,11 @@ const FilaUsuario = ({ usuario }) => {
                   estado: e.target.value,
                 })
               }
-            />
+            >
+              <option value="Pendiente">Pendiente</option>
+              <option value="No autorizado">No autorizado</option>
+              <option value="Autorizado">Autorizado</option>
+            </select>
           </td>
         </>
       ) : (
@@ -249,67 +330,18 @@ const FilaUsuario = ({ usuario }) => {
   );
 };
 
-const DataTableUsuario = ({ listaUsuarios }) => {
-  const [busqueda, setBusqueda] = useState("");
-  const [usuariosFiltrados, setUsuariosFiltrados] = useState(listaUsuarios);
-
-  useEffect(() => {
-    setUsuariosFiltrados(
-      listaUsuarios.filter((elemento) => {
-        return JSON.stringify(elemento)
-          .toLowerCase()
-          .includes(busqueda.toLowerCase());
-      })
-    );
-  }, [busqueda, listaUsuarios]);
-
-  return (
-    <div className="table-responsive">
-      <section className="table-search-fields">
-        <div className="input-group mb-3 ">
-          <span className="input-group-text" id="basic-addon1">
-            <i className="fas fa-search"></i>
-          </span>
-          <input
-            value={busqueda}
-            onChange={(e) => setBusqueda(e.target.value)}
-            type="text"
-            className="form-control"
-            placeholder="Buscar..."
-            aria-label="search"
-            aria-describedby="search"
-          />
-        </div>
-      </section>
-      <table className="table  table-sm table-hover  table-bordered caption-top table-listado">
-        <thead className="table-light text-center">
-          <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">Correo</th>
-            <th scope="col">Rol</th>
-            <th scope="col">Estado</th>
-            <th scope="col">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {usuariosFiltrados.map((usuario) => {
-            return <FilaUsuario usuario={usuario} setMostrarTabla={false} />;
-          })}
-        </tbody>
-      </table>
-    </div>
-  );
-};
-
-const FormularioCreacionUsuarios = ({ setMostrarTabla }) => {
+const FormularioCreacionUsuario = ({ setMostrarTabla }) => {
   const form = useRef(null);
-  const submitForm = async (e) => {
+
+  async function submitForm(e) {
     e.preventDefault();
     const fd = new FormData(form.current);
+
     const nuevoUsuario = {};
     fd.forEach((value, key) => {
       nuevoUsuario[key] = value;
     });
+
     const formatoMayusculas = (str) => {
       return str
         .toLowerCase()
@@ -318,29 +350,24 @@ const FormularioCreacionUsuarios = ({ setMostrarTabla }) => {
         .join(" ");
     };
 
-    const options = {
-      method: "POST",
-      url: "http://localhost:27017/usuarios/",
-      headers: { "Content-Type": "application/json" },
-      data: {
+    await crearUsuario(
+      {
         correo: nuevoUsuario.correo,
         nombre: formatoMayusculas(nuevoUsuario.nombre),
         rol: nuevoUsuario.rol,
         estado: nuevoUsuario.estado,
       },
-    };
-    await axios
-      .request(options)
-      .then(function (response) {
+      (response) => {
         console.log(response.data);
         toast.success("Usuario agregado con éxito");
-      })
-      .catch(function (error) {
+      },
+      (error) => {
         console.error(error);
-        toast.error("Error creando un Usuario");
-      });
+        toast.error("Error creando un usuario");
+      }
+    );
     setMostrarTabla(true);
-  };
+  }
 
   return (
     <div className="form-usuarios">
@@ -356,8 +383,8 @@ const FormularioCreacionUsuarios = ({ setMostrarTabla }) => {
               className="form-control"
               type="text"
               required
-              minlength="3"
-              maxlength="30"
+              minLength="3"
+              maxLength="30"
               size="8"
             />
           </div>
@@ -386,8 +413,9 @@ const FormularioCreacionUsuarios = ({ setMostrarTabla }) => {
               className="bg-gray-50 border border-gray-600 p-2 rounded-lg"
               name="rol"
               required
+              defaultValue=""
             >
-              <option selected="true" disabled value="">
+              <option disabled value="">
                 Seleccione una opción
               </option>
               <option value="Administrador/a">Administrador/a</option>
@@ -404,8 +432,9 @@ const FormularioCreacionUsuarios = ({ setMostrarTabla }) => {
               className="bg-gray-50 border border-gray-600 p-2 rounded-lg"
               name="estado"
               required
+              defaultValue=""
             >
-              <option selected="true" disabled value="">
+              <option disabled value="">
                 Seleccione una opción
               </option>
               <option value="Pendiente">Pendiente</option>

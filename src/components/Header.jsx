@@ -5,10 +5,10 @@ import Apolo2 from "media/APOLO_2.png";
 const Header = () => {
   return (
     <header>
-      <div class="logo">
+      <div className="logo">
         <img src={Apolo2} alt="" />
       </div>
-      <div class="logo2">
+      <div className="logo2">
         <img src={Mision} alt="" />
       </div>
     </header>

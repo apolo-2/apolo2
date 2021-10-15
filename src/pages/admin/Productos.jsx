@@ -88,7 +88,7 @@ const Productos = () => {
           }}
           className={`btn ${colorBoton} btn-rounded`}
         >
-          <i class="fas fa-plus-circle fa-lg"></i>
+          <i className="fas fa-plus-circle fa-lg"></i>
           <span>{textoBoton}</span>
         </button>
       </div>
@@ -186,11 +186,11 @@ const FormularioCreacionProducto = ({
       <h4 className="">{textoTituloFormulario}</h4>
       <br />
       <form ref={form} onSubmit={submitForm} className="">
-        <div class="mb-3 row">
-          <label for="descripcion" class="col-sm-2 col-form-label">
+        <div className="mb-3 row">
+          <label for="descripcion" className="col-sm-2 col-form-label">
             Descripción:{" "}
           </label>
-          <div class="col-sm-9">
+          <div className="col-sm-9">
             <input
               type="text"
               name="descripcion"
@@ -202,11 +202,11 @@ const FormularioCreacionProducto = ({
           </div>
         </div>
 
-        <div class="mb-3 row">
-          <label for="valorUnit" class="col-sm-2 col-form-label">
+        <div className="mb-3 row">
+          <label for="valorUnit" className="col-sm-2 col-form-label">
             Valor unitario:{" "}
           </label>
-          <div class="col-sm-9">
+          <div className="col-sm-9">
             <input
               type="number"
               name="valorUnit"
@@ -220,11 +220,11 @@ const FormularioCreacionProducto = ({
           </div>
         </div>
 
-        <div class="mb-3 row">
-          <label for="estado" class="col-sm-2 col-form-label">
+        <div className="mb-3 row">
+          <label for="estado" className="col-sm-2 col-form-label">
             Estado:{" "}
           </label>
-          <div class="col-sm-9">
+          <div className="col-sm-9">
             <select
               className="form-select"
               aria-label="Default select"
@@ -248,11 +248,11 @@ const FormularioCreacionProducto = ({
               setMostrarTabla("LISTAR");
             }}
           >
-            <i class="far fa-window-close space-button-icon"></i>
+            <i className="far fa-window-close space-button-icon"></i>
             Cancelar
           </button>
           <button type="submit" className="btn btn-primary btn">
-            <i class="fas fa-save space-button-icon"></i>
+            <i className="fas fa-save space-button-icon"></i>
             Guardar
           </button>
         </div>
@@ -304,11 +304,11 @@ const FormularioActualizarProducto = ({
       <h4 className="">{textoTituloFormulario}</h4>
       <br />
       <form ref={form} onSubmit={submitForm} className="">
-        <div class="mb-3 row">
-          <label for="descripcion" class="col-sm-2 col-form-label">
+        <div className="mb-3 row">
+          <label for="descripcion" className="col-sm-2 col-form-label">
             Descripción:{" "}
           </label>
-          <div class="col-sm-9">
+          <div className="col-sm-9">
             <input
               type="text"
               name="descripcion"
@@ -320,11 +320,11 @@ const FormularioActualizarProducto = ({
           </div>
         </div>
 
-        <div class="mb-3 row">
-          <label for="valorUnit" class="col-sm-2 col-form-label">
+        <div className="mb-3 row">
+          <label for="valorUnit" className="col-sm-2 col-form-label">
             Valor unitario:{" "}
           </label>
-          <div class="col-sm-9">
+          <div className="col-sm-9">
             <input
               type="number"
               name="valorUnit"
@@ -338,11 +338,11 @@ const FormularioActualizarProducto = ({
           </div>
         </div>
 
-        <div class="mb-3 row">
-          <label for="estado" class="col-sm-2 col-form-label">
+        <div className="mb-3 row">
+          <label for="estado" className="col-sm-2 col-form-label">
             Estado:{" "}
           </label>
-          <div class="col-sm-9">
+          <div className="col-sm-9">
             <select
               className="form-select"
               aria-label="Default select"
@@ -366,11 +366,11 @@ const FormularioActualizarProducto = ({
               setMostrarTabla("LISTAR");
             }}
           >
-            <i class="far fa-window-close space-button-icon"></i>
+            <i className="far fa-window-close space-button-icon"></i>
             Cancelar
           </button>
           <button type="submit" className="btn btn-primary btn">
-            <i class="fas fa-save space-button-icon"></i>
+            <i className="fas fa-save space-button-icon"></i>
             Guardar
           </button>
         </div>

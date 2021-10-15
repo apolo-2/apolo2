@@ -20,6 +20,8 @@ const Sidebar = () => {
         <a id="nav-collapse" href="/#">
           <span className="icon icon-cross" />
         </a>
+        <p></p>
+        <Ruta icono="fas fa-home" ruta="/admin" nombre="Inicio" />
         <Ruta
           icono="fas fa-hand-holding-usd"
           ruta="/admin/ventas"
@@ -31,7 +33,6 @@ const Sidebar = () => {
           ruta="/admin/usuarios"
           nombre="Usuarios"
         />
-        <Ruta icono="fas fa-home" ruta="/admin" nombre="INICIO" />
         <p></p>
         <p></p>
         <Ruta icono="fas fa-sign-out-alt" ruta="/" nombre="SALIR" />
