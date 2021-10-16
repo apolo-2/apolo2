@@ -28,7 +28,22 @@ nav a {
   -webkit-user-drag: none;
 }
 
+button.btn-menu-salir{
+  background: none;
+  color: white;
+  border: none;
+  font: inherit;
+  outline: inherit;
+  padding: 12px 16px;
+  width: 100%;
+  text-align: left;
+}
+
 nav a:hover {
+  background-color: #39c;
+}
+
+nav button.btn-menu-salir:hover {
   background-color: #39c;
 }
 

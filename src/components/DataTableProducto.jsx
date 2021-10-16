@@ -55,7 +55,7 @@ const DataTableProducto = ({
           <tbody>
             {productosFiltrados.map((producto, index) => {
               return (
-                <tr className="text-center">
+                <tr key={index.toString()} className="text-center">
                   <td>{index + 1}</td>
                   {/* <td>{producto.codigo}</td> */}
                   <td>{producto._id.substring(17)}</td>
@@ -132,7 +132,8 @@ const DataTableProducto = ({
       <div
         className="modal fade"
         id="confirmDeleteModal"
-        tabindex="-1"
+        // tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="confirmDeleteModalLabel"
         aria-hidden="true"
       >
