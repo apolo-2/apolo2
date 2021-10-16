@@ -35,7 +35,9 @@ const Sidebar = () => {
         />
         <p></p>
         {/* <Ruta icono="fas fa-sign-out-alt" ruta="/" nombre="SALIR" /> */}
-        <button onClick={() => logout({ returnTo: window.location.origin })} className="btn-menu-salir">
+        {/* <button onClick={() => logout({ returnTo: window.location.origin })} className="btn-menu-salir"> */}
+        <button onClick={() => logout({ returnTo: "http://localhost:3000/admin" })} className="btn-menu-salir">
+
           <i className="fas fa-sign-out-alt" aria-hidden="true" /> 
           SALIR
         </button>

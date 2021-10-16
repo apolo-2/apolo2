@@ -1,9 +1,9 @@
 import React from 'react'
 import { useAuth0 } from "@auth0/auth0-react";
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 const PrivateRoute = ({children}) => {
-    const { user, isAuthenticated, isLoading } = useAuth0();
+    const {  isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
 
     // useEffect(() => {
     //   console.log('user ', user)
@@ -12,11 +12,18 @@ const PrivateRoute = ({children}) => {
     // }, [user, isAuthenticated, isLoading])
 
     if (isLoading) return <div>Loading ...</div>
-   return isAuthenticated ? <>{children}</> : 
-        <>
-            <div>No estas autoizado para ver este sitio</div>
-            <Link to="/">[Inicia sesión...]</Link>
-        </>
+
+    // opc 2, cargando directamente el login al no estar autorizado
+    if (!isAuthenticated) return loginWithRedirect()
+    return <>{children}</>
+
+//     opc 1 Mensaje que no esta autorizado e invitacion al login
+//    return isAuthenticated ? <>{children}</> : 
+//         <>
+//             <div>No estas autorizado para ver este sitio</div>
+//             <Link to="/">[Inicia sesión...]</Link>
+//         </>
+
 }
 
 export default PrivateRoute
