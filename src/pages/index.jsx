@@ -10,9 +10,9 @@ function Index() {
     <section>
       <br />
       {/* <br /><br /> */}
-      <div class="bg-light p-5 rounded mt-3">
+      <div className="bg-light p-5 rounded mt-3">
         <section id="pantalla_dividida">
-          <div class="izquierda">
+          <div className="izquierda">
             <h2>INTEGRANTES</h2>
 
             <h5>Yenni Delgado Balaguera</h5>
@@ -25,21 +25,23 @@ function Index() {
             <img src={Nave} alt="" />
           </div>
 
-          <div class="cuadrado">
+          <div className="cuadrado">
             <p>
-              Este es un aplicativo para la administracion de ventas hace parte
+              Aplicativo para la administracion de ventas hace parte
               del proyecto MISION TIC 2022
             </p>
 
-            <h2>Iniciar Sesion</h2>
+            {/* <h2>Iniciar Sesion</h2> */}
 
-            {/* <a class="btn btn-lg btn-primary" href="/admin" role="button">
+            {/* <a className="btn btn-lg btn-primary" href="/admin" role="button">
               <img className="logo-google" src={Google} alt="Logo Google" />
               Continua con Google
             </a> */}
-            <button onClick={() => loginWithRedirect()} class="btn btn-lg btn-primary">
-              <img className="logo-google" src={Google} alt="Logo Google" />
-              Continua con Google
+            <br />
+            <button onClick={() => loginWithRedirect()} className="btn btn-lg btn-primary">
+              {/* <img className="logo-google" src={Google} alt="Logo Google" /> */}
+              {/* Continua con Google */}
+              Inicia sesión
             </button>
           </div>
         </section>

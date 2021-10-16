@@ -17,6 +17,8 @@ function App() {
     clientId="DNOD2uQnF7gGDbJU9RnFt2C4shNBTUUh"
     // redirectUri={window.location.origin}
     redirectUri='http://localhost:3000/admin'
+    audience =  'api-auth-apolo2-ventas-app'
+    
     >
       <div className="App">
         <Router>

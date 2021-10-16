@@ -5,7 +5,14 @@ import userImage from "./../media/users.png";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const Sidebar = () => {
-  const { logout } = useAuth0();
+  
+  const { user, logout } = useAuth0();
+
+  const cerrarSesion = ()=> {
+    localStorage.removeItem('token')
+    logout({ returnTo: "http://localhost:3000/admin" })
+  }
+
   return (
     <aside id="sidebar" className="s-sidebar__nav">
       <input
@@ -23,6 +30,12 @@ const Sidebar = () => {
           <span className="icon icon-cross" />
         </a>
         <Ruta
+          icono="fas fa-user"
+          ruta="/admin"
+          nombre="Perfil"
+          usuario={user}
+        />
+        <Ruta
           icono="fas fa-hand-holding-usd"
           ruta="/admin/ventas"
           nombre="Ventas"
@@ -35,9 +48,7 @@ const Sidebar = () => {
         />
         <p></p>
         {/* <Ruta icono="fas fa-sign-out-alt" ruta="/" nombre="SALIR" /> */}
-        {/* <button onClick={() => logout({ returnTo: window.location.origin })} className="btn-menu-salir"> */}
-        <button onClick={() => logout({ returnTo: "http://localhost:3000/admin" })} className="btn-menu-salir">
-
+        <button onClick={() => cerrarSesion()} className="btn-menu-salir">
           <i className="fas fa-sign-out-alt" aria-hidden="true" /> 
           SALIR
         </button>
@@ -46,11 +57,20 @@ const Sidebar = () => {
   );
 };
 
-const Ruta = ({ icono, ruta, nombre }) => {
+const Ruta = ({ icono, ruta, nombre, usuario }) => {
   return (
     <>
       <Link to={ruta}>
-        <i className={`fa ${icono}`} aria-hidden="true" /> {nombre}
+        {usuario ? (
+          <>
+            <img src={usuario.picture} alt="Imagen usuario" className="image-usuario-perfil"/>
+            {usuario.name}
+          </>
+        ) : (
+          <>
+            <i className={`fa ${icono}`} aria-hidden="true" /> {nombre}
+          </>
+        )}
       </Link>
     </>
   );
