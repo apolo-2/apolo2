@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ReactLoading from 'react-loading'
 
 const DataTableProducto = ({
   listaProductos,
@@ -6,6 +7,7 @@ const DataTableProducto = ({
   setProductToEdit,
   deleteProducto,
   setIdProductToDelete,
+  loading,
 }) => {
   const [busqueda, setBusqueda] = useState("");
   const [productosFiltrados, setProductosFiltrados] = useState(listaProductos);
@@ -40,61 +42,64 @@ const DataTableProducto = ({
             />
           </div>
         </section>
-
-        <table className="table  table-sm table-hover  table-bordered caption-top table-listado">
-          <thead className="table-light text-center">
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Identificador</th>
-              <th scope="col">Descripción</th>
-              <th scope="col">Valor Unitarío</th>
-              <th scope="col">Estado</th>
-              <th scope="col">Acciónes</th>
-            </tr>
-          </thead>
-          <tbody>
-            {productosFiltrados.map((producto, index) => {
-              return (
-                <tr key={index.toString()} className="text-center">
-                  <td>{index + 1}</td>
-                  {/* <td>{producto.codigo}</td> */}
-                  <td>{producto._id.substring(17)}</td>
-                  <td>{producto.descripcion}</td>
-                  <td>{producto.valorUnit}</td>
-                  <td>{producto.estado}</td>
-                  <td className="td_acciones">
-                    <button
-                      type="button"
-                      className="btn  btn-sm btn-outline-info"
-                      title="Editar"
-                      onClick={() => {
-                        console.log("Action: edit");
-                        setProductToEdit(producto);
-                        setMostrarTabla("ACTUALIZAR");
-                      }}
-                    >
-                      <i className="fas fa-pencil-alt "></i>
-                      {/* Editar */}
-                    </button>
-                    <button
-                      type="button"
-                      className="btn  btn-sm btn-sm btn-outline-danger"
-                      title="Eliminar"
-                      data-bs-toggle="modal"
-                      data-bs-target="#confirmDeleteModal"
-                      onClick={() => {
-                        setIdProductToDelete(producto._id);
-                      }}
-                    >
-                      <i className="far fa-trash-alt "></i>
-                      {/* Eliminar */}
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        {loading ?  (
+            <ReactLoading type='cylon' color='abc123' height={'10%'} width={'10%'} />
+         ) : (
+          <table className="table  table-sm table-hover  table-bordered caption-top table-listado">
+            <thead className="table-light text-center">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Identificador</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Valor Unitarío</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Acciónes</th>
+              </tr>
+            </thead>
+            <tbody>
+              {productosFiltrados.map((producto, index) => {
+                return (
+                  <tr key={index.toString()} className="text-center">
+                    <td>{index + 1}</td>
+                    {/* <td>{producto.codigo}</td> */}
+                    <td>{producto._id.substring(17)}</td>
+                    <td>{producto.descripcion}</td>
+                    <td>{producto.valorUnit}</td>
+                    <td>{producto.estado}</td>
+                    <td className="td_acciones">
+                      <button
+                        type="button"
+                        className="btn  btn-sm btn-outline-info"
+                        title="Editar"
+                        onClick={() => {
+                          console.log("Action: edit");
+                          setProductToEdit(producto);
+                          setMostrarTabla("ACTUALIZAR");
+                        }}
+                      >
+                        <i className="fas fa-pencil-alt "></i>
+                        {/* Editar */}
+                      </button>
+                      <button
+                        type="button"
+                        className="btn  btn-sm btn-sm btn-outline-danger"
+                        title="Eliminar"
+                        data-bs-toggle="modal"
+                        data-bs-target="#confirmDeleteModal"
+                        onClick={() => {
+                          setIdProductToDelete(producto._id);
+                        }}
+                      >
+                        <i className="far fa-trash-alt "></i>
+                        {/* Eliminar */}
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+         )} 
       </div>
 
       {/* paginator */}
@@ -150,7 +155,7 @@ const DataTableProducto = ({
                 aria-label="Close"
               ></button>
             </div>
-            <div className="modal-body">Desea eliminar el registro?</div>
+            <div className="modal-body">¿Desea eliminar el registro?</div>
             <div className="modal-footer">
               <button
                 type="button"
