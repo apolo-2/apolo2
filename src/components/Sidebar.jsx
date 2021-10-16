@@ -2,8 +2,10 @@
 import { Link } from "react-router-dom";
 import "styles/sidebar.css";
 import userImage from "./../media/users.png";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Sidebar = () => {
+  const { logout } = useAuth0();
   return (
     <aside id="sidebar" className="s-sidebar__nav">
       <input
@@ -32,7 +34,11 @@ const Sidebar = () => {
           nombre="Usuarios"
         />
         <p></p>
-        <Ruta icono="fas fa-sign-out-alt" ruta="/" nombre="SALIR" />
+        {/* <Ruta icono="fas fa-sign-out-alt" ruta="/" nombre="SALIR" /> */}
+        <button onClick={() => logout({ returnTo: window.location.origin })} className="btn-menu-salir">
+          <i className="fas fa-sign-out-alt" aria-hidden="true" /> 
+          SALIR
+        </button>
       </nav>
     </aside>
   );

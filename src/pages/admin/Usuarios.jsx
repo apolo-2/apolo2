@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import "styles/usuarios.css";
 import axios from "axios";
-import { nanoid } from "nanoid";
+// import { nanoid } from "nanoid";
 import { Dialog, Tooltip } from "@material-ui/core";
 import { ToastContainer, toast } from "react-toastify";
 import { obtenerUsuarios, editarUsuario, eliminarUsuario } from "utils/api";

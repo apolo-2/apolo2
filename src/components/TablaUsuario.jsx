@@ -4,14 +4,14 @@ export const TablaUsuario = ({ usuarios }, { setMostrarTabla }) => {
   return (
     <div>
     <section className="table-search-fields">
-                    <div class="input-group mb-3 ">
-                        <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
-                        <input type="text" class="form-control" placeholder="Buscar..." aria-label="search" aria-describedby="search" />
+                    <div className="input-group mb-3 ">
+                        <span className="input-group-text" id="basic-addon1"><i className="fas fa-search"></i></span>
+                        <input type="text" className="form-control" placeholder="Buscar..." aria-label="search" aria-describedby="search" />
                     </div>
                 </section>
-      <div class="table-responsive">
+      <div className="table-responsive">
       
-        <table class="table  table-sm table-hover  table-bordered caption-top table-listado">
+        <table className="table  table-sm table-hover  table-bordered caption-top table-listado">
           <thead className="table-light text-center">
             <tr>
               <th scope="col">#</th>
@@ -35,7 +35,7 @@ export const TablaUsuario = ({ usuarios }, { setMostrarTabla }) => {
                     <button
                       onClick={setMostrarTabla(true)}
                       type="button"
-                      class="btn  btn-sm btn-outline-warning"
+                      className="btn  btn-sm btn-outline-warning"
                       title="Editar"
                     >
                       Editar
@@ -51,29 +51,29 @@ export const TablaUsuario = ({ usuarios }, { setMostrarTabla }) => {
 
       {/* paginator */}
       <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-          <li class="page-item disabled">
-            <a class="page-link" href="/admin/productos">
+        <ul className="pagination justify-content-center">
+          <li className="page-item disabled">
+            <a className="page-link" href="/admin/productos">
               &laquo;
             </a>
           </li>
-          <li class="page-item active">
-            <a class="page-link" href="/admin/productos">
+          <li className="page-item active">
+            <a className="page-link" href="/admin/productos">
               1
             </a>
           </li>
-          <li class="page-item">
-            <a class="page-link" href="/admin/productos">
+          <li className="page-item">
+            <a className="page-link" href="/admin/productos">
               2
             </a>
           </li>
-          <li class="page-item">
-            <a class="page-link" href="/admin/productos">
+          <li className="page-item">
+            <a className="page-link" href="/admin/productos">
               3
             </a>
           </li>
-          <li class="page-item">
-            <a class="page-link" href="/admin/productos">
+          <li className="page-item">
+            <a className="page-link" href="/admin/productos">
               &raquo;
             </a>
           </li>
