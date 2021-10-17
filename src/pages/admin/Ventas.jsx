@@ -127,7 +127,7 @@ const FormularioCreacionVentas = ({
 
       <form ref={form} onSubmit={submitForm} className="">
         <div className="mb-3 row">
-          <label htmlFor="cliente" className="col-sm-2 col-form-label">
+          <label for="cliente" className="col-sm-2 col-form-label">
             Cliente:{" "}
           </label>
           <div className="col-sm-9">
@@ -142,7 +142,7 @@ const FormularioCreacionVentas = ({
         </div>
 
         <div className="mb-3 row">
-          <label htmlFor="vendedor" className="col-sm-2 col-form-label">
+          <label for="vendedor" className="col-sm-2 col-form-label">
             Vendedor:{" "}
           </label>
           <div className="col-sm-9">
@@ -157,7 +157,7 @@ const FormularioCreacionVentas = ({
         </div>
 
         <div className="mb-3 row">
-          <label htmlFor="total" className="col-sm-2 col-form-label">
+          <label for="total" className="col-sm-2 col-form-label">
             total:{" "}
           </label>
           <div className="col-sm-9">

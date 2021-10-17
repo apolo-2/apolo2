@@ -73,13 +73,13 @@ const Usuarios = () => {
       </div>
       {mostrarTabla ? (
         <TablaUsuarios
-          listaUsuarios={usuarios}
           //setMostrarTabla={setMostrarTabla}
+          listaUsuarios={usuarios}
           setEjecutarConsulta={setEjecutarConsulta}
         />
       ) : (
         <FormularioCreacionUsuario
-          //setMostrarTabla={setMostrarTabla}
+          setMostrarTabla={setMostrarTabla}
           listaUsuarios={usuarios}
           setUsuarios={setUsuarios}
         />

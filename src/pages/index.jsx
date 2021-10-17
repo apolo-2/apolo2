@@ -26,22 +26,24 @@ function Index() {
 
           <div className="cuadrado">
             <p>
-              Este es un aplicativo para la administracion de ventas hace parte
-              del proyecto MISION TIC 2022
+              Aplicativo para la administracion de ventas hace parte del
+              proyecto MISION TIC 2022
             </p>
 
-            <h2>Iniciar Sesion</h2>
+            {/* <h2>Iniciar Sesion</h2> */}
 
-            {/* <a class="btn btn-lg btn-primary" href="/admin" role="button">
+            {/* <a className="btn btn-lg btn-primary" href="/admin" role="button">
               <img className="logo-google" src={Google} alt="Logo Google" />
               Continua con Google
             </a> */}
+            <br />
             <button
               onClick={() => loginWithRedirect()}
-              class="btn btn-lg btn-primary"
+              className="btn btn-lg btn-primary"
             >
-              <img className="logo-google" src={Google} alt="Logo Google" />
-              Continua con Google
+              {/* <img className="logo-google" src={Google} alt="Logo Google" /> */}
+              {/* Continua con Google */}
+              Inicia sesión
             </button>
           </div>
         </section>

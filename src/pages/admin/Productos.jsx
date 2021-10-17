@@ -3,6 +3,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import DataTableProducto from "components/DataTableProducto";
 import "styles/productos.css";
+
 import {
   obtenerProductos,
   crearProducto,
@@ -11,6 +12,7 @@ import {
 } from "utils/api";
 
 const Productos = () => {
+
   const [mostrarTabla, setMostrarTabla] = useState("LISTAR"); //LISTAR, CREAR, ACTUALIZAR
   const [productos, setProductos] = useState([]);
   const [textoBoton, setTextoBoton] = useState("Nuevo Producto");
@@ -21,18 +23,28 @@ const Productos = () => {
   const [productToEdit, setProductToEdit] = useState({});
   const [idProductToDelete, setIdProductToDelete] = useState();
   const [ejecutarConsulta, setEjecutarConsulta] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    if (ejecutarConsulta) {
-      obtenerProductos(
+
+    const fetchProductos = async ()=>{
+
+      setLoading(true)
+      await obtenerProductos(
         (response) => {
           setProductos(response.data);
+          setEjecutarConsulta(false);
+          setLoading(false)
         },
         (error) => {
           console.error("Salio un error:", error);
+          setLoading(false)
         }
       );
-      setEjecutarConsulta(false);
+    }
+
+    if (ejecutarConsulta) {
+      fetchProductos()
     }
   }, [ejecutarConsulta]);
 
@@ -44,6 +56,7 @@ const Productos = () => {
   }, [mostrarTabla]);
 
   useEffect(() => {
+
     if (mostrarTabla === "LISTAR") {
       setTextoBoton("Nuevo Producto");
       setColorBoton("btn-secondary");
@@ -114,6 +127,7 @@ const Productos = () => {
                 setProductToEdit={setProductToEdit}
                 deleteProducto={deleteProducto}
                 setIdProductToDelete={setIdProductToDelete}
+                loading = {loading}
               />
             );
           case "CREAR":
