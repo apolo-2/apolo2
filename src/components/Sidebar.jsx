@@ -46,6 +46,11 @@ const Sidebar = () => {
           ruta="/admin/usuarios"
           nombre="Usuarios"
         />
+        <Ruta
+          icono="fas fa-user-friends"
+          ruta="/admin/usuarios2"
+          nombre="Usuarios2"
+        />
         <p></p>
         {/* <Ruta icono="fas fa-sign-out-alt" ruta="/" nombre="SALIR" /> */}
         <button onClick={() => cerrarSesion()} className="btn-menu-salir">

@@ -1,4 +1,4 @@
-import Google from "media/google_logo.png";
+// import Google from "media/google_logo.png";
 import "./../index.css";
 import Nave from "media/Nave.png";
 import { useAuth0 } from "@auth0/auth0-react";

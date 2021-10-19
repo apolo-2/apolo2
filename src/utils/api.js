@@ -54,6 +54,18 @@ export const obtenerUsuarios = async (successCallback, errorCallback) => {
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
 
+// Ruta dummy, o ruta autodiscover
+export const obtenerDatosUsuario = async (successCallback, errorCallback) => {
+  const options = {
+    method: 'GET',
+    url: 'http://localhost:5000/usuarios/self',
+    headers: {
+      Authorization: getToken(), // 3. enviarle el token a backend
+    },
+  };
+  await axios.request(options).then(successCallback).catch(errorCallback);
+};
+
 export const crearUsuario = async (data, successCallback, errorCallback) => {
   const options = {
     method: "POST",
