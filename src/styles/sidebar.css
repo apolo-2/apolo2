@@ -1,0 +1,222 @@
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  overflow-x: hidden;
+}
+
+
+nav {
+  background: #36a;
+  bottom: 0;
+  box-shadow: 0 0 5px #666;
+  height: 100%;
+  left: -17.5rem;
+  padding-top: 38px;
+  position: absolute;
+  top: 0;
+  transition: .5s ease-in-out;
+  width: 17rem;
+  user-select: none;
+  z-index: 100
+}
+
+nav a {
+  color: #eee;
+  display: block;
+  padding: 12px 16px;
+  transition: .5s;
+  text-decoration: none;
+  -webkit-user-drag: none;
+}
+
+button.btn-menu-salir{
+  background: none;
+  color: white;
+  border: none;
+  font: inherit;
+  outline: inherit;
+  padding: 12px 16px;
+  width: 100%;
+  text-align: left;
+}
+
+nav a:hover {
+  background-color: #39c;
+}
+
+nav button.btn-menu-salir:hover {
+  background-color: #39c;
+}
+
+#nav-collapse {
+  padding: 8px 12px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  float: left;
+}
+
+#nav-expand {
+  background-color: #333;
+  color: #eee;
+  font-size: larger;
+  font-weight: bold;
+  font-style: inherit;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  display: block;
+  left: 0;
+  top: 7px;
+  padding: 16px 20px;
+  position: absolute;
+  text-decoration: none;
+  transition: .5s linear;
+  user-select: none;
+  -webkit-user-drag: none;
+  float: left;
+}
+
+#nav-expand:focus {
+  opacity: 0;
+}
+
+#nav-expand:focus~main {
+  margin-left: 17rem;
+  transition-delay: .25s;
+}
+
+#nav-expand:focus~nav {
+  left: 0;
+  transition-delay: .25s;
+}
+
+#nav-expand:hover {
+  background-color: #369;
+  color: #fff;
+}
+
+.icon {
+  display: inline-block;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 12px;
+  width: 12px;
+}
+
+.icon-cross {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAABHNCSVQICAgIfAhkiAAAAPdJREFUGJV1jz9LhWAYxc+9rVZDQ+DcEI0NLU19gxr6Ci3tuvjnA+gggSBt4qzzO90b5FBubkHgEM1CBL5K93Ia8jWv4G88/A7PeQAArusekXwRQpiGYSzQ4/v+Gcn3OI6vMRJf+cdWFXrxs8+bOI5vkCTJLckf/rMtiuJhJJIk67oWAIA0Te8mhR2klGvbtg/UvNlC27ZPSlwquaqqZwA1dmGe56uu676HxPO8U5IfMyuGp+fEt+nTQghzqWnaMYBDdUVKuXYc5yLLsnsAmz5e6Lp+AgCIouiK5FfTNCvLsvanT5dl+Wia5t6wOwiC87GoCMPwUom/I2EVwEqOzwUAAAAASUVORK5CYII=');
+}
+
+.icon-menu {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAABHNCSVQICAgIfAhkiAAAAB5JREFUKJFj/P///38GEgATKYoHKWAc9TQRgGRPAwD0IAv+FT8LPwAAAABJRU5ErkJggg==');
+  margin: 0;
+  width: 70px;
+  height: 70px;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked~#sidebarMenu {
+  transform: translateX(0);
+}
+
+input[type=checkbox] {
+  transition: all 0.3s;
+  box-sizing: border-box;
+  display: none;
+}
+
+.sidebarIconToggle {
+  transition: all 0.3s;
+  box-sizing: border-box;
+  cursor: pointer;
+  position: absolute;
+  z-index: 99;
+  height: 100%;
+  width: 100%;
+  top: 22px;
+  left: 15px;
+  height: 22px;
+  width: 22px;
+}
+
+.spinner {
+  transition: all 0.3s;
+  box-sizing: border-box;
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background-color: #fff;
+}
+
+.horizontal {
+  transition: all 0.3s;
+  box-sizing: border-box;
+  position: relative;
+  float: left;
+  margin-top: 3px;
+}
+
+.diagonal.part-1 {
+  position: relative;
+  transition: all 0.3s;
+  box-sizing: border-box;
+  float: left;
+}
+
+.diagonal.part-2 {
+  transition: all 0.3s;
+  box-sizing: border-box;
+  position: relative;
+  float: left;
+  margin-top: 3px;
+}
+
+input[type=checkbox]:checked~.sidebarIconToggle>.horizontal {
+  transition: all 0.3s;
+  box-sizing: border-box;
+  opacity: 0;
+}
+
+input[type=checkbox]:checked~.sidebarIconToggle>.diagonal.part-1 {
+  transition: all 0.3s;
+  box-sizing: border-box;
+  transform: rotate(135deg);
+  margin-top: 8px;
+}
+
+input[type=checkbox]:checked~.sidebarIconToggle>.diagonal.part-2 {
+  transition: all 0.3s;
+  box-sizing: border-box;
+  transform: rotate(-135deg);
+  margin-top: -9px;
+}
+
+.social-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.title-sidebar {
+  display: flex;
+  justify-content: center;
+  color: #fff;
+  font-size: 20px;
+  font-style: bold;
+}
+
+.image--cover {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 20px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.image-usuario-perfil{
+  background-color: #6B7280; 
+  width: 1.5em; 
+  height: 1.5em; 
+  border-radius: 0.125rem; 
+  border-width: 1px; 
+  margin-right: 0.2em;
+}
