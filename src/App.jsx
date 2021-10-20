@@ -11,6 +11,7 @@ import Usuarios from "pages/admin/Usuarios";
 import Usuarios2 from "pages/admin/Usuarios2";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { UserContext } from 'context/userContext';
+import PrivateRoute from 'components/PrivateRoute';
 
 function App() {
 
@@ -34,7 +35,9 @@ function App() {
                 <PrivateLayout>
                   <Switch>
                     <Route path="/admin/productos">
-                      <Productos />
+                      <PrivateRoute roleList={['admin']}>
+                        <Productos />
+                      </PrivateRoute>
                     </Route>
                     <Route path="/admin/ventas">
                       <Ventas />

@@ -1,24 +1,18 @@
-import {React} from 'react'
-// import { Link } from 'react-router-dom';
+import { useUser } from 'context/userContext';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-const PrivateRoute = ({children}) => {
+const PrivateRoute = ({ roleList, children }) => {
+  const { userData } = useUser();
+    console.log('Rol de usuario:', userData.rol);
+  if (roleList.includes(userData.rol)) {
+    return children;
+  }
 
-    //Get informacion sobre la autenticación
-    // useEffect(() => {
-    //   console.log('user ', user)
-    //   console.log('isAuthenticated ', isAuthenticated)
-    //   console.log('isLoading ', isLoading)
-    // }, [user, isAuthenticated, isLoading])
+  return <>
+            <div>No estas autorizado para ver este sitio</div>
+            <Link to="/">[Inicia sesión...]</Link>
+        </>;
+};
 
-    return <>{children}</>
-
-//     opc 1 Mensaje que no esta autorizado e invitacion al login
-//    return isAuthenticated ? <>{children}</> : 
-//         <>
-//             <div>No estas autorizado para ver este sitio</div>
-//             <Link to="/">[Inicia sesión...]</Link>
-//         </>
-
-}
-
-export default PrivateRoute
+export default PrivateRoute;
