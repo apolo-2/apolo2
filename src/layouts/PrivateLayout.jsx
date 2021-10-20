@@ -9,7 +9,7 @@ import { useUser } from 'context/userContext';
 
 const PrivateLayout = ({ children }) => {
   
-  const {  isAuthenticated, isLoading, loginWithRedirect, getAccessTokenSilently  } = useAuth0();
+  const {  isAuthenticated, isLoading, loginWithRedirect, getAccessTokenSilently, logout  } = useAuth0();
   const [loadingUserInformation, setLoadingUserInformation] = useState(false)
   const { setUserData } = useUser();
     //for token
@@ -45,6 +45,7 @@ const PrivateLayout = ({ children }) => {
               (err) => {
                 console.log('err', err);
                 setLoadingUserInformation(false)
+                logout({ returnTo: 'http://localhost:3000/admin' });
               }
           );
       }
@@ -52,7 +53,7 @@ const PrivateLayout = ({ children }) => {
       if (isAuthenticated) 
           fetchAuth0Token() 
   
-  }, [isAuthenticated , getAccessTokenSilently, setUserData ])
+  }, [isAuthenticated , getAccessTokenSilently, logout, setUserData ])
 
   if (isLoading || loadingUserInformation) return <ReactLoading type='cylon' color='abc123' height={'10%'} width={'10%'} />
 
