@@ -1,4 +1,3 @@
-// import logo from 'media/apolo_logo.png';
 import { Link } from "react-router-dom";
 import "styles/sidebar.css";
 import userImage from "./../media/users.png";
