@@ -321,7 +321,8 @@ const FormularioCreacionUsuarios = ({ setMostrarTabla }) => {
 
     const options = {
       method: "POST",
-      url: "http://localhost:27017/usuarios/",
+      // url: "http://localhost:27017/usuarios/",
+      url:  window.location.origin+'/usuarios/',
       headers: { "Content-Type": "application/json" },
       data: {
         correo: nuevoUsuario.correo,

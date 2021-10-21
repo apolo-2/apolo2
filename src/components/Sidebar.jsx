@@ -10,7 +10,7 @@ const Sidebar = () => {
 
   const cerrarSesion = ()=> {
     localStorage.removeItem('token')
-    logout({ returnTo: "http://localhost:3000/admin" })
+    logout({ returnTo: window.location.origin+'/admin' })
   }
 
   return (
