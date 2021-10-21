@@ -3,11 +3,14 @@ import axios from "axios";
 const getToken = function(){
   return  `Bearer ${localStorage.getItem('token')}`
 }
+const URI_API = 'https://serene-forest-26816.herokuapp.com'
+// const URI_API = 'http://localhost:5000'
+
 
 export const obtenerProductos = async (successCallback, errorCallback) => {
   const options = { 
       method: "GET",
-      url: "http://localhost:5000/producto" ,
+      url: `${URI_API}/producto` ,
       headers: { Authorization: getToken() }
   };
   await axios.request(options).then(successCallback).catch(errorCallback);
@@ -16,7 +19,7 @@ export const obtenerProductos = async (successCallback, errorCallback) => {
 export const crearProducto = async (data, successCallback, errorCallback) => {
   const options = {
     method: "POST",
-    url: "http://localhost:5000/producto",
+    url: `${URI_API}/producto`,
     headers: { "Content-Type": "application/json", Authorization: getToken() },
     data,
   };
@@ -31,7 +34,7 @@ export const editarProducto = async (
 ) => {
   const options = {
     method: "PATCH",
-    url: `http://localhost:5000/producto/${id}/`,
+    url: `${URI_API}/producto/${id}/`,
     headers: { "Content-Type": "application/json" , Authorization: getToken()},
     data,
   };
@@ -41,7 +44,7 @@ export const editarProducto = async (
 export const eliminarProducto = async (id, successCallback, errorCallback) => {
   const options = {
     method: "DELETE",
-    url: `http://localhost:5000/producto/${id}/`,
+    url: `${URI_API}/producto/${id}/`,
     headers: { "Content-Type": "application/json", Authorization: getToken() },
   };
   await axios.request(options).then(successCallback).catch(errorCallback);
@@ -50,7 +53,7 @@ export const eliminarProducto = async (id, successCallback, errorCallback) => {
 
 // usuarios
 export const obtenerUsuarios = async (successCallback, errorCallback) => {
-  const options = { method: "GET", url: "http://localhost:5000/usuarios/", headers: { Authorization: getToken() }};
+  const options = { method: "GET", url: `${URI_API}/usuarios/`, headers: { Authorization: getToken() }};
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
 
@@ -58,7 +61,7 @@ export const obtenerUsuarios = async (successCallback, errorCallback) => {
 export const obtenerDatosUsuario = async (successCallback, errorCallback) => {
   const options = {
     method: 'GET',
-    url: 'http://localhost:5000/usuarios/self',
+    url: `${URI_API}/usuarios/self`,
     headers: {
       Authorization: getToken(), // 3. enviarle el token a backend
     },
@@ -69,7 +72,7 @@ export const obtenerDatosUsuario = async (successCallback, errorCallback) => {
 export const crearUsuario = async (data, successCallback, errorCallback) => {
   const options = {
     method: "POST",
-    url: "http://localhost:5000/usuarios/",
+    url: `${URI_API}/usuarios/`,
     headers: { "Content-Type": "application/json" , Authorization: getToken()},
     data,
   };
@@ -84,7 +87,7 @@ export const editarUsuario = async (
 ) => {
   const options = {
     method: "PATCH",
-    url: `http://localhost:5000/usuarios/${id}/`,
+    url: `${URI_API}/usuarios/${id}/`,
     headers: { "Content-Type": "application/json" , Authorization: getToken() },
     data,
   };
@@ -94,7 +97,7 @@ export const editarUsuario = async (
 export const eliminarUsuario = async (id, successCallback, errorCallback) => {
   const options = {
     method: "DELETE",
-    url: `http://localhost:5000/usuarios/${id}/`,
+    url: `${URI_API}/usuarios/${id}/`,
     headers: { "Content-Type": "application/json", Authorization: getToken() },
   };
   await axios.request(options).then(successCallback).catch(errorCallback);
