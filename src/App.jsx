@@ -13,17 +13,19 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import { UserContext } from 'context/userContext';
 import PrivateRoute from 'components/PrivateRoute';
 
+window.uri='https://thawing-thicket-08307.herokuapp.com/'
+
 function App() {
 
   const [userData, setUserData] = useState({});
-
+  console.log(window.location.origin)
   return (
 
     <Auth0Provider
     domain="misiontic-apolo2-appventas.us.auth0.com"
     clientId="DNOD2uQnF7gGDbJU9RnFt2C4shNBTUUh"
-    // redirectUri={window.location.origin}
-    redirectUri='http://localhost:3000/admin'
+    //redirectUri={window.location.origin}
+    redirectUri={window.location.origin+'/admin'}
     audience =  'api-auth-apolo2-ventas-app'
     
     >
