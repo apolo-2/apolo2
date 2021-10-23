@@ -1,192 +1,224 @@
 import React, { useEffect, useState, useRef } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import DataTableVentas from "components/DataTableVentas";
+import DataTableVenta from "components/DataTableVenta";
+import RegistrarVentas from "components/CrearVentas";
 import "styles/ventas.css";
 
-const VentasBackend = [
-  {
-    numVenta: "0001",
-    cliente: "Pablo Perez",
-    vendedor: "Lucia",
-    total: 150000,
-  },
-  {
-    numVenta: "0002",
-    cliente: "Diana Duran",
-    vendedor: "Leidy",
-    total: 180000,
-  },
-  {
-    numVenta: "0003",
-    cliente: "Diana Duran",
-    vendedor: "Laura",
-    total: 250000,
-  },
-  {
-    numVenta: "0004",
-    cliente: 'Mouse Gamer Genious"',
-    vendedor: "Leidy",
-    total: 12500,
-  },
-];
+import { obtenerVentas, editarVenta, eliminarVenta } from "utils/api";
 
 const Ventas = () => {
-  const [mostrarTabla, setMostrarTabla] = useState(true);
-  const [Ventas, setVentas] = useState([]);
-  const [textoBoton, setTextoBoton] = useState("Nuevo Ventas");
+  const [mostrarTabla, setMostrarTabla] = useState("LISTAR"); //LISTAR, CREAR, ACTUALIZAR
+  const [ventas, setProductos] = useState([]);
+  const [textoBoton, setTextoBoton] = useState("Nuevo Venta");
   const [colorBoton, setColorBoton] = useState("btn-secondary");
+  const [textoTituloFormulario, setTextoTituloFormulario] = useState(
+    "Formulario nueva venta"
+  );
+  const [ventaToEdit, setVentaToEdit] = useState({});
+  const [idVentaToDelete, setIdVentaToDelete] = useState();
+  const [ejecutarConsulta, setEjecutarConsulta] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    //obtener lista  desde el backend
-    setVentas(VentasBackend);
-  }, []);
+    const fetchVentas = async () => {
+      setLoading(true);
+      await obtenerVentas(
+        (response) => {
+          setProductos(response.data);
+          setEjecutarConsulta(false);
+          setLoading(false);
+        },
+        (error) => {
+          console.error("Salio un error:", error);
+          setLoading(false);
+        }
+      );
+    };
+
+    if (ejecutarConsulta) {
+      fetchVentas();
+    }
+  }, [ejecutarConsulta]);
 
   useEffect(() => {
-    if (mostrarTabla) {
-      setTextoBoton("Registrar venta");
-      setColorBoton("btn-secondary");
-    } else {
-      setTextoBoton("Mostrar listado de ventas");
-      setColorBoton("btn-info");
+    // if (mostrarTabla) {
+    if (mostrarTabla === "LISTAR") {
+      setEjecutarConsulta(true);
     }
   }, [mostrarTabla]);
+
+  useEffect(() => {
+    if (mostrarTabla === "LISTAR") {
+      setTextoBoton("Registrar Venta");
+      setColorBoton("btn-secondary");
+    } else if (mostrarTabla === "CREAR") {
+      setTextoBoton("Mostrar Todas las ventas");
+      setColorBoton("btn-info");
+      setTextoTituloFormulario("Formulario registro de venta");
+    } else if (mostrarTabla === "ACTUALIZAR") {
+      setTextoBoton("Mostrar Todas las ventas");
+      setColorBoton("btn-info");
+      setTextoTituloFormulario("Formulario actualizar venta");
+    }
+  }, [mostrarTabla]);
+
+  // function Maye - eliminar prod, accionado desde DataTableVenta.jsx
+  const deleteVenta = async () => {
+    await eliminarVenta(
+      idVentaToDelete,
+      (response) => {
+        console.log(response.data);
+        toast.success("Venta eliminada con éxito! ");
+        setEjecutarConsulta(true);
+      },
+      (error) => {
+        console.error(error);
+        toast.error("Error eliminando el venta");
+      }
+    );
+  };
+  //./
+
   return (
     <div className="container-ventas">
       <div className="">
         <div className="container-title">
-          <h3 className="">Gestión de Ventas</h3>
+          <h3 className="">Administrador de ventas</h3>
         </div>
         <br />
         <button
           onClick={() => {
-            setMostrarTabla(!mostrarTabla);
+            setMostrarTabla(mostrarTabla === "LISTAR" ? "CREAR" : "LISTAR");
           }}
           className={`btn ${colorBoton} btn-rounded`}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="26"
-            height="26"
-            fill="currentColor"
-            className="bi bi-plus-circle-fill"
-            viewBox="0 0 16 16"
-          >
-            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
-          </svg>
+          <i className="fas fa-plus-circle fa-lg"></i>
           <span>{textoBoton}</span>
         </button>
       </div>
+      {(() => {
+        switch (mostrarTabla) {
+          case "LISTAR":
+            return (
+              <DataTableVenta
+                listaVentas={ventas}
+                setMostrarTabla={setMostrarTabla}
+                setVentaToEdit={setVentaToEdit}
+                deleteVenta={deleteVenta}
+                setIdVentaToDelete={setIdVentaToDelete}
+                loading={loading}
+              />
+            );
+          case "CREAR":
+            return <RegistrarVentas />;
+          case "ACTUALIZAR":
+            return (
+              <FormularioActualizarVenta
+                setMostrarTabla={setMostrarTabla}
+                setEjecutarConsulta={setEjecutarConsulta}
+                setVentaToEdit={setVentaToEdit}
+                textoTituloFormulario={textoTituloFormulario}
+                venta={ventaToEdit}
+              />
+            );
+          default:
+            return <h2>Error!</h2>;
+        }
+      })()}
 
-      {mostrarTabla ? (
-        <TablaVentas listaVentas={Ventas} />
-      ) : (
-        <FormularioCreacionVentas
-          setMostrarTabla={setMostrarTabla}
-          listaVentas={Ventas}
-          setVentas={setVentas}
-        />
-      )}
-
-      <ToastContainer position="bottom-right" autoClose={27017} />
+      <ToastContainer position="bottom-right" autoClose={5000} />
     </div>
   );
 };
 
-const TablaVentas = ({ listaVentas }) => {
-  useEffect(() => {
-    console.log("este es el listado  en el componente de tabla", listaVentas);
-  }, [listaVentas]);
-  return <DataTableVentas listaVentas={listaVentas} />;
-};
-
-const FormularioCreacionVentas = ({
+const FormularioActualizarVenta = ({
   setMostrarTabla,
-  listaVentas,
-  setVentas,
+  textoTituloFormulario,
+  venta,
 }) => {
   const form = useRef(null);
-  const submitForm = (e) => {
+  console.log(venta);
+  const submitForm = async (e) => {
     e.preventDefault();
     const fd = new FormData(form.current);
-    const nuevoVentas = {};
+
+    const nuevaVenta = {};
     fd.forEach((value, key) => {
-      nuevoVentas[key] = value;
+      nuevaVenta[key] = value;
     });
-    setMostrarTabla(true);
-    setVentas([...listaVentas, nuevoVentas]);
-    console.log("nuevoVentas::", nuevoVentas);
-    toast.success("Genial!, se registró la venta", {});
+
+    // Actualizar venta
+    await editarVenta(
+      venta._id,
+      {
+        descripcion: nuevaVenta.descripcion,
+      },
+      (response) => {
+        console.log(response.data);
+        toast.success("Venta modificado con éxito! ");
+        setMostrarTabla("LISTAR");
+      },
+      (error) => {
+        toast.error("Error modificando el venta");
+        console.error(error);
+      }
+    );
   };
 
   return (
-    // form nuevo prod
     <div className="container">
       <br />
-      <h5 className="">Formulario nuevo Ventas</h5>
-
+      <h4 className="">{textoTituloFormulario}</h4>
+      <br />
       <form ref={form} onSubmit={submitForm} className="">
         <div className="mb-3 row">
-          <label for="cliente" className="col-sm-2 col-form-label">
-            Cliente:{" "}
-          </label>
-          <div className="col-sm-9">
-            <input
-              type="text"
-              name="cliente"
-              className="form-control"
-              placeholder="Ingrese cliente"
-              required
-            />
-          </div>
-        </div>
-
-        <div className="mb-3 row">
-          <label for="vendedor" className="col-sm-2 col-form-label">
+          <label for="descripcion" className="col-sm-2 col-form-label">
             Vendedor:{" "}
           </label>
           <div className="col-sm-9">
             <input
               type="text"
-              name="vendedor"
+              name="descripcion"
               className="form-control"
-              placeholder="Ingrese el nombre del vendedor"
+              placeholder="Ingrese descripción del venta"
               required
+              defaultValue={venta.vendedor.nombre}
             />
           </div>
         </div>
 
         <div className="mb-3 row">
-          <label for="total" className="col-sm-2 col-form-label">
-            total:{" "}
+          <label for="valorUnit" className="col-sm-2 col-form-label">
+            Total Venta:{" "}
           </label>
           <div className="col-sm-9">
             <input
-              className="form-select"
-              aria-label="Default select"
-              name="total"
+              type="number"
+              name="valorUnit"
+              className="form-control"
+              min={0}
+              max={9999999999999}
+              placeholder="Ingrese valor por unidad"
               required
-              defaultValue={0}
-            ></input>
+              defaultValue={venta.totalVenta}
+            />
           </div>
         </div>
 
-        <div className="col-md-11 d-flex justify-content-end ">
-          <button type="submit" className="btn btn-primary btn-lg">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              className="bi bi-sd-card"
-              viewBox="0 0 16 16"
-            >
-              <path d="M6.25 3.5a.75.75 0 0 0-1.5 0v2a.75.75 0 0 0 1.5 0v-2zm2 0a.75.75 0 0 0-1.5 0v2a.75.75 0 0 0 1.5 0v-2zm2 0a.75.75 0 0 0-1.5 0v2a.75.75 0 0 0 1.5 0v-2zm2 0a.75.75 0 0 0-1.5 0v2a.75.75 0 0 0 1.5 0v-2z" />
-              <path
-                fill-rule="evenodd"
-                d="M5.914 0H12.5A1.5 1.5 0 0 1 14 1.5v13a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5V3.914c0-.398.158-.78.44-1.06L4.853.439A1.5 1.5 0 0 1 5.914 0zM13 1.5a.5.5 0 0 0-.5-.5H5.914a.5.5 0 0 0-.353.146L3.146 3.561A.5.5 0 0 0 3 3.914V14.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-13z"
-              />
-            </svg>
+        <div className="col-md-11 d-flex justify-content-end div-btn-actions">
+          <button
+            type=""
+            className="btn btn-secondary btn"
+            onClick={() => {
+              setMostrarTabla("LISTAR");
+            }}
+          >
+            <i className="far fa-window-close space-button-icon"></i>
+            Cancelar
+          </button>
+          <button type="submit" className="btn btn-primary btn">
+            <i className="fas fa-save space-button-icon"></i>
             Guardar
           </button>
         </div>

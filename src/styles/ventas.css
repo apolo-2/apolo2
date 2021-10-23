@@ -18,6 +18,10 @@ svg.bi-plus-circle-fill {
     margin-right: 5px;
 }
 
+.hidden {
+    display: none;
+}
+
 .container-title {
     background: #435d7d;
     color: #fff;
@@ -36,4 +40,22 @@ svg.bi-plus-circle-fill {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+}
+
+li {
+    list-style: none;
+    text-align: left;
+    color: blue
+}
+
+ol {
+    list-style: none;
+    text-align: left;
+    color: blue
+}
+
+ul {
+    list-style: none;
+    font-family: 'Courier New', Courier, monospace;
+    font-style: inherit;
 }

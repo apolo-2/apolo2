@@ -1,26 +1,51 @@
 import React, { useEffect, useState } from "react";
 import ReactLoading from "react-loading";
 
-const DataTableProducto = ({
-  listaProductos,
+const DataTableVenta = ({
+  listaVentas,
   setMostrarTabla,
-  setProductToEdit,
-  deleteProducto,
-  setIdProductToDelete,
+  setVentaToEdit,
+  deleteVenta,
+  setIdVentaToDelete,
   loading,
 }) => {
   const [busqueda, setBusqueda] = useState("");
-  const [productosFiltrados, setProductosFiltrados] = useState(listaProductos);
+  const [ventasFiltradas, setVentasFiltrados] = useState(listaVentas);
 
   useEffect(() => {
-    setProductosFiltrados(
-      listaProductos.filter((elemento) => {
+    setVentasFiltrados(
+      listaVentas.filter((elemento) => {
         return JSON.stringify(elemento)
           .toLowerCase()
           .includes(busqueda.toLowerCase());
       })
     );
-  }, [busqueda, listaProductos]);
+  }, [busqueda, listaVentas]);
+
+  function ListItem(props) {
+    return <li>{props.value}</li>;
+  }
+  const formatoMayusculas = (str) => {
+    let acumulo = [];
+    let long = str.length;
+    let nuevoStr = str;
+    for (let i = 0; i < long; i++) {
+      acumulo[i] = (
+        <ol>
+          <p>Producto {i}</p>
+          <ol>
+            {
+              <ListItem
+                value={`Prod: ${nuevoStr[i].detalleProducto.descripcion}`}
+              />
+            }
+            {<ListItem value={"Und: " + nuevoStr[i].unidadesAgregadas} />}
+          </ol>
+        </ol>
+      ); //.descripcion;
+    }
+    return acumulo; //<ul>{<ListItem key={acumulo.toString()} value={acumulo} />}</ul>;
+  };
 
   return (
     <div>
@@ -53,24 +78,24 @@ const DataTableProducto = ({
           <table className="table  table-sm table-hover  table-bordered caption-top table-listado">
             <thead className="table-light text-center">
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">Identificador</th>
-                <th scope="col">Descripción</th>
-                <th scope="col">Valor Unitarío</th>
-                <th scope="col">Estado</th>
-                <th scope="col">Acciónes</th>
+                <th scope="col">COD Venta</th>
+                <th scope="col">Vendedor</th>
+                <th scope="col">Productos Vendidos</th>
+                <th scope="col">Total Venta</th>
+                <th scope="col">Fecha de Registro</th>
+                <th scope="col">Acciones</th>
               </tr>
             </thead>
             <tbody>
-              {productosFiltrados.map((producto, index) => {
+              {ventasFiltradas.map((venta, index) => {
                 return (
                   <tr key={index.toString()} className="text-center">
-                    <td>{index + 1}</td>
-                    {/* <td>{producto.codigo}</td> */}
-                    <td>{producto._id.substring(17)}</td>
-                    <td>{producto.descripcion}</td>
-                    <td>{producto.valorUnit}</td>
-                    <td>{producto.estado}</td>
+                    {/* <td>{venta.codigo}</td> */}
+                    <td>{venta._id.substring(17)}</td>
+                    <td> {venta.vendedor.nombre}</td>
+                    <td>{formatoMayusculas(venta.productosAgregados)}</td>
+                    <td> {venta.totalVenta}</td>
+                    <td> {venta.fechaRegistro}</td>
                     <td className="td_acciones">
                       <button
                         type="button"
@@ -78,7 +103,7 @@ const DataTableProducto = ({
                         title="Editar"
                         onClick={() => {
                           console.log("Action: edit");
-                          setProductToEdit(producto);
+                          setVentaToEdit(venta);
                           setMostrarTabla("ACTUALIZAR");
                         }}
                       >
@@ -92,7 +117,7 @@ const DataTableProducto = ({
                         data-bs-toggle="modal"
                         data-bs-target="#confirmDeleteModal"
                         onClick={() => {
-                          setIdProductToDelete(producto._id);
+                          setIdVentaToDelete(venta._id);
                         }}
                       >
                         <i className="far fa-trash-alt "></i>
@@ -172,7 +197,7 @@ const DataTableProducto = ({
               <button
                 onClick={() => {
                   console.log("Action: Delete");
-                  deleteProducto();
+                  deleteVenta();
                 }}
                 type="button"
                 className="btn btn-primary"
@@ -188,4 +213,4 @@ const DataTableProducto = ({
   );
 };
 
-export default DataTableProducto;
+export default DataTableVenta;

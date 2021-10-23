@@ -121,6 +121,7 @@ const TablaUsuarios = ({ listaUsuarios, setEjecutarConsulta }) => {
           />
         </div>
       </section>
+
       <table className="table  table-sm table-hover  table-bordered caption-top table-listado">
         <thead className="table-light text-center">
           <tr>
