@@ -351,8 +351,12 @@ const FormularioCreacionUsuario = ({ setMostrarTabla }) => {
         .join(" ");
     };
 
-    await crearUsuario(
-      {
+    const options = {
+      method: "POST",
+      // url: "http://localhost:27017/usuarios/",
+      url:  window.location.origin+'/usuarios/',
+      headers: { "Content-Type": "application/json" },
+      data: {
         correo: nuevoUsuario.correo,
         nombre: formatoMayusculas(nuevoUsuario.nombre),
         rol: nuevoUsuario.rol,

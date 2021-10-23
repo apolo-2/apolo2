@@ -1,15 +1,15 @@
-// import logo from 'media/apolo_logo.png';
 import { Link } from "react-router-dom";
 import "styles/sidebar.css";
 import userImage from "./../media/users.png";
 import { useAuth0 } from "@auth0/auth0-react";
+import PrivateComponent from "./PrivateComponent";
 
 const Sidebar = () => {
   const { user, logout } = useAuth0();
 
   const cerrarSesion = () => {
     localStorage.removeItem("token");
-    logout({ returnTo: "http://localhost:3000/admin" });
+    logout({ returnTo: window.location.origin + "/admin" });
   };
 
   return (
@@ -36,17 +36,32 @@ const Sidebar = () => {
           nombre="Perfil"
           usuario={user}
         />
-        <Ruta
-          icono="fas fa-hand-holding-usd"
-          ruta="/admin/ventas"
-          nombre="Ventas"
-        />
-        <Ruta icono="fas fa-tasks" ruta="/admin/productos" nombre="Productos" />
-        <Ruta
-          icono="fas fa-user-friends"
-          ruta="/admin/usuarios"
-          nombre="Usuarios"
-        />
+        <PrivateComponent roleList={["admin", "vendedor"]}>
+          <Ruta
+            icono="fas fa-hand-holding-usd"
+            ruta="/admin/ventas"
+            nombre="Ventas"
+          />
+        </PrivateComponent>
+        <PrivateComponent roleList={["admin", "vendedor"]}>
+          <Ruta
+            icono="fas fa-tasks"
+            ruta="/admin/productos"
+            nombre="Productos"
+          />
+        </PrivateComponent>
+        <PrivateComponent roleList={["admin"]}>
+          <Ruta
+            icono="fas fa-user-friends"
+            ruta="/admin/usuarios"
+            nombre="Usuarios"
+          />
+          <Ruta
+            icono="fas fa-user-friends"
+            ruta="/admin/usuarios2"
+            nombre="Usuarios2"
+          />
+        </PrivateComponent>
         <p></p>
         {/* <Ruta icono="fas fa-sign-out-alt" ruta="/" nombre="SALIR" /> */}
         <button onClick={() => cerrarSesion()} className="btn-menu-salir">

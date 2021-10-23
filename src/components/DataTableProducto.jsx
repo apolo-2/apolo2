@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactLoading from "react-loading";
+import PrivateComponent from "./PrivateComponent";
 
 const DataTableProducto = ({
   listaProductos,
@@ -58,7 +59,9 @@ const DataTableProducto = ({
                 <th scope="col">Descripción</th>
                 <th scope="col">Valor Unitarío</th>
                 <th scope="col">Estado</th>
-                <th scope="col">Acciónes</th>
+                <PrivateComponent roleList={["admin"]}>
+                  <th scope="col">Acciónes</th>
+                </PrivateComponent>
               </tr>
             </thead>
             <tbody>
@@ -71,34 +74,36 @@ const DataTableProducto = ({
                     <td>{producto.descripcion}</td>
                     <td>{producto.valorUnit}</td>
                     <td>{producto.estado}</td>
-                    <td className="td_acciones">
-                      <button
-                        type="button"
-                        className="btn  btn-sm btn-outline-info"
-                        title="Editar"
-                        onClick={() => {
-                          console.log("Action: edit");
-                          setProductToEdit(producto);
-                          setMostrarTabla("ACTUALIZAR");
-                        }}
-                      >
-                        <i className="fas fa-pencil-alt "></i>
-                        {/* Editar */}
-                      </button>
-                      <button
-                        type="button"
-                        className="btn  btn-sm btn-sm btn-outline-danger"
-                        title="Eliminar"
-                        data-bs-toggle="modal"
-                        data-bs-target="#confirmDeleteModal"
-                        onClick={() => {
-                          setIdProductToDelete(producto._id);
-                        }}
-                      >
-                        <i className="far fa-trash-alt "></i>
-                        {/* Eliminar */}
-                      </button>
-                    </td>
+                    <PrivateComponent roleList={["admin"]}>
+                      <td className="td_acciones">
+                        <button
+                          type="button"
+                          className="btn  btn-sm btn-outline-info"
+                          title="Editar"
+                          onClick={() => {
+                            console.log("Action: edit");
+                            setProductToEdit(producto);
+                            setMostrarTabla("ACTUALIZAR");
+                          }}
+                        >
+                          <i className="fas fa-pencil-alt "></i>
+                          {/* Editar */}
+                        </button>
+                        <button
+                          type="button"
+                          className="btn  btn-sm btn-sm btn-outline-danger"
+                          title="Eliminar"
+                          data-bs-toggle="modal"
+                          data-bs-target="#confirmDeleteModal"
+                          onClick={() => {
+                            setIdProductToDelete(producto._id);
+                          }}
+                        >
+                          <i className="far fa-trash-alt "></i>
+                          {/* Eliminar */}
+                        </button>
+                      </td>
+                    </PrivateComponent>
                   </tr>
                 );
               })}

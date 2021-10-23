@@ -25,7 +25,7 @@ export const obtenerProductosDis = async (successCallback, errorCallback) => {
 export const crearProducto = async (data, successCallback, errorCallback) => {
   const options = {
     method: "POST",
-    url: "http://localhost:5000/producto",
+    url: `${URI_API}/producto`,
     headers: { "Content-Type": "application/json", Authorization: getToken() },
     data,
   };
@@ -50,7 +50,7 @@ export const editarProducto = async (
 export const eliminarProducto = async (id, successCallback, errorCallback) => {
   const options = {
     method: "DELETE",
-    url: `http://localhost:5000/producto/${id}/`,
+    url: `${URI_API}/producto/${id}/`,
     headers: { "Content-Type": "application/json", Authorization: getToken() },
   };
   await axios.request(options).then(successCallback).catch(errorCallback);
@@ -94,7 +94,7 @@ export const editarUsuario = async (
 export const eliminarUsuario = async (id, successCallback, errorCallback) => {
   const options = {
     method: "DELETE",
-    url: `http://localhost:5000/usuarios/${id}/`,
+    url: `${URI_API}/usuarios/${id}/`,
     headers: { "Content-Type": "application/json", Authorization: getToken() },
   };
   await axios.request(options).then(successCallback).catch(errorCallback);
