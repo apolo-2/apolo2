@@ -37,6 +37,12 @@ svg.bi-plus-circle-fill {
     margin-left: 5px;
 }
 
+.button-crear {
+    margin-left: auto;
+    margin-right: 0;
+    float: right;
+}
+
 .td_acciones {
     display: flex;
     flex-direction: row;

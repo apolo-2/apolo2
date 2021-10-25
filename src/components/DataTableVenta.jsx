@@ -1,6 +1,6 @@
-import { nanoid } from "nanoid";
 import React, { useEffect, useState } from "react";
 import ReactLoading from "react-loading";
+import { format } from "date-fns";
 
 const DataTableVenta = ({
   listaVentas,
@@ -33,17 +33,23 @@ const DataTableVenta = ({
     for (let i = 0; i < long; i++) {
       acumulo[i] = (
         <ol>
-          <p>Producto {i}</p>
+          <p>Producto {i + 1}</p>
           <ol>
             {
               <ListItem
-                value={`Prod: ${nuevoStr[i].detalleProducto.descripcion}`}
+                value={`* Prod: ${nuevoStr[i].detalleProducto.descripcion}`}
               />
             }
             {
               <ListItem
-                key={nanoid()}
-                value={`Und: ${nuevoStr[i].unidadesAgregadas}`}
+                value={`* Unds vendidas: ${nuevoStr[i].unidadesAgregadas}`}
+              />
+            }
+            {
+              <ListItem
+                value={`* Valor Und: ${formatNumber(
+                  nuevoStr[i].detalleProducto.valorUnit
+                )}`}
               />
             }
           </ol>
@@ -51,6 +57,46 @@ const DataTableVenta = ({
       );
     }
     return acumulo;
+  };
+  const formatDate = function (date) {
+    return format(new Date(date), "Pp");
+  };
+
+  const formatNumber = function (num) {
+    let numSplit, int, ints;
+    //let dec;
+    num = Math.abs(num);
+    num = num.toFixed(2);
+    numSplit = num.split(".");
+    int = numSplit[0];
+    //dec = numSplit[1];
+    ints = int.split("");
+    console.log(ints);
+    let intStr = "";
+    if (int.length > 3) {
+      let newInt = int;
+      let nCommas = Math.floor(int.length / 3);
+      let N = [];
+      for (let i = 1; i <= nCommas; i++) {
+        N.push(i);
+      }
+      let K = [];
+      for (let i = 0; i < N.length; i++) {
+        let intGroup = newInt.substring(0, 3);
+        newInt = newInt.replace(newInt.substring(0, 3), "");
+
+        K.push(intGroup + ".");
+      }
+
+      for (let i = 0; i < K.length; i++) {
+        intStr = intStr + K[i];
+      }
+    } else {
+      intStr = int;
+    }
+    int = intStr.substring(0, intStr.length - 1);
+
+    return "$" + int; // + "," + dec; //Listo para decimales
   };
 
   return (
@@ -87,7 +133,7 @@ const DataTableVenta = ({
                 <th scope="col">Vendedor</th>
                 <th scope="col">Productos Vendidos</th>
                 <th scope="col">Total Venta</th>
-                <th scope="col">Fecha de Registro</th>
+                <th scope="col">Fecha/Hora Registro</th>
                 <th scope="col">Acciones</th>
               </tr>
             </thead>
@@ -98,8 +144,8 @@ const DataTableVenta = ({
                     <td>{venta._id.substring(17)}</td>
                     <td> {venta.vendedor.nombre}</td>
                     <td>{formatDetalleVenta(venta.productosAgregados)}</td>
-                    <td> {venta.totalVenta}</td>
-                    <td> {venta.fechaRegistro}</td>
+                    <td> {formatNumber(venta.totalVenta)}</td>
+                    <td> {formatDate(venta.fechaRegistro)}</td>
                     <td className="td_acciones">
                       <button
                         type="button"

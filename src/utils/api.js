@@ -3,8 +3,8 @@ import axios from "axios";
 const getToken = function () {
   return `Bearer ${localStorage.getItem("token")}`;
 };
-const URI_API = "https://serene-forest-26816.herokuapp.com";
-//const URI_API = "http://localhost:5000";
+//const URI_API = "https://serene-forest-26816.herokuapp.com";
+const URI_API = "http://localhost:5000";
 
 export const obtenerProductos = async (successCallback, errorCallback) => {
   const options = {

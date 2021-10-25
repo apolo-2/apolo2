@@ -240,11 +240,9 @@ const FormularioCreacionProducto = ({
               aria-label="Default select"
               name="estado"
               required
-              defaultValue=""
+              defaultValue="Disponible"
             >
-              <option value="Disponible" selected>
-                Disponible
-              </option>
+              <option value="Disponible">Disponible</option>
               <option value="No disponible">No disponible</option>
             </select>
           </div>
@@ -359,9 +357,7 @@ const FormularioActualizarProducto = ({
               required
               defaultValue={producto.estado}
             >
-              <option value="Disponible" selected>
-                Disponible
-              </option>
+              <option value="Disponible">Disponible</option>
               <option value="No disponible">No disponible</option>
             </select>
           </div>

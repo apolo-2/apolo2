@@ -11,6 +11,7 @@
     "axios": "^0.22.0",
     "bootstrap": "^5.1.1",
     "datatables.net-bs4": "^1.11.3",
+    "date-fns": "^2.25.0",
     "jquery": "^3.6.0",
     "popper.js": "^1.16.0",
     "react": "^17.0.2",
