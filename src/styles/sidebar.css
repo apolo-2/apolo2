@@ -4,7 +4,6 @@ body {
   overflow-x: hidden;
 }
 
-
 nav {
   background: #36a;
   bottom: 0;
@@ -29,7 +28,7 @@ nav a {
   -webkit-user-drag: none;
 }
 
-button.btn-menu-salir{
+button.btn-menu-salir {
   background: none;
   color: white;
   border: none;
@@ -64,8 +63,8 @@ nav button.btn-menu-salir:hover {
   font-style: inherit;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   display: block;
-  left: 0;
-  top: 7px;
+  left: 0px;
+  top: 0px;
   padding: 16px 20px;
   position: absolute;
   text-decoration: none;
@@ -205,18 +204,24 @@ input[type=checkbox]:checked~.sidebarIconToggle>.diagonal.part-2 {
 
 .image--cover {
   width: 150px;
-  height: 150px;
-  border-radius: 50%;
+  border-collapse: separate;
+  border-radius: 10px;
   margin: 20px;
   object-fit: cover;
+  object-position: right;
+}
+
+.center {
+  margin: 20px;
   object-position: center;
 }
 
-.image-usuario-perfil{
-  background-color: #6B7280; 
-  width: 1.5em; 
-  height: 1.5em; 
-  border-radius: 0.125rem; 
-  border-width: 1px; 
+.image-usuario-perfil {
+  background-color: #6B7280;
+  width: 1.5em;
+  height: 1.5em;
+  border-collapse: separate;
+  border-radius: 0.125rem;
+  border-width: 1px;
   margin-right: 0.2em;
 }

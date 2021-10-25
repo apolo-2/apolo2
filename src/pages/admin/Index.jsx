@@ -32,11 +32,8 @@ const Admin = () => {
             </div>
           </div>
         </div>
-        {/* <row className="center-main">
-          <img src={Nave} alt="" />
-        </row> */}
         <div className="center-main">
-          <img src={Nave} alt="" />
+          <img src={Nave} alt="" className="imagenCenter" />
         </div>
       </div>
     </div>

@@ -6,6 +6,7 @@ card {
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
+    border-collapse: separate;
     border-radius: 0.9rem;
 }
 
@@ -34,4 +35,11 @@ a.span {
     text-align: center;
     font-size: 12px;
     text-decoration: none;
+}
+
+@media (max-width: 600px) {
+    .imagenCenter {
+        bottom: 100px;
+        width: 120px;
+    }
 }

@@ -18,12 +18,17 @@ svg.bi-plus-circle-fill {
     margin-right: 5px;
 }
 
+.hidden {
+    display: none;
+}
+
 .container-title {
     background: #435d7d;
     color: #fff;
     padding: 16px 30px;
     margin: -20px -25px 10px;
     border-radius: 10px 10px 0 0;
+    border-collapse: separate;
     display: flex;
     justify-content: space-between;
 }
@@ -32,8 +37,32 @@ svg.bi-plus-circle-fill {
     margin-left: 5px;
 }
 
+.button-crear {
+    margin-left: auto;
+    margin-right: 0;
+    float: right;
+}
+
 .td_acciones {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+}
+
+li {
+    list-style: none;
+    text-align: left;
+    color: blue
+}
+
+ol {
+    list-style: none;
+    text-align: left;
+    color: blue
+}
+
+ul {
+    list-style: none;
+    font-family: 'Courier New', Courier, monospace;
+    font-style: inherit;
 }

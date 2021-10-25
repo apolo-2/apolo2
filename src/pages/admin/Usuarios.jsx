@@ -1,10 +1,14 @@
 import React, { useEffect, useState, useRef } from "react";
 import "styles/usuarios.css";
-import axios from "axios";
-// import { nanoid } from "nanoid";
 import { Dialog, Tooltip } from "@material-ui/core";
 import { ToastContainer, toast } from "react-toastify";
-import { obtenerUsuarios, editarUsuario, eliminarUsuario } from "utils/api";
+import { nanoid } from "nanoid";
+import {
+  crearUsuario,
+  obtenerUsuarios,
+  editarUsuario,
+  eliminarUsuario,
+} from "utils/api";
 
 const Usuarios = () => {
   const [mostrarTabla, setMostrarTabla] = useState(true);
@@ -13,20 +17,19 @@ const Usuarios = () => {
   const [colorBoton, setColorBoton] = useState("btn-secondary");
   const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
 
-  //hooks
   useEffect(() => {
     console.log("consulta", ejecutarConsulta);
     if (ejecutarConsulta) {
       obtenerUsuarios(
         (response) => {
-          console.log("la respuesta que se recibio fue", response);
           setUsuarios(response.data);
+          setEjecutarConsulta(false);
+          console.log("la respuesta que se recibio fue", response);
         },
         (error) => {
           console.error("Salio un error:", error);
         }
       );
-      setEjecutarConsulta(false);
     }
   }, [ejecutarConsulta]);
 
@@ -65,11 +68,13 @@ const Usuarios = () => {
       {mostrarTabla ? (
         <DataTableUsuario
           listaUsuarios={usuarios}
+          setEjecutarConsulta={setEjecutarConsulta}
           setMostrarTabla={setMostrarTabla}
         />
       ) : (
         <FormularioCreacionUsuarios
           setMostrarTabla={setMostrarTabla}
+          setEjecutarConsulta={setEjecutarConsulta}
           listaUsuarios={usuarios}
           setUsuarios={setUsuarios}
         />
@@ -79,9 +84,10 @@ const Usuarios = () => {
   );
 };
 
-const FilaUsuario = ({ usuario }) => {
+const FilaUsuario = ({ usuario, setEjecutarConsulta, setMostrarTabla }) => {
   const [edit, setEdit] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
+  const mountedRef = useRef(true);
   const [infoNuevoUsuario, setInfoNuevoUsuario] = useState({
     _id: usuario._id,
     nombre: usuario.nombre,
@@ -103,30 +109,43 @@ const FilaUsuario = ({ usuario }) => {
         setEdit(false);
         console.log(response.data);
         toast.success("Usuario modificado con éxito");
+        setEjecutarConsulta(true);
+        //setMostrarTabla(true);
       },
       (error) => {
-        toast.error("Error modificando el usuario");
         console.error(error);
+        toast.error("Error modificando el usuario");
       }
     );
+    if (!mountedRef.current) return null; // fix: cancel asynchronous task while they are running
   };
+  // fix: cancel asynchronous task while they are running
+  useEffect(() => {
+    return () => {
+      mountedRef.current = false;
+    };
+  }, []);
+
   const deleteUsuario = async () => {
     await eliminarUsuario(
       usuario._id,
       (response) => {
         console.log(response.data);
-        toast.success("usuario eliminado con éxito");
+        toast.success("Usuario eliminado");
+        setEjecutarConsulta(true);
+        setMostrarTabla(true);
       },
       (error) => {
         console.error(error);
         toast.error("Error eliminando el usuario");
       }
     );
+
     setOpenDialog(false);
   };
 
   return (
-    <tr>
+    <tr key={nanoid()}>
       {edit ? (
         <>
           <td>
@@ -142,52 +161,77 @@ const FilaUsuario = ({ usuario }) => {
               }
             />
           </td>
+
           <td>
             <input
               className="bg-gray-50 border border-gray-600 p-2 rounded-lg m-2"
               type="text"
               value={infoNuevoUsuario.correo}
-              onChange={(e) =>
+              onChange={(ea) =>
                 setInfoNuevoUsuario({
                   ...infoNuevoUsuario,
-                  correo: e.target.value,
+                  correo: ea.target.value,
                 })
               }
             />
           </td>
           <td>
-            <input
-              className="bg-gray-50 border border-gray-600 p-2 rounded-lg m-2"
-              type="text"
-              value={infoNuevoUsuario.rol}
+            <select
+              name="rol"
+              defaultValue={infoNuevoUsuario.rol}
               onChange={(e) =>
                 setInfoNuevoUsuario({
                   ...infoNuevoUsuario,
                   rol: e.target.value,
                 })
               }
-            />
+              className="form-select"
+            >
+              <option value="admin">Admin</option>
+              <option value="vendedor">Vendedor</option>
+              <option value="sin-rol">Sin rol</option>
+            </select>
           </td>
           <td>
-            <input
-              className="bg-gray-50 border border-gray-600 p-2 rounded-lg m-2"
-              type="text"
-              value={infoNuevoUsuario.estado}
+            <select
+              name="estado"
+              defaultValue={infoNuevoUsuario.estado}
               onChange={(e) =>
                 setInfoNuevoUsuario({
                   ...infoNuevoUsuario,
                   estado: e.target.value,
                 })
               }
-            />
+              className="form-select"
+            >
+              <option value="pendiente">Pendiente</option>
+              <option value="autorizado">Autorizado</option>
+              <option value="no-autorizado">No autorizado</option>
+            </select>
           </td>
         </>
       ) : (
         <>
           <td>{usuario.nombre}</td>
           <td>{usuario.correo}</td>
-          <td>{usuario.rol}</td>
-          <td>{usuario.estado}</td>
+          <td>
+            <select disabled defaultValue={usuario.rol} className="form-select">
+              <option value="admin">Admin</option>
+              <option value="vendedor">Vendedor</option>
+              <option value="sin-rol">Sin rol</option>
+            </select>
+          </td>
+          <td>
+            <select
+              disabled
+              defaultValue={infoNuevoUsuario.estado}
+              className="form-select"
+            >
+              <option value="pendiente">Pendiente</option>
+              <option value="autorizado">Autorizado</option>
+              <option value="no-autorizado">No autorizado</option>
+            </select>
+          </td>
         </>
       )}
       <td>
@@ -225,35 +269,40 @@ const FilaUsuario = ({ usuario }) => {
           )}
         </div>
         <Dialog open={openDialog}>
-          <div className="p-8 flex flex-col">
-            <h1 className="text-gray-900 text-2xl font-bold">
-              ¿Está seguro de querer eliminar el usuario?
-            </h1>
-            <div className="flex w-full items-center justify-center my-4">
-              <button
-                onClick={() => deleteUsuario()}
-                className="mx-2 px-4 py-2 bg-green-500 text-white hover:bg-green-700 rounded-md shadow-md"
-              >
-                Sí
-              </button>
-              <button
-                onClick={() => setOpenDialog(false)}
-                className="mx-2 px-4 py-2 bg-red-500 text-white hover:bg-red-700 rounded-md shadow-md"
-              >
-                No
-              </button>
+          <Dialog open={openDialog}>
+            <div className="p-8 flex flex-col">
+              <h1 className="text-gray-900 text-2xl font-bold">
+                ¿Está seguro de querer eliminar el vehículo?
+              </h1>
+              <div className="flex w-full items-center justify-center my-4">
+                <button
+                  onClick={() => deleteUsuario()}
+                  className="mx-2 px-4 py-2 bg-green-500 text-white hover:bg-green-700 rounded-md shadow-md"
+                >
+                  Sí
+                </button>
+                <button
+                  onClick={() => setOpenDialog(false)}
+                  className="mx-2 px-4 py-2 bg-red-500 text-white hover:bg-red-700 rounded-md shadow-md"
+                >
+                  No
+                </button>
+              </div>
             </div>
-          </div>
+          </Dialog>
         </Dialog>
       </td>
     </tr>
   );
 };
 
-const DataTableUsuario = ({ listaUsuarios }) => {
+const DataTableUsuario = ({
+  listaUsuarios,
+  setEjecutarConsulta,
+  setMostrarTabla,
+}) => {
   const [busqueda, setBusqueda] = useState("");
   const [usuariosFiltrados, setUsuariosFiltrados] = useState(listaUsuarios);
-
   useEffect(() => {
     setUsuariosFiltrados(
       listaUsuarios.filter((elemento) => {
@@ -263,7 +312,6 @@ const DataTableUsuario = ({ listaUsuarios }) => {
       })
     );
   }, [busqueda, listaUsuarios]);
-
   return (
     <div className="table-responsive">
       <section className="table-search-fields">
@@ -294,7 +342,14 @@ const DataTableUsuario = ({ listaUsuarios }) => {
         </thead>
         <tbody>
           {usuariosFiltrados.map((usuario) => {
-            return <FilaUsuario usuario={usuario} setMostrarTabla={false} />;
+            return (
+              <FilaUsuario
+                key={nanoid()}
+                usuario={usuario}
+                setEjecutarConsulta={setEjecutarConsulta}
+                setMostrarTabla={setMostrarTabla}
+              />
+            );
           })}
         </tbody>
       </table>
@@ -302,7 +357,10 @@ const DataTableUsuario = ({ listaUsuarios }) => {
   );
 };
 
-const FormularioCreacionUsuarios = ({ setMostrarTabla }) => {
+const FormularioCreacionUsuarios = ({
+  setEjecutarConsulta,
+  setMostrarTabla,
+}) => {
   const form = useRef(null);
   const submitForm = async (e) => {
     e.preventDefault();
@@ -319,31 +377,28 @@ const FormularioCreacionUsuarios = ({ setMostrarTabla }) => {
         .join(" ");
     };
 
-    const options = {
-      method: "POST",
-      // url: "http://localhost:27017/usuarios/",
-      url:  window.location.origin+'/usuarios/',
-      headers: { "Content-Type": "application/json" },
-      data: {
-        correo: nuevoUsuario.correo,
-        nombre: formatoMayusculas(nuevoUsuario.nombre),
-        rol: nuevoUsuario.rol,
-        estado: nuevoUsuario.estado,
-      },
+    const datosUsuario = {
+      correo: nuevoUsuario.correo,
+      nombre: formatoMayusculas(nuevoUsuario.nombre),
+      rol: nuevoUsuario.rol,
+      estado: nuevoUsuario.estado,
     };
-    await axios
-      .request(options)
-      .then(function (response) {
+
+    await crearUsuario(
+      datosUsuario,
+      (response) => {
         console.log(response.data);
+
         toast.success("Usuario agregado con éxito");
-      })
-      .catch(function (error) {
+        setMostrarTabla(true);
+        setEjecutarConsulta(true);
+      },
+      (error) => {
         console.error(error);
         toast.error("Error creando un Usuario");
-      });
-    setMostrarTabla(true);
+      }
+    );
   };
-
   return (
     <div className="form-usuarios">
       <h2 className="text-2xl font-extrabold text-gray-800">Crear usuario</h2>
@@ -358,13 +413,12 @@ const FormularioCreacionUsuarios = ({ setMostrarTabla }) => {
               className="form-control"
               type="text"
               required
-              minlength="3"
-              maxlength="30"
+              minLength="3"
+              maxLength="30"
               size="8"
             />
           </div>
         </div>
-
         <div className="mb-3 row">
           <label className="col-sm-2 label-usuarios" htmlFor="correo">
             Correo
@@ -389,7 +443,7 @@ const FormularioCreacionUsuarios = ({ setMostrarTabla }) => {
               name="rol"
               required
             >
-              <option selected="true" disabled value="">
+              <option defaultValue="true" disabled value="">
                 Seleccione una opción
               </option>
               <option value="Administrador/a">Administrador/a</option>
@@ -407,7 +461,7 @@ const FormularioCreacionUsuarios = ({ setMostrarTabla }) => {
               name="estado"
               required
             >
-              <option selected="true" disabled value="">
+              <option defaultValue="true" disabled value="">
                 Seleccione una opción
               </option>
               <option value="Pendiente">Pendiente</option>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import ReactLoading from 'react-loading'
+
+import ReactLoading from "react-loading";
 import PrivateComponent from "./PrivateComponent";
 
 const DataTableProducto = ({
@@ -43,9 +44,14 @@ const DataTableProducto = ({
             />
           </div>
         </section>
-        {loading ?  (
-            <ReactLoading type='cylon' color='abc123' height={'10%'} width={'10%'} />
-         ) : (
+        {loading ? (
+          <ReactLoading
+            type="cylon"
+            color="abc123"
+            height={"10%"}
+            width={"10%"}
+          />
+        ) : (
           <table className="table  table-sm table-hover  table-bordered caption-top table-listado">
             <thead className="table-light text-center">
               <tr>
@@ -54,7 +60,7 @@ const DataTableProducto = ({
                 <th scope="col">Descripción</th>
                 <th scope="col">Valor Unitarío</th>
                 <th scope="col">Estado</th>
-                <PrivateComponent roleList = {['admin']}>
+                <PrivateComponent roleList={["admin"]}>
                   <th scope="col">Acciónes</th>
                 </PrivateComponent>
               </tr>
@@ -69,7 +75,7 @@ const DataTableProducto = ({
                     <td>{producto.descripcion}</td>
                     <td>{producto.valorUnit}</td>
                     <td>{producto.estado}</td>
-                    <PrivateComponent roleList = {['admin']}>
+                    <PrivateComponent roleList={["admin"]}>
                       <td className="td_acciones">
                         <button
                           type="button"
@@ -104,7 +110,7 @@ const DataTableProducto = ({
               })}
             </tbody>
           </table>
-         )} 
+        )}
       </div>
 
       {/* paginator */}

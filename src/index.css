@@ -77,6 +77,7 @@ h3 {
 
 .cuadrado a {
   background-color: white;
+  border-collapse: separate;
   border-radius: 10px;
   padding: 20px;
   text-decoration: none;

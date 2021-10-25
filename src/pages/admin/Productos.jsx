@@ -12,7 +12,6 @@ import {
 } from "utils/api";
 
 const Productos = () => {
-
   const [mostrarTabla, setMostrarTabla] = useState("LISTAR"); //LISTAR, CREAR, ACTUALIZAR
   const [productos, setProductos] = useState([]);
   const [textoBoton, setTextoBoton] = useState("Nuevo Producto");
@@ -23,28 +22,26 @@ const Productos = () => {
   const [productToEdit, setProductToEdit] = useState({});
   const [idProductToDelete, setIdProductToDelete] = useState();
   const [ejecutarConsulta, setEjecutarConsulta] = useState(false);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-
-    const fetchProductos = async ()=>{
-
-      setLoading(true)
+    const fetchProductos = async () => {
+      setLoading(true);
       await obtenerProductos(
         (response) => {
           setProductos(response.data);
           setEjecutarConsulta(false);
-          setLoading(false)
+          setLoading(false);
         },
         (error) => {
           console.error("Salio un error:", error);
-          setLoading(false)
+          setLoading(false);
         }
       );
-    }
+    };
 
     if (ejecutarConsulta) {
-      fetchProductos()
+      fetchProductos();
     }
   }, [ejecutarConsulta]);
 
@@ -56,7 +53,6 @@ const Productos = () => {
   }, [mostrarTabla]);
 
   useEffect(() => {
-
     if (mostrarTabla === "LISTAR") {
       setTextoBoton("Nuevo Producto");
       setColorBoton("btn-secondary");
@@ -127,7 +123,7 @@ const Productos = () => {
                 setProductToEdit={setProductToEdit}
                 deleteProducto={deleteProducto}
                 setIdProductToDelete={setIdProductToDelete}
-                loading = {loading}
+                loading={loading}
               />
             );
           case "CREAR":
@@ -201,7 +197,7 @@ const FormularioCreacionProducto = ({
       <br />
       <form ref={form} onSubmit={submitForm} className="">
         <div className="mb-3 row">
-          <label for="descripcion" className="col-sm-2 col-form-label">
+          <label htmlFor="descripcion" className="col-sm-2 col-form-label">
             Descripción:{" "}
           </label>
           <div className="col-sm-9">
@@ -217,7 +213,7 @@ const FormularioCreacionProducto = ({
         </div>
 
         <div className="mb-3 row">
-          <label for="valorUnit" className="col-sm-2 col-form-label">
+          <label htmlFor="valorUnit" className="col-sm-2 col-form-label">
             Valor unitario:{" "}
           </label>
           <div className="col-sm-9">
@@ -235,7 +231,7 @@ const FormularioCreacionProducto = ({
         </div>
 
         <div className="mb-3 row">
-          <label for="estado" className="col-sm-2 col-form-label">
+          <label htmlFor="estado" className="col-sm-2 col-form-label">
             Estado:{" "}
           </label>
           <div className="col-sm-9">
@@ -244,11 +240,9 @@ const FormularioCreacionProducto = ({
               aria-label="Default select"
               name="estado"
               required
-              defaultValue=""
+              defaultValue="Disponible"
             >
-              <option value="Disponible" selected>
-                Disponible
-              </option>
+              <option value="Disponible">Disponible</option>
               <option value="No disponible">No disponible</option>
             </select>
           </div>
@@ -281,7 +275,6 @@ const FormularioActualizarProducto = ({
   producto,
 }) => {
   const form = useRef(null);
-
   const submitForm = async (e) => {
     e.preventDefault();
     const fd = new FormData(form.current);
@@ -319,7 +312,7 @@ const FormularioActualizarProducto = ({
       <br />
       <form ref={form} onSubmit={submitForm} className="">
         <div className="mb-3 row">
-          <label for="descripcion" className="col-sm-2 col-form-label">
+          <label htmlFor="descripcion" className="col-sm-2 col-form-label">
             Descripción:{" "}
           </label>
           <div className="col-sm-9">
@@ -335,7 +328,7 @@ const FormularioActualizarProducto = ({
         </div>
 
         <div className="mb-3 row">
-          <label for="valorUnit" className="col-sm-2 col-form-label">
+          <label htmlFor="valorUnit" className="col-sm-2 col-form-label">
             Valor unitario:{" "}
           </label>
           <div className="col-sm-9">
@@ -353,7 +346,7 @@ const FormularioActualizarProducto = ({
         </div>
 
         <div className="mb-3 row">
-          <label for="estado" className="col-sm-2 col-form-label">
+          <label htmlFor="estado" className="col-sm-2 col-form-label">
             Estado:{" "}
           </label>
           <div className="col-sm-9">
@@ -364,9 +357,7 @@ const FormularioActualizarProducto = ({
               required
               defaultValue={producto.estado}
             >
-              <option value="Disponible" selected>
-                Disponible
-              </option>
+              <option value="Disponible">Disponible</option>
               <option value="No disponible">No disponible</option>
             </select>
           </div>

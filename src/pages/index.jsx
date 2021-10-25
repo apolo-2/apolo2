@@ -3,7 +3,6 @@ import "./../index.css";
 import Nave from "media/Nave.png";
 import { useAuth0 } from "@auth0/auth0-react";
 
-
 function Index() {
   const { loginWithRedirect } = useAuth0();
   return (
@@ -27,8 +26,8 @@ function Index() {
 
           <div className="cuadrado">
             <p>
-              Aplicativo para la administracion de ventas hace parte
-              del proyecto MISION TIC 2022
+              Aplicativo para la administracion de ventas hace parte del
+              proyecto MISION TIC 2022
             </p>
 
             {/* <h2>Iniciar Sesion</h2> */}
@@ -38,7 +37,10 @@ function Index() {
               Continua con Google
             </a> */}
             <br />
-            <button onClick={() => loginWithRedirect()} className="btn btn-lg btn-primary">
+            <button
+              onClick={() => loginWithRedirect()}
+              className="btn btn-lg btn-primary"
+            >
               {/* <img className="logo-google" src={Google} alt="Logo Google" /> */}
               {/* Continua con Google */}
               Inicia sesión
