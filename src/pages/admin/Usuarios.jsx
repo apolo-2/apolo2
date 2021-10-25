@@ -1,12 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
-import "styles/styles.css";
 import "styles/usuarios.css";
-import { nanoid } from "nanoid";
 import { Dialog, Tooltip } from "@material-ui/core";
 import { ToastContainer, toast } from "react-toastify";
+import { nanoid } from "nanoid";
 import {
-  obtenerUsuarios,
   crearUsuario,
+  obtenerUsuarios,
   editarUsuario,
   eliminarUsuario,
 } from "utils/api";
@@ -18,28 +17,23 @@ const Usuarios = () => {
   const [colorBoton, setColorBoton] = useState("btn-secondary");
   const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
 
-  //hooks
   useEffect(() => {
-    const fetchUsuarios = async () => {
-      await obtenerUsuarios(
+    console.log("consulta", ejecutarConsulta);
+    if (ejecutarConsulta) {
+      obtenerUsuarios(
         (response) => {
-          console.log("la respuesta que se recibio fue", response);
           setUsuarios(response.data);
           setEjecutarConsulta(false);
+          console.log("la respuesta que se recibio fue", response);
         },
         (error) => {
           console.error("Salio un error:", error);
         }
       );
-    };
-    console.log("consulta", ejecutarConsulta);
-    if (ejecutarConsulta) {
-      fetchUsuarios();
     }
   }, [ejecutarConsulta]);
 
   useEffect(() => {
-    //obtener lista de vehículos desde el backend
     if (mostrarTabla) {
       setEjecutarConsulta(true);
     }
@@ -72,14 +66,15 @@ const Usuarios = () => {
         </button>
       </div>
       {mostrarTabla ? (
-        <TablaUsuarios
-          //setMostrarTabla={setMostrarTabla}
+        <DataTableUsuario
           listaUsuarios={usuarios}
           setEjecutarConsulta={setEjecutarConsulta}
+          setMostrarTabla={setMostrarTabla}
         />
       ) : (
-        <FormularioCreacionUsuario
+        <FormularioCreacionUsuarios
           setMostrarTabla={setMostrarTabla}
+          setEjecutarConsulta={setEjecutarConsulta}
           listaUsuarios={usuarios}
           setUsuarios={setUsuarios}
         />
@@ -89,68 +84,10 @@ const Usuarios = () => {
   );
 };
 
-const TablaUsuarios = ({ listaUsuarios, setEjecutarConsulta }) => {
-  const [busqueda, setBusqueda] = useState("");
-  const [usuariosFiltrados, setUsuariosFiltrados] = useState(listaUsuarios);
-
-  useEffect(() => {
-    setUsuariosFiltrados(
-      listaUsuarios.filter((elemento) => {
-        return JSON.stringify(elemento)
-          .toLowerCase()
-          .includes(busqueda.toLowerCase());
-      })
-    );
-  }, [busqueda, listaUsuarios]);
-
-  return (
-    <div className="table-responsive">
-      <section className="table-search-fields">
-        <div className="input-group mb-3 ">
-          <span className="input-group-text" id="basic-addon1">
-            <i className="fas fa-search"></i>
-          </span>
-          <input
-            value={busqueda}
-            onChange={(e) => setBusqueda(e.target.value)}
-            type="text"
-            className="form-control"
-            placeholder="Buscar..."
-            aria-label="search"
-            aria-describedby="search"
-          />
-        </div>
-      </section>
-
-      <table className="table  table-sm table-hover  table-bordered caption-top table-listado">
-        <thead className="table-light text-center">
-          <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">Correo</th>
-            <th scope="col">Rol</th>
-            <th scope="col">Estado</th>
-            <th scope="col">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {usuariosFiltrados.map((usuario) => {
-            return (
-              <FilaUsuario
-                key={nanoid()}
-                usuario={usuario}
-                setEjecutarConsulta={setEjecutarConsulta}
-              />
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
-  );
-};
-
-const FilaUsuario = ({ usuario, setEjecutarConsulta }) => {
+const FilaUsuario = ({ usuario, setEjecutarConsulta, setMostrarTabla }) => {
   const [edit, setEdit] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
+  const mountedRef = useRef(true);
   const [infoNuevoUsuario, setInfoNuevoUsuario] = useState({
     _id: usuario._id,
     nombre: usuario.nombre,
@@ -172,33 +109,43 @@ const FilaUsuario = ({ usuario, setEjecutarConsulta }) => {
         setEdit(false);
         console.log(response.data);
         toast.success("Usuario modificado con éxito");
-        setEdit(false);
         setEjecutarConsulta(true);
+        //setMostrarTabla(true);
       },
       (error) => {
-        toast.error("Error modificando el usuario");
         console.error(error);
+        toast.error("Error modificando el usuario");
       }
     );
+    if (!mountedRef.current) return null; // fix: cancel asynchronous task while they are running
   };
+  // fix: cancel asynchronous task while they are running
+  useEffect(() => {
+    return () => {
+      mountedRef.current = false;
+    };
+  }, []);
+
   const deleteUsuario = async () => {
     await eliminarUsuario(
       usuario._id,
       (response) => {
         console.log(response.data);
-        toast.success("usuario eliminado con éxito");
+        toast.success("Usuario eliminado");
         setEjecutarConsulta(true);
+        setMostrarTabla(true);
       },
       (error) => {
         console.error(error);
         toast.error("Error eliminando el usuario");
       }
     );
+
     setOpenDialog(false);
   };
 
   return (
-    <tr>
+    <tr key={nanoid()}>
       {edit ? (
         <>
           <td>
@@ -214,24 +161,23 @@ const FilaUsuario = ({ usuario, setEjecutarConsulta }) => {
               }
             />
           </td>
+
           <td>
             <input
               className="bg-gray-50 border border-gray-600 p-2 rounded-lg m-2"
               type="text"
               value={infoNuevoUsuario.correo}
-              onChange={(e) =>
+              onChange={(ea) =>
                 setInfoNuevoUsuario({
                   ...infoNuevoUsuario,
-                  correo: e.target.value,
+                  correo: ea.target.value,
                 })
               }
             />
           </td>
           <td>
             <select
-              className="bg-gray-50 border border-gray-600 p-2 rounded-lg"
               name="rol"
-              required
               defaultValue={infoNuevoUsuario.rol}
               onChange={(e) =>
                 setInfoNuevoUsuario({
@@ -239,27 +185,28 @@ const FilaUsuario = ({ usuario, setEjecutarConsulta }) => {
                   rol: e.target.value,
                 })
               }
+              className="form-select"
             >
-              <option value="Administrador/a">Administrador/a</option>
-              <option value="Vendedor">Vendedor/a</option>
+              <option value="admin">Admin</option>
+              <option value="vendedor">Vendedor</option>
+              <option value="sin-rol">Sin rol</option>
             </select>
           </td>
           <td>
             <select
-              className="bg-gray-50 border border-gray-600 p-2 rounded-lg"
               name="estado"
-              required
-              value={infoNuevoUsuario.estado}
+              defaultValue={infoNuevoUsuario.estado}
               onChange={(e) =>
                 setInfoNuevoUsuario({
                   ...infoNuevoUsuario,
                   estado: e.target.value,
                 })
               }
+              className="form-select"
             >
-              <option value="Pendiente">Pendiente</option>
-              <option value="No autorizado">No autorizado</option>
-              <option value="Autorizado">Autorizado</option>
+              <option value="pendiente">Pendiente</option>
+              <option value="autorizado">Autorizado</option>
+              <option value="no-autorizado">No autorizado</option>
             </select>
           </td>
         </>
@@ -267,8 +214,24 @@ const FilaUsuario = ({ usuario, setEjecutarConsulta }) => {
         <>
           <td>{usuario.nombre}</td>
           <td>{usuario.correo}</td>
-          <td>{usuario.rol}</td>
-          <td>{usuario.estado}</td>
+          <td>
+            <select disabled defaultValue={usuario.rol} className="form-select">
+              <option value="admin">Admin</option>
+              <option value="vendedor">Vendedor</option>
+              <option value="sin-rol">Sin rol</option>
+            </select>
+          </td>
+          <td>
+            <select
+              disabled
+              defaultValue={infoNuevoUsuario.estado}
+              className="form-select"
+            >
+              <option value="pendiente">Pendiente</option>
+              <option value="autorizado">Autorizado</option>
+              <option value="no-autorizado">No autorizado</option>
+            </select>
+          </td>
         </>
       )}
       <td>
@@ -306,43 +269,106 @@ const FilaUsuario = ({ usuario, setEjecutarConsulta }) => {
           )}
         </div>
         <Dialog open={openDialog}>
-          <div className="p-8 flex flex-col">
-            <h1 className="text-gray-900 text-2xl font-bold">
-              ¿Está seguro de querer eliminar el usuario?
-            </h1>
-            <div className="flex w-full items-center justify-center my-4">
-              <button
-                onClick={() => deleteUsuario()}
-                className="mx-2 px-4 py-2 bg-green-500 text-white hover:bg-green-700 rounded-md shadow-md"
-              >
-                Sí
-              </button>
-              <button
-                onClick={() => setOpenDialog(false)}
-                className="mx-2 px-4 py-2 bg-red-500 text-white hover:bg-red-700 rounded-md shadow-md"
-              >
-                No
-              </button>
+          <Dialog open={openDialog}>
+            <div className="p-8 flex flex-col">
+              <h1 className="text-gray-900 text-2xl font-bold">
+                ¿Está seguro de querer eliminar el vehículo?
+              </h1>
+              <div className="flex w-full items-center justify-center my-4">
+                <button
+                  onClick={() => deleteUsuario()}
+                  className="mx-2 px-4 py-2 bg-green-500 text-white hover:bg-green-700 rounded-md shadow-md"
+                >
+                  Sí
+                </button>
+                <button
+                  onClick={() => setOpenDialog(false)}
+                  className="mx-2 px-4 py-2 bg-red-500 text-white hover:bg-red-700 rounded-md shadow-md"
+                >
+                  No
+                </button>
+              </div>
             </div>
-          </div>
+          </Dialog>
         </Dialog>
       </td>
     </tr>
   );
 };
 
-const FormularioCreacionUsuario = ({ setMostrarTabla }) => {
-  const form = useRef(null);
+const DataTableUsuario = ({
+  listaUsuarios,
+  setEjecutarConsulta,
+  setMostrarTabla,
+}) => {
+  const [busqueda, setBusqueda] = useState("");
+  const [usuariosFiltrados, setUsuariosFiltrados] = useState(listaUsuarios);
+  useEffect(() => {
+    setUsuariosFiltrados(
+      listaUsuarios.filter((elemento) => {
+        return JSON.stringify(elemento)
+          .toLowerCase()
+          .includes(busqueda.toLowerCase());
+      })
+    );
+  }, [busqueda, listaUsuarios]);
+  return (
+    <div className="table-responsive">
+      <section className="table-search-fields">
+        <div className="input-group mb-3 ">
+          <span className="input-group-text" id="basic-addon1">
+            <i className="fas fa-search"></i>
+          </span>
+          <input
+            value={busqueda}
+            onChange={(e) => setBusqueda(e.target.value)}
+            type="text"
+            className="form-control"
+            placeholder="Buscar..."
+            aria-label="search"
+            aria-describedby="search"
+          />
+        </div>
+      </section>
+      <table className="table  table-sm table-hover  table-bordered caption-top table-listado">
+        <thead className="table-light text-center">
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Rol</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {usuariosFiltrados.map((usuario) => {
+            return (
+              <FilaUsuario
+                key={nanoid()}
+                usuario={usuario}
+                setEjecutarConsulta={setEjecutarConsulta}
+                setMostrarTabla={setMostrarTabla}
+              />
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+};
 
-  async function submitForm(e) {
+const FormularioCreacionUsuarios = ({
+  setEjecutarConsulta,
+  setMostrarTabla,
+}) => {
+  const form = useRef(null);
+  const submitForm = async (e) => {
     e.preventDefault();
     const fd = new FormData(form.current);
-
     const nuevoUsuario = {};
     fd.forEach((value, key) => {
       nuevoUsuario[key] = value;
     });
-
     const formatoMayusculas = (str) => {
       return str
         .toLowerCase()
@@ -351,29 +377,28 @@ const FormularioCreacionUsuario = ({ setMostrarTabla }) => {
         .join(" ");
     };
 
-    const options = {
-      method: "POST",
-      // url: "http://localhost:27017/usuarios/",
-      url:  window.location.origin+'/usuarios/',
-      headers: { "Content-Type": "application/json" },
-      data: {
-        correo: nuevoUsuario.correo,
-        nombre: formatoMayusculas(nuevoUsuario.nombre),
-        rol: nuevoUsuario.rol,
-        estado: nuevoUsuario.estado,
-      },
+    const datosUsuario = {
+      correo: nuevoUsuario.correo,
+      nombre: formatoMayusculas(nuevoUsuario.nombre),
+      rol: nuevoUsuario.rol,
+      estado: nuevoUsuario.estado,
+    };
+
+    await crearUsuario(
+      datosUsuario,
       (response) => {
         console.log(response.data);
+
         toast.success("Usuario agregado con éxito");
+        setMostrarTabla(true);
+        setEjecutarConsulta(true);
       },
       (error) => {
         console.error(error);
-        toast.error("Error creando un usuario");
+        toast.error("Error creando un Usuario");
       }
     );
-    setMostrarTabla(true);
-  }
-
+  };
   return (
     <div className="form-usuarios">
       <h2 className="text-2xl font-extrabold text-gray-800">Crear usuario</h2>
@@ -394,7 +419,6 @@ const FormularioCreacionUsuario = ({ setMostrarTabla }) => {
             />
           </div>
         </div>
-
         <div className="mb-3 row">
           <label className="col-sm-2 label-usuarios" htmlFor="correo">
             Correo
@@ -418,9 +442,8 @@ const FormularioCreacionUsuario = ({ setMostrarTabla }) => {
               className="bg-gray-50 border border-gray-600 p-2 rounded-lg"
               name="rol"
               required
-              defaultValue=""
             >
-              <option disabled value="">
+              <option defaultValue="true" disabled value="">
                 Seleccione una opción
               </option>
               <option value="Administrador/a">Administrador/a</option>
@@ -437,9 +460,8 @@ const FormularioCreacionUsuario = ({ setMostrarTabla }) => {
               className="bg-gray-50 border border-gray-600 p-2 rounded-lg"
               name="estado"
               required
-              defaultValue=""
             >
-              <option disabled value="">
+              <option defaultValue="true" disabled value="">
                 Seleccione una opción
               </option>
               <option value="Pendiente">Pendiente</option>

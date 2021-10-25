@@ -28,6 +28,7 @@ svg.bi-plus-circle-fill {
     padding: 16px 30px;
     margin: -20px -25px 10px;
     border-radius: 10px 10px 0 0;
+    border-collapse: separate;
     display: flex;
     justify-content: space-between;
 }

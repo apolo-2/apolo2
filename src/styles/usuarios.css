@@ -48,6 +48,7 @@ button .space-button-icon {
     background-color: #ffffff;
     margin: auto;
     padding: 15px;
+    border-collapse: separate;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 2px 10px -3px #333;

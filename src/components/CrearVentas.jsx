@@ -1,8 +1,6 @@
 import { nanoid } from "nanoid";
 import React, { useEffect, useState, useRef } from "react";
-//import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-//import DataTableVentas from "components/DataTableVentas";
 import "../styles/ventas.css";
 import { crearVenta } from "utils/api";
 import { obtenerProductosDis } from "utils/api";
@@ -44,16 +42,16 @@ const RegistrarVentas = () => {
   const submitForm = async (e) => {
     e.preventDefault();
     const fd = new FormData(form.current);
-    const formData = {};
-    fd.forEach((value, key) => {
-      formData[key] = value;
-    });
-    console.log("form data", formData);
 
-    const listaProductos = Object.keys(formData)
+    const nuevoProducto = {};
+    fd.forEach((value, key) => {
+      nuevoProducto[key] = value;
+    });
+    console.log("nuevoProducto: ", nuevoProducto);
+    const listaProductos = Object.keys(nuevoProducto)
       .map((k) => {
         if (k.includes("producto")) {
-          return productosTabla.filter((v) => v._id === formData[k])[0];
+          return productosTabla.filter((v) => v._id === nuevoProducto[k])[0];
         }
         return null;
       })
@@ -65,19 +63,19 @@ const RegistrarVentas = () => {
       delete listaProductos[i].created;
     }
 
-    const cantidadesA = Object.keys(formData)
+    const cantidadesA = Object.keys(nuevoProducto)
       .map((k) => {
         if (k.includes("cantidad")) {
-          return formData[k];
+          return nuevoProducto[k];
         }
         return null;
       })
       .filter((v) => v);
 
-    const totalProducto = Object.keys(formData)
+    const totalProducto = Object.keys(nuevoProducto)
       .map((k) => {
         if (k.includes("producto_todo")) {
-          return formData[k];
+          return nuevoProducto[k];
         }
         return null;
       })
@@ -93,14 +91,10 @@ const RegistrarVentas = () => {
       };
     }
 
-    //Datos a enviar en el objeto
-    //========>
-    //========>
     let currenteDate = new Date().getTime();
     var date = new Date(currenteDate);
     const datosVenta = {
-      vendedor: vendedores.filter((v) => v._id === formData.vendedor)[0],
-      //      productos: listaProductos,
+      vendedor: vendedores.filter((v) => v._id === nuevoProducto.vendedor)[0],
       productosAgregados: cantidadesA,
       totalVenta: totalCompra,
       fechaRegistro: date,
@@ -110,7 +104,10 @@ const RegistrarVentas = () => {
       datosVenta,
       (response) => {
         console.log(response);
-        toast.success("Usuario agregado con éxito");
+        toast.success("Venta creada correctamente", {
+          durations: { success: 5000 },
+        });
+        window.location.replace("");
       },
       (error) => {
         console.error(error);
@@ -123,7 +120,6 @@ const RegistrarVentas = () => {
       <form ref={form} onSubmit={submitForm} className="">
         <h1 className="">Registrar ventas</h1>
         <label className="flex flex-col" htmlFor="vendedor">
-          {" "}
           <span className="text-2xl font-gray-900">Vendedores</span>
         </label>
 
@@ -132,7 +128,7 @@ const RegistrarVentas = () => {
             Seleccione una opción{" "}
           </option>
           {vendedores.map((el) => {
-            return <option value={el._id}>{`${el.correo}`}</option>;
+            return <option value={el._id}>{`${el.nombre}`}</option>;
           })}
         </select>
 
@@ -146,22 +142,15 @@ const RegistrarVentas = () => {
           <i className="fas fa-save space-button-icon"></i>
           Crear Venta
         </button>
+        <ToastContainer position="bottom-center" autoClose={3000} />
       </form>
-      <ToastContainer position="bottom-center" autoClose={3000} />
     </div>
   );
 };
 
-/*const TotalCompra = ({ sumarTotales }) => {
-  console.log("INVOCO TOTALES" + sumarTotales);
-  return <input value={sumarTotales} />;
-};
-*/
-
 const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
   const [productoAAgregar, setProductoAAgregar] = useState({});
   const [filasTabla, setFilasTabla] = useState([]);
-
   useEffect(() => {
     setProductosTabla(filasTabla);
   }, [filasTabla, setProductosTabla]);
@@ -171,7 +160,6 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
         return false;
       }
     }
-
     return true;
   }
   const agregarNuevoProducto = () => {
@@ -185,12 +173,6 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
   const eliminarProducto = (productoAEliminar) => {
     setFilasTabla(filasTabla.filter((v) => v._id !== productoAEliminar._id));
     setProductos([...productos, productoAEliminar]);
-  };
-  let valorAcumulado = 0;
-
-  const sumarTotales = (productoItem, valorAdicionado) => {
-    valorAcumulado = valorAdicionado;
-    valorAcumulado += valorAcumulado;
   };
 
   const modificarProducto = (producto, cantidad) => {
@@ -222,7 +204,6 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
           <option disabled value="">
             Seleccione uno de los productos
           </option>
-
           {productos.map((el) => {
             return (
               <option key={nanoid()} value={el._id}>
@@ -235,7 +216,7 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
         <button
           type="button"
           onClick={() => agregarNuevoProducto()}
-          className=""
+          className="btn btn-primary"
         >
           Agregar
         </button>
@@ -263,35 +244,19 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
                 index={index}
                 modificarProducto={modificarProducto}
                 eliminarProducto={eliminarProducto}
-                setIdProductToDelete={sumarTotales}
               />
             );
           })}
         </tbody>
       </table>
-      {/*<input
-        className=""
-        type="number"
-        name="TotalCalculado"
-        id="totalVenta"
-        required
-        value={valor}
-      />*/}
     </div>
   );
 };
 
-const FilaProducto = ({
-  prod,
-  index,
-  modificarProducto,
-  eliminarProducto,
-  valuea,
-  setIdProductToDelete,
-}) => {
+const FilaProducto = ({ prod, index, modificarProducto, eliminarProducto }) => {
   const [productoItem, setProducto] = useState(prod);
   useEffect(() => {}, [productoItem]);
-  const [name, setName] = React.useState(valuea);
+
   return (
     <tr>
       <td>{productoItem._id}</td>
@@ -309,8 +274,6 @@ const FilaProducto = ({
           placeholder={"Unds"}
           name={`cantidad_${index}`}
           onChange={function (e) {
-            setIdProductToDelete(index, e.target.value);
-            setName(e.target.value);
             modificarProducto(
               productoItem,
               e.target.value === "" ? "0" : e.target.value

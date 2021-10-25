@@ -3,20 +3,21 @@ import axios from "axios";
 const getToken = function () {
   return `Bearer ${localStorage.getItem("token")}`;
 };
+const URI_API = "https://serene-forest-26816.herokuapp.com";
+//const URI_API = "http://localhost:5000";
 
 export const obtenerProductos = async (successCallback, errorCallback) => {
   const options = {
     method: "GET",
-    url: "http://localhost:5000/producto",
+    url: `${URI_API}/producto`,
     headers: { Authorization: getToken() },
   };
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
-
 export const obtenerProductosDis = async (successCallback, errorCallback) => {
   const options = {
     method: "GET",
-    url: "http://localhost:5000/productosDisponibles",
+    url: `${URI_API}/productosDisponibles`,
     headers: { Authorization: getToken() },
   };
   await axios.request(options).then(successCallback).catch(errorCallback);
@@ -40,7 +41,7 @@ export const editarProducto = async (
 ) => {
   const options = {
     method: "PATCH",
-    url: `http://localhost:5000/producto/${id}/`,
+    url: `${URI_API}/producto/${id}/`,
     headers: { "Content-Type": "application/json", Authorization: getToken() },
     data,
   };
@@ -60,8 +61,20 @@ export const eliminarProducto = async (id, successCallback, errorCallback) => {
 export const obtenerUsuarios = async (successCallback, errorCallback) => {
   const options = {
     method: "GET",
-    url: "http://localhost:5000/usuarios/",
+    url: `${URI_API}/usuarios/`,
     headers: { Authorization: getToken() },
+  };
+  await axios.request(options).then(successCallback).catch(errorCallback);
+};
+
+// Ruta dummy, o ruta autodiscover
+export const obtenerDatosUsuario = async (successCallback, errorCallback) => {
+  const options = {
+    method: "GET",
+    url: `${URI_API}/usuarios/self`,
+    headers: {
+      Authorization: getToken(), // 3. enviarle el token a backend
+    },
   };
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
@@ -69,7 +82,7 @@ export const obtenerUsuarios = async (successCallback, errorCallback) => {
 export const crearUsuario = async (data, successCallback, errorCallback) => {
   const options = {
     method: "POST",
-    url: "http://localhost:5000/usuarios/",
+    url: `${URI_API}/usuarios/`,
     headers: { "Content-Type": "application/json", Authorization: getToken() },
     data,
   };
@@ -84,7 +97,7 @@ export const editarUsuario = async (
 ) => {
   const options = {
     method: "PATCH",
-    url: `http://localhost:5000/usuarios/${id}/`,
+    url: `${URI_API}/usuarios/${id}/`,
     headers: { "Content-Type": "application/json", Authorization: getToken() },
     data,
   };
@@ -105,7 +118,7 @@ export const eliminarUsuario = async (id, successCallback, errorCallback) => {
 export const obtenerVentas = async (successCallback, errorCallback) => {
   const options = {
     method: "GET",
-    url: "http://localhost:5000/ventas/",
+    url: `${URI_API}/ventas/`,
     headers: { Authorization: getToken() },
   };
   await axios.request(options).then(successCallback).catch(errorCallback);
@@ -114,7 +127,7 @@ export const obtenerVentas = async (successCallback, errorCallback) => {
 export const crearVenta = async (data, successCallback, errorCallback) => {
   const options = {
     method: "POST",
-    url: "http://localhost:5000/ventas",
+    url: `${URI_API}/ventas/`,
     headers: { "Content-Type": "application/json", Authorization: getToken() },
     data,
   };
@@ -124,7 +137,7 @@ export const crearVenta = async (data, successCallback, errorCallback) => {
 export const editarVenta = async (id, data, successCallback, errorCallback) => {
   const options = {
     method: "PATCH",
-    url: `http://localhost:5000/ventas/${id}/`,
+    url: `${URI_API}/ventas/${id}/`,
     headers: { "Content-Type": "application/json", Authorization: getToken() },
     data,
   };
@@ -134,7 +147,7 @@ export const editarVenta = async (id, data, successCallback, errorCallback) => {
 export const eliminarVenta = async (id, successCallback, errorCallback) => {
   const options = {
     method: "DELETE",
-    url: `http://localhost:5000/ventas/${id}/`,
+    url: `${URI_API}/ventas/${id}/`,
     headers: { "Content-Type": "application/json", Authorization: getToken() },
   };
   await axios.request(options).then(successCallback).catch(errorCallback);

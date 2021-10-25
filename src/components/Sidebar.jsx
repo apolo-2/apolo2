@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import "styles/sidebar.css";
-import userImage from "./../media/users.png";
 import { useAuth0 } from "@auth0/auth0-react";
 import PrivateComponent from "./PrivateComponent";
 
@@ -21,8 +20,14 @@ const Sidebar = () => {
         className="social-buttons"
       />
       <nav>
-        <img src={userImage} alt="" className="image--cover" />
-        <p></p>
+        <p className="center">
+          <Ruta
+            icono="fas fa-user"
+            ruta="/admin"
+            nombre="Perfil"
+            usuario={user}
+          />
+        </p>
         <span className="title-sidebar">OPCIONES DISPONIBLES</span>
         <p></p>
         <a id="nav-collapse" href="/#">
@@ -30,12 +35,7 @@ const Sidebar = () => {
         </a>
         <p></p>
         <Ruta icono="fas fa-home" ruta="/admin" nombre="Inicio" />
-        <Ruta
-          icono="fas fa-user"
-          ruta="/admin"
-          nombre="Perfil"
-          usuario={user}
-        />
+
         <PrivateComponent roleList={["admin", "vendedor"]}>
           <Ruta
             icono="fas fa-hand-holding-usd"
@@ -56,11 +56,12 @@ const Sidebar = () => {
             ruta="/admin/usuarios"
             nombre="Usuarios"
           />
-          <Ruta
+
+          {/*<Ruta
             icono="fas fa-user-friends"
             ruta="/admin/usuarios2"
             nombre="Usuarios2"
-          />
+          >*/}
         </PrivateComponent>
         <p></p>
         {/* <Ruta icono="fas fa-sign-out-alt" ruta="/" nombre="SALIR" /> */}
@@ -82,9 +83,10 @@ const Ruta = ({ icono, ruta, nombre, usuario }) => {
             <img
               src={usuario.picture}
               alt="Imagen usuario"
-              className="image-usuario-perfil"
+              className="image--cover center"
             />
-            {usuario.name}
+            <br></br>
+            <span className="title-sidebar">{usuario.name}</span>
           </>
         ) : (
           <>

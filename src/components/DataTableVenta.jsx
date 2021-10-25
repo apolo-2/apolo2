@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import React, { useEffect, useState } from "react";
 import ReactLoading from "react-loading";
 
@@ -7,11 +8,11 @@ const DataTableVenta = ({
   setVentaToEdit,
   deleteVenta,
   setIdVentaToDelete,
-  loading,
+  setEjecutarConsulta,
 }) => {
   const [busqueda, setBusqueda] = useState("");
   const [ventasFiltradas, setVentasFiltrados] = useState(listaVentas);
-
+  const [loading] = useState(false);
   useEffect(() => {
     setVentasFiltrados(
       listaVentas.filter((elemento) => {
@@ -25,7 +26,7 @@ const DataTableVenta = ({
   function ListItem(props) {
     return <li>{props.value}</li>;
   }
-  const formatoMayusculas = (str) => {
+  const formatDetalleVenta = (str) => {
     let acumulo = [];
     let long = str.length;
     let nuevoStr = str;
@@ -39,17 +40,21 @@ const DataTableVenta = ({
                 value={`Prod: ${nuevoStr[i].detalleProducto.descripcion}`}
               />
             }
-            {<ListItem value={"Und: " + nuevoStr[i].unidadesAgregadas} />}
+            {
+              <ListItem
+                key={nanoid()}
+                value={`Und: ${nuevoStr[i].unidadesAgregadas}`}
+              />
+            }
           </ol>
         </ol>
-      ); //.descripcion;
+      );
     }
-    return acumulo; //<ul>{<ListItem key={acumulo.toString()} value={acumulo} />}</ul>;
+    return acumulo;
   };
 
   return (
     <div>
-      {/* bootstrap  */}
       <div className="table-responsive">
         <section className="table-search-fields">
           <div className="input-group mb-3 ">
@@ -71,8 +76,8 @@ const DataTableVenta = ({
           <ReactLoading
             type="cylon"
             color="abc123"
-            height={"10%"}
-            width={"10%"}
+            height={"20%"}
+            width={"20%"}
           />
         ) : (
           <table className="table  table-sm table-hover  table-bordered caption-top table-listado">
@@ -90,25 +95,23 @@ const DataTableVenta = ({
               {ventasFiltradas.map((venta, index) => {
                 return (
                   <tr key={index.toString()} className="text-center">
-                    {/* <td>{venta.codigo}</td> */}
                     <td>{venta._id.substring(17)}</td>
                     <td> {venta.vendedor.nombre}</td>
-                    <td>{formatoMayusculas(venta.productosAgregados)}</td>
+                    <td>{formatDetalleVenta(venta.productosAgregados)}</td>
                     <td> {venta.totalVenta}</td>
                     <td> {venta.fechaRegistro}</td>
                     <td className="td_acciones">
                       <button
                         type="button"
-                        className="btn  btn-sm btn-outline-info"
+                        className="btn btn-sm btn-outline-info"
                         title="Editar"
                         onClick={() => {
-                          console.log("Action: edit");
+                          console.log("Action: edit venta");
                           setVentaToEdit(venta);
                           setMostrarTabla("ACTUALIZAR");
                         }}
                       >
                         <i className="fas fa-pencil-alt "></i>
-                        {/* Editar */}
                       </button>
                       <button
                         type="button"
@@ -118,6 +121,7 @@ const DataTableVenta = ({
                         data-bs-target="#confirmDeleteModal"
                         onClick={() => {
                           setIdVentaToDelete(venta._id);
+                          setMostrarTabla("LISTAR");
                         }}
                       >
                         <i className="far fa-trash-alt "></i>
@@ -131,43 +135,9 @@ const DataTableVenta = ({
           </table>
         )}
       </div>
-
-      {/* paginator */}
-      <nav aria-label="Page navigation example">
-        <ul className="pagination justify-content-center">
-          <li className="page-item disabled">
-            <a className="page-link" href="/admin/productos">
-              &laquo;
-            </a>
-          </li>
-          <li className="page-item active">
-            <a className="page-link" href="/admin/productos">
-              1
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" href="/admin/productos">
-              2
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" href="/admin/productos">
-              3
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" href="/admin/productos">
-              &raquo;
-            </a>
-          </li>
-        </ul>
-      </nav>
-
-      {/* <!-- Modal --> */}
       <div
         className="modal fade"
         id="confirmDeleteModal"
-        // tabindex="-1"
         tabIndex="-1"
         aria-labelledby="confirmDeleteModalLabel"
         aria-hidden="true"
