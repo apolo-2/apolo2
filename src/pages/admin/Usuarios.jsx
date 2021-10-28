@@ -446,8 +446,8 @@ const FormularioCreacionUsuarios = ({
               <option defaultValue="true" disabled value="">
                 Seleccione una opción
               </option>
-              <option value="Administrador/a">Administrador/a</option>
-              <option value="Vendedor">Vendedor/a</option>
+              <option value="admin">Administrador/a</option>
+              <option value="vendedor">Vendedor/a</option>
             </select>
           </div>
         </div>
@@ -464,9 +464,9 @@ const FormularioCreacionUsuarios = ({
               <option defaultValue="true" disabled value="">
                 Seleccione una opción
               </option>
-              <option value="Pendiente">Pendiente</option>
-              <option value="No autorizado">No autorizado</option>
-              <option value="Rechazado">Autorizado</option>
+              <option value="pendiente">Pendiente</option>
+              <option value="no-autorizado">No autorizado</option>
+              <option value="autorizado">Autorizado</option>
             </select>
           </div>
         </div>

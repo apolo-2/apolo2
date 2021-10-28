@@ -85,7 +85,7 @@ const RolesUsuario = ({ user }) => {
       </option>
       <option value='admin'>Admin</option>
       <option value='vendedor'>Vendedor</option>
-      <option value='sin rol'>Sin rol</option>
+      <option value='sin-rol'>Sin rol</option>
     </select>
   );
 };
@@ -116,13 +116,13 @@ const EstadoUsuario = ({ user }) => {
       <option value='' disabled>
         Seleccione un estado
       </option>
-      <option value='Autorizado' className='text-green-500'>
+      <option value='autorizado' className='text-green-500'>
         Autorizado
       </option>
-      <option value='Pendiente' className='text-yellow-500'>
+      <option value='pendiente' className='text-yellow-500'>
         Pendiente
       </option>
-      <option value='No autorizado' className='text-red-500'>
+      <option value='no-autorizado' className='text-red-500'>
         No autorizado
       </option>
     </select>
